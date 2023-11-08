@@ -8,10 +8,11 @@ import Visa from '@/../public/assets/image/visa.svg';
 import MasterCard from '@/../public/assets/image/master_card.svg';
 import UnionPay from '@/../public/assets/image/union_pay.svg';
 import JcbPay from '@/../public/assets/image/JCB_logo.png';
+
 function Footer() {
   return (
     <div>
-      <div className="bg-grey p-8 flex flex-col items-center">
+      <div className="bg-grey-33 p-8 flex flex-col items-center">
         <Image className="my-4" src={FooterImg} alt="HMP Master Footer" width={170} height={128} />
         <NavFooter />
       </div>

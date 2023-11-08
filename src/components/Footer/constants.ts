@@ -2,20 +2,20 @@ import Path from '@/routes/Path';
 
 type NavFooterProps = {
   title: string;
-  path: string;
+  path: any;
 };
 
 export const navFooter: NavFooterProps[] = [
   {
     title: 'About',
-    path: Path.ABOUT
+    path: (hotel_slug: string) => Path.ABOUT(hotel_slug)
   },
   {
     title: 'Frequently Asked Questions',
-    path: Path.FAQS
+    path: (hotel_slug: string) => Path.FAQS(hotel_slug)
   },
   {
     title: 'English Demo Test',
-    path: Path.ENGLIST_DEMO_TEST
+    path: (hotel_slug: string) => Path.ENGLIST_DEMO_TEST(hotel_slug)
   }
 ];

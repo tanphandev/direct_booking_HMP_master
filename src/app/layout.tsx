@@ -1,6 +1,27 @@
 import type { Metadata } from 'next';
+import { Roboto, Montserrat } from 'next/font/google';
+
 import '../styles/globalStyle.scss';
+import '../styles/custom.scss';
 import ProviderWrapper from '@/components/Provider/ProviderWrapper';
+
+// ============================ DEFINE FONT FAMILY ============================ //
+
+const roboto = Roboto({
+  weight: ['300', '400', '500', '700'],
+  style: ['normal', 'italic'],
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-roboto'
+});
+
+const montserrat = Montserrat({
+  weight: ['300', '400', '500', '600', '700'],
+  style: ['normal', 'italic'],
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-montserrat'
+});
 
 export const metadata: Metadata = {
   title: 'My Next App',
@@ -12,7 +33,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body>
+      <body className={`${roboto.variable} ${montserrat.variable}`}>
         <ProviderWrapper>{children}</ProviderWrapper>
       </body>
     </html>
