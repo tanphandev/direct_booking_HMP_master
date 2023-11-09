@@ -1,6 +1,5 @@
-import { PackageProps } from '@/types/booking';
-import PackageItemDetail from '../PackageOption/PackageItemDetail';
 import CheckIn from '../CheckIn/CheckIn';
+import PackageItemDetail from '../PackageOption/PackageItemDetail';
 import PersonQuanity from '../PersonQuanity/PersonQuanity';
 
 function ReviewPackage({ packageChose, setIsChoosePackage }: PackageProps) {

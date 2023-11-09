@@ -2,7 +2,6 @@
 import { useEffect, useRef, useState } from 'react';
 import Packages from './Packages/Packages';
 import Rooms from './Rooms/Rooms';
-import { PackageDetail } from '@/types/booking';
 
 function BookingChoose() {
   const tabsRef = useRef<HTMLButtonElement[]>([]);
@@ -12,7 +11,7 @@ function BookingChoose() {
   const tabs: TabProps[] = [
     {
       label: 'ROOMS',
-      component: <Rooms />
+      component: <Rooms />,
     },
     {
       label: 'PACKAGES',
@@ -23,14 +22,16 @@ function BookingChoose() {
           packageChose={packageChose}
           setPackageChose={setPackageChose}
         />
-      )
-    }
+      ),
+    },
   ];
 
+  /* Change Tab */
   const ChangeTab = (index: number) => {
     setActiveTabIndex(index);
   };
 
+  /* active tab */
   useEffect(() => {
     tabsRef.current?.forEach((tab, index) => {
       if (index === activeTabIndex) {

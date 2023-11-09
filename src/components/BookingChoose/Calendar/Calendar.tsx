@@ -1,4 +1,5 @@
 import React, { forwardRef } from 'react';
+import { DateRangePicker } from 'react-date-range';
 
 // main css file calender
 import 'react-date-range/dist/styles.css';
@@ -6,8 +7,6 @@ import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 // custom theme
 import '@/styles/calendar.scss';
-
-import { DateRangePicker } from 'react-date-range';
 
 type Props = {
   isHide: boolean;
@@ -23,7 +22,7 @@ const Calendar = forwardRef<any, Props>(function Component({ isHide, rangeDate, 
   return (
     <DateRangePicker
       ref={ref}
-      className={`${isHide ? '!hidden' : ''} absolute top-0 left-0 translate-y-[82px]`}
+      className={`${isHide ? '!hidden' : ''} absolute top-0 left-0 translate-y-[82px] z-10`}
       onChange={handleOnChange}
       moveRangeOnFirstSelection={false}
       months={2}

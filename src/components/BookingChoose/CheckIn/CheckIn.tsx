@@ -1,9 +1,9 @@
-import CalendarIcon from '@/app/assets/icons/Calendar';
 import { forwardRef, memo, useImperativeHandle, useState } from 'react';
+import { useOnClickOutside } from '@/hooks/useClickOutSide';
 
 import Calendar from '../Calendar/Calendar';
+import CalendarIcon from '@/assets/icons/Calendar';
 import { displayDateFormat } from '@/utils/format';
-import { useOnClickOutside } from '@/hooks/useClickOutSide';
 
 type Props = {
   quantityNight?: number;
@@ -30,6 +30,7 @@ const CheckIn = forwardRef<RangeDate, Props>(function Component({ quantityNight 
     startDate: rangeDate[0].startDate,
     endDate: rangeDate[0].endDate,
   }));
+
   const toggleCalendar = () => {
     setIsHideCalendar(!isHideCalendar);
   };

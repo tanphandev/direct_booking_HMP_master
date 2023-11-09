@@ -3,7 +3,6 @@ import { ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu';
 
 import PackageItemDetail from './PackageItemDetail';
 import { LeftArrow, RightArrow } from './Arrow';
-import { PackageDetail, PackageProps } from '@/types/booking';
 import 'react-horizontal-scrolling-menu/dist/styles.css';
 
 type scrollVisibilityApiType = React.ContextType<typeof VisibilityContext>;
@@ -19,8 +18,8 @@ function PackageOption({ packageChose, setIsChoosePackage, setPackageChose }: Pa
         adult_price: '1,000.00',
         child_price: '800.00',
         signle_price: '1,300.00',
-        description: 'description'
-      }
+        description: 'description',
+      },
     },
     {
       name: 'Package 2',
@@ -31,8 +30,8 @@ function PackageOption({ packageChose, setIsChoosePackage, setPackageChose }: Pa
         adult_price: '1,000.00',
         child_price: '800.00',
         signle_price: '1,300.00',
-        description: 'description'
-      }
+        description: 'description',
+      },
     },
     {
       name: 'Package 3',
@@ -43,8 +42,8 @@ function PackageOption({ packageChose, setIsChoosePackage, setPackageChose }: Pa
         adult_price: '1,000.00',
         child_price: '800.00',
         signle_price: '1,300.00',
-        description: 'description'
-      }
+        description: 'description',
+      },
     },
     {
       name: 'Package 4',
@@ -55,8 +54,8 @@ function PackageOption({ packageChose, setIsChoosePackage, setPackageChose }: Pa
         adult_price: '1,000.00',
         child_price: '800.00',
         signle_price: '1,300.00',
-        description: 'description'
-      }
+        description: 'description',
+      },
     },
     {
       name: 'Package 5',
@@ -67,8 +66,8 @@ function PackageOption({ packageChose, setIsChoosePackage, setPackageChose }: Pa
         adult_price: '1,000.00',
         child_price: '800.00',
         signle_price: '1,300.00',
-        description: 'description'
-      }
+        description: 'description',
+      },
     },
     {
       name: 'Package 6',
@@ -79,8 +78,8 @@ function PackageOption({ packageChose, setIsChoosePackage, setPackageChose }: Pa
         adult_price: '1,000.00',
         child_price: '800.00',
         signle_price: '1,300.00',
-        description: 'description'
-      }
+        description: 'description',
+      },
     },
     {
       name: 'Package 7',
@@ -91,8 +90,8 @@ function PackageOption({ packageChose, setIsChoosePackage, setPackageChose }: Pa
         adult_price: '1,000.00',
         child_price: '800.00',
         signle_price: '1,300.00',
-        description: 'description'
-      }
+        description: 'description',
+      },
     },
     {
       name: 'Package 8',
@@ -103,8 +102,8 @@ function PackageOption({ packageChose, setIsChoosePackage, setPackageChose }: Pa
         adult_price: '1,000.00',
         child_price: '800.00',
         signle_price: '1,300.00',
-        description: 'description'
-      }
+        description: 'description',
+      },
     },
     {
       name: 'Package 9',
@@ -115,11 +114,11 @@ function PackageOption({ packageChose, setIsChoosePackage, setPackageChose }: Pa
         adult_price: '1,000.00',
         child_price: '800.00',
         signle_price: '1,300.00',
-        description: 'description'
-      }
+        description: 'description',
+      },
     },
     {
-      name: 'Package 9',
+      name: 'Package 10',
       detail: {
         duration: '3 days, 2 nights',
         max_adult: 3,
@@ -127,9 +126,9 @@ function PackageOption({ packageChose, setIsChoosePackage, setPackageChose }: Pa
         adult_price: '1,000.00',
         child_price: '800.00',
         signle_price: '1,300.00',
-        description: 'description'
-      }
-    }
+        description: 'description',
+      },
+    },
   ];
   const [position, setPosition] = useState(0);
   const [selected, setSelected] = useState<number[]>([]);
@@ -141,7 +140,7 @@ function PackageOption({ packageChose, setIsChoosePackage, setPackageChose }: Pa
       const itemSelected = isItemSelected(id);
 
       setSelected((currentSelected) =>
-        itemSelected ? currentSelected.filter((el) => el !== id) : currentSelected.concat(id)
+        itemSelected ? currentSelected.filter((el) => el !== id) : currentSelected.concat(id),
       );
     };
 
@@ -149,7 +148,7 @@ function PackageOption({ packageChose, setIsChoosePackage, setPackageChose }: Pa
   const savePosition = useCallback(
     ({ scrollContainer }: scrollVisibilityApiType) =>
       !!scrollContainer.current && setPosition(scrollContainer.current.scrollLeft),
-    []
+    [],
   );
 
   /* handle reset postion item list when click next and back */
@@ -159,7 +158,7 @@ function PackageOption({ packageChose, setIsChoosePackage, setPackageChose }: Pa
         scrollContainer.current.scrollLeft = position;
       }
     },
-    [position]
+    [position],
   );
 
   /* handle user choose package */

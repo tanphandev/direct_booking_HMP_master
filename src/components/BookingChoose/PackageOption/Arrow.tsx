@@ -1,13 +1,13 @@
 import React from 'react';
 import { VisibilityContext } from 'react-horizontal-scrolling-menu';
 
-import ArrowLeftIcon from '@/app/assets/icons/ArrowLeftIcon';
-import ArrowRightIcon from '@/app/assets/icons/ArrowRightIcon';
+import ArrowLeftIcon from '@/assets/icons/ArrowLeftIcon';
+import ArrowRightIcon from '@/assets/icons/ArrowRightIcon';
 
 function Arrow({
   children,
   disabled,
-  onClick
+  onClick,
 }: {
   children: React.ReactNode;
   disabled: boolean;
@@ -24,7 +24,7 @@ function Arrow({
         justifyContent: 'center',
         right: '1%',
         opacity: disabled ? '0' : '1',
-        userSelect: 'none'
+        userSelect: 'none',
       }}
     >
       {children}
