@@ -1,11 +1,14 @@
+import { createRef } from 'react';
+
 import CheckIn from '../CheckIn/CheckIn';
 import PersonQuanity from '../PersonQuanity/PersonQuanity';
 
 function Rooms() {
+  const checkInRef = createRef<RangeDate>();
   return (
     <div>
       <div>
-        <CheckIn />
+        <CheckIn ref={checkInRef} />
         <PersonQuanity />
         <div className="h-[80px] flex bg-white rounded-md mb-2">
           <input
