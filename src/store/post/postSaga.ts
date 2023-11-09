@@ -10,7 +10,6 @@ function* getPosts(): Generator {
   yield put(enableLoading(POST));
   try {
     const data: any = yield call(ApiCaller.get, '/posts');
-    console.log('data', data);
     yield put(getPostSuccess(data));
   } catch (error) {
     yield put(getPostFailed(error));

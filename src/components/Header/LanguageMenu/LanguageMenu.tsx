@@ -1,9 +1,9 @@
 'use client';
 import { useRef, useState } from 'react';
 
-import { LanguageCode, language, languageProps } from '@/types/Language';
-import ArrowDown from '@/components/icons/ArrowDown';
 import { useOnClickOutside } from '@/hooks/useClickOutSide';
+import { LanguageCode, language, languageProps } from '@/types/Language';
+import ArrowDown from '@/app/assets/icons/ArrowDown';
 
 function LanguageMenu() {
   const languageMenuRef = useRef<HTMLUListElement>(null);
