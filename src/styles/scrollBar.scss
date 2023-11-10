@@ -1,0 +1,9 @@
+/* width */
+.package-detail-scrollbar::-webkit-scrollbar {
+  @apply w-1;
+}
+
+/* Handle */
+.package-detail-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-grey-d9 rounded-md;
+}
