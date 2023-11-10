@@ -33,3 +33,12 @@ interface ChildProps {
 }
 
 interface PersonQuantityPopperProps extends AdultProps, ChildProps {}
+
+// ================================= SCHEDULE ================================= //
+
+interface SchelduleProps {
+  day: string;
+  transfer?: string;
+  excursion?: string;
+  FAndB?: string;
+}

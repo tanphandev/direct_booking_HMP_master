@@ -7,6 +7,7 @@ module.exports = {
       black: 'rgba(0,0,0,0)',
       'black-0.1': 'rgba(0,0,0,.1)',
       'black-0.2': 'rgba(0,0,0,.2)',
+      'black-0.3': 'rgba(0,0,0,.3)',
       'grey-33': '#333947',
       'grey-21': '#212529',
       'grey-2a': '#2a2f38',
