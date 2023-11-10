@@ -9,35 +9,7 @@ import Amenities from "@/components/icons/Amenities";
 import QUESTION from "@/components/icons/question.svg"
 import { cp_paragraphs, cp_title } from "@/api/mock-data/faq";
 const SidebarSearch = () => {
-  // const { NEXT_APP_GOOGLE_API_KEY } = process.env;
-  // const googleMapsApiKey = process.env.NEXT_APP_GOOGLE_API_KEY || "";
-  // // const googleMapsApiKey ='AIzaSyBc1hyY2K4I171t2rPehhQuxqYyGT8ebmY';
-  // // console.log(googleMapsApiKey)
-  // const [open, setOpen] = useState(false);
-  // const LATITUDE = 16 + (2 / 60) + (46.3 / 3600);
-  // const LONGITUDE = 108 + (12 / 60) + (34.7 / 3600);
-  // const handleOpen = async () => {
-  //     setOpen(true);
-  // }
-  // const { isLoaded } = useLoadScript({
-  //     googleMapsApiKey: googleMapsApiKey
-  // })
 
-
-  // const [faqs, setFaqs] = useState<any>(null);
-  // useEffect(()=>{
-  //     const faqsURL = 'direct_booking/get_business_by_slug';
-  //     const slug = 'xyz';
-
-  //     ApiCaller.get(faqsURL, { slug })
-  //         .then((response: ApiResponse<any>) => {
-  //             console.log('API Response:', response);
-  //             // setFaqs(response.)
-  //         })
-  //         .catch((error) => {
-  //             console.error('API Error:', error);
-  //         });
-  // },[])
 
   const lang = "vi";
   function Map() {
