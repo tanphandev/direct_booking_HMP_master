@@ -14,7 +14,11 @@ export type ApiResponse<T> = {
   status?: number;
   data: T;
 };
-
+export type ApiResponseFaqs<T> ={
+  business_navigation:[
+    
+  ];
+}
 export const getCookie = (name: string) => {
   const value = ` ${document.cookie}`;
   const parts = value.split(` ${name}=`);

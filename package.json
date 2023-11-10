@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-google-maps/api": "^2.19.2",
     "@reduxjs/toolkit": "^1.9.7",
     "axios": "^1.6.0",
     "next": "14.0.1",
@@ -19,6 +20,7 @@
     "redux-saga": "^1.2.3"
   },
   "devDependencies": {
+    "@types/google.maps": "^3.54.7",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
