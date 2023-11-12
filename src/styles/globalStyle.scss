@@ -11,19 +11,13 @@
 
 @layer base {
   h1 {
-    @apply text-3xl font-normal leading-[1.2];
+    @apply text-3xl font-normal leading-[1.5];
   }
   h2 {
-    @apply text-2xl font-normal leading-[1.2];
+    @apply text-2xl font-normal leading-[1.5];
   }
   h3 {
-    @apply text-xl font-normal leading-[1.2];
-  }
-  p {
-    @apply text-base font-normal leading-[1.4];
-  }
-  span {
-    @apply text-base font-normal leading-[1.4];
+    @apply text-xl font-normal leading-[1.5];
   }
 }
 

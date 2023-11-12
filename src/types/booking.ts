@@ -42,3 +42,11 @@ interface SchelduleProps {
   excursion?: string;
   FAndB?: string;
 }
+
+interface DateProps {
+  title: string;
+  date: any;
+  time: string;
+  mb?: string;
+  bgColor?: string;
+}
