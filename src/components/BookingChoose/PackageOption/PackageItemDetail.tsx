@@ -1,7 +1,7 @@
 import { useContext } from 'react';
-import { VisibilityContext } from 'react-horizontal-scrolling-menu';
-import { useModalContext } from '@/contexts/ModalProvider';
+import { useModalContext } from '@/contexts/TravelXModal';
 
+import { VisibilityContext } from 'react-horizontal-scrolling-menu';
 import { MODAL_NAME } from '@/types/modal';
 
 type PackageItemDetail = {

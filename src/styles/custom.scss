@@ -8,3 +8,7 @@
 .react-horizontal-scrolling-menu--scroll-container::-webkit-scrollbar {
   display: none;
 }
+
+.order-phone-input:focus ~ .phone-code {
+  border-color: #80bdff !important;
+}

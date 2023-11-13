@@ -191,7 +191,7 @@ function PackageOption({ packageChose, setIsChoosePackage, setPackageChose }: Pa
       <div className="flex justify-end">
         <button
           onClick={() => {
-            GotoReviewPackage();
+            packageChose && GotoReviewPackage();
           }}
           className={`transition-all w-[150px] h-[56px] text-white bg-grey-6c font-bold rounded-md opacity-60 ${
             packageChose ? '!bg-blue-0a !opacity-100 hover:!bg-blue-09' : 'cursor-not-allowed'
