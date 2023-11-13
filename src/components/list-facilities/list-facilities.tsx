@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const ListFacilities = () => {
     const lang = "vi";
-    const pathIcon = "@/assets/icons";
+    const pathIcon = "/assets/icons";
     return (
         <div>
             <h2 className="font-bold">Cơ sở vật chất</h2>
@@ -13,7 +13,7 @@ const ListFacilities = () => {
             facility.lang === lang && (
               <div key={facility.custom_id} className="flex py-3">
                 <Image src={`${pathIcon}/${facility.custom_icon.replace('pro:', '')}`} alt={facility.custom_title} width={24} height={24} />
-                <span>{facility.custom_title}</span>
+                <span className="pl-4">{facility.custom_title}</span>
               </div>
             )))}
             </div>

@@ -1,4 +1,5 @@
 import RoomFeatures from "@/components/RoomFeatures/RoomFeatures";
+import SearchResult from "@/components/SearchResult/SearchResult";
 import ListFacilities from "@/components/list-facilities/list-facilities";
 import SidebarSearch from "@/components/sidebar-search/sidebar-search";
 const SearchResultPage = () => {
@@ -11,6 +12,7 @@ const SearchResultPage = () => {
             <div className="flex-1 pl-8">
                 <ListFacilities />
                 <RoomFeatures />
+                <SearchResult />
             </div>
         </div>
 
