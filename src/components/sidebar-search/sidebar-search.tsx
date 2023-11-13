@@ -2,12 +2,12 @@
 import BookingSearchBox from "@/components/booking-search-box/booking-search-box";
 import Image from 'next/image';
 import GG_MAP from "@/../public/assets/image/gmap.jpg"
-import Comment from "@/components/icons/Comment";
-// import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
-import Amenities from "@/components/icons/Amenities";
 
-import QUESTION from "@/components/icons/question.svg"
+// import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
+
+import QUESTION from "@/assets/icons/question.svg"
 import { cp_paragraphs, cp_title } from "@/api/mock-data/faq";
+import Amenities from "@/assets/icons/Amenities";
 const SidebarSearch = () => {
 
 
