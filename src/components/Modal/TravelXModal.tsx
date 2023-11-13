@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { useRef } from 'react';
 import { useOnClickOutside } from '@/hooks/useClickOutSide';
-import { useModalContext } from '@/contexts/TravelXModal';
+import { useModalContext } from '@/contexts/ModalProvider';
 
 import TravelXLogo from '@/../public/assets/image/travelx_logo.png';
 import XmarkIcon from '@/assets/icons/XmarkIcon';

@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { useModalContext } from '@/contexts/TravelXModal';
+import { useModalContext } from '@/contexts/ModalProvider';
 import { useOnClickOutside } from '@/hooks/useClickOutSide';
 
 import Schedule from '../BookingChoose/Schedule/Schedule';

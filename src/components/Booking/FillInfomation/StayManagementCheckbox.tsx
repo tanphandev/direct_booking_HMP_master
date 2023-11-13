@@ -1,4 +1,4 @@
-import { useModalContext } from '@/contexts/TravelXModal';
+import { useModalContext } from '@/contexts/ModalProvider';
 import { MODAL_NAME } from '@/types/modal';
 import WarningIcon from '@/assets/icons/WarningIcon';
 
