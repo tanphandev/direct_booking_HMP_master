@@ -73,8 +73,8 @@ const Stepper = ({
     return (
       <div key={index} className={index !== 0 ? 'w-full flex items-center' : 'flex items-center'}>
         <div
-          className={`flex-auto border-t-2 transition duration-500 ease-in-out  ${
-            step.completed ? 'border-blue-0a' : 'border-black-0.54 '
+          className={`flex-auto border-t-[1px] transition duration-500 ease-in-out  ${
+            step.completed ? 'border-blue-0a' : 'border-grey-d9'
           }  `}
         ></div>
         <div

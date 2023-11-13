@@ -17,7 +17,9 @@ function GuestInformation({ isReuseOrderData = false }: GuestInformationProps) {
             })}
           >
             <input id="reuse-data-order" className="w-4 h-4" type="checkbox" />
-            <label htmlFor="reuse-data-order">Use the same information above</label>
+            <label className="cursor-pointer" htmlFor="reuse-data-order">
+              Use the same information above
+            </label>
           </div>
         </div>
         <InformationForm />

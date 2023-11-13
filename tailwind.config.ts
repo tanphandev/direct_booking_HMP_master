@@ -20,7 +20,9 @@ module.exports = {
       },
       boxShadow: {
         custom_1: '0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12)',
+        custom_2: '0 0 16px rgba(0,0,0,.08)',
       },
+      gridTemplateColumns: {},
     },
   },
   plugins: [require('daisyui')],
