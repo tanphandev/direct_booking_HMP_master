@@ -9,6 +9,7 @@ const colors = {
   'grey-21': '#212529',
   'grey-2a': '#2a2f38',
   'grey-6c': '#6c757d',
+  'grey-99': '#999999',
   'grey-cc': '#cccccc33',
   'grey-d9': '#d9dbd9',
   'grey-f5': '#f5f5f5',

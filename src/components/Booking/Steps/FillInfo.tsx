@@ -1,10 +1,10 @@
 import BookingLayout from '@/layouts/BookingLayout/BookingLayout';
-import Infomation from '../Infomation/Infomation';
+import OrderInfomation from '../FillInfomation/OrderInfomartion';
 
 export default function FillInfo() {
   return (
     <BookingLayout>
-      <Infomation />
+      <OrderInfomation />
     </BookingLayout>
   );
 }

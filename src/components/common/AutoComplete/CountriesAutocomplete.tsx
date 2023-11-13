@@ -4,7 +4,12 @@ import { TCountryCode } from 'countries-list';
 
 import Autocomplete from './Autocomplete';
 
-const CountriesAutocomplete = ({ isRequire }: { isRequire: boolean }) => {
+type Props = {
+  isRequire: boolean;
+  value: string;
+  setValue: React.Dispatch<React.SetStateAction<string>>;
+};
+const CountriesAutocomplete = ({ isRequire, value, setValue }: Props) => {
   /* get country names  */
   const countryNames = useMemo(() => {
     const countryCodes = Object.keys(Countries) as TCountryCode[];
@@ -12,20 +17,19 @@ const CountriesAutocomplete = ({ isRequire }: { isRequire: boolean }) => {
     return countryNames;
   }, []);
 
-  const [val, setVal] = useState<string>('');
   /* a list to show on the dropdown when user types */
   const [items, setItems] = useState<string[]>([]);
 
   useEffect(() => {
     /* if there is no value, return the countries list. */
-    if (!val) {
+    if (!value) {
       setItems(countryNames);
       return;
     }
     /* if the val changes, we filter items so that it can be filtered. and set it as new state */
-    const newItems = countryNames.filter((p) => p.toLowerCase().includes(val.toLowerCase())).sort();
+    const newItems = countryNames.filter((p) => p.toLowerCase().includes(value.toLowerCase())).sort();
     setItems(newItems);
-  }, [countryNames, val]);
+  }, [countryNames, value]);
 
   return (
     <div className="flex flex-col">
@@ -36,8 +40,8 @@ const CountriesAutocomplete = ({ isRequire }: { isRequire: boolean }) => {
       <Autocomplete
         id="countries-input"
         items={items}
-        value={val}
-        onChange={setVal}
+        value={value}
+        onChange={setValue}
         inputClassName="border-grey-d9 rounded-md px-[12px] py-[6px]"
         menuWrapperClassName="auto-complete-countries bg-white"
         menuItemClassName="transition-colors h-[48px] px-4 hover:bg-black-0.1"

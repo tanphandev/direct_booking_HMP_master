@@ -1,12 +1,19 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-const Stepper = ({ steps, currentStep }: { steps: string[]; currentStep: number }) => {
+const Stepper = ({
+  steps,
+  currentStep,
+  setCurrentStep,
+}: {
+  steps: string[];
+  currentStep: number;
+  setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
+}) => {
   const [newStep, setNewStep] = useState<any[]>([]);
   const stepsRef = useRef<any>();
 
   const updateStep = (stepNumber: number, steps: any[]) => {
     const newSteps = [...steps];
-    console.log(newSteps);
     let count = 0;
     while (count < newSteps.length) {
       //current step
@@ -70,7 +77,12 @@ const Stepper = ({ steps, currentStep }: { steps: string[]; currentStep: number 
             step.completed ? 'border-blue-0a' : 'border-black-0.54 '
           }  `}
         ></div>
-        <div className="flex items-center">
+        <div
+          onClick={() => {
+            step.completed && setCurrentStep(index + 1);
+          }}
+          className="flex items-center cursor-pointer"
+        >
           <div
             className={`rounded-full transition duration-500 ease-in-out w-6 h-6 text-white flex items-center justify-center ${
               step.selected ? 'bg-blue-0a font-bold' : 'bg-black-0.54'
@@ -79,8 +91,8 @@ const Stepper = ({ steps, currentStep }: { steps: string[]; currentStep: number 
             {index + 1}
           </div>
           <div
-            className={`top-0  text-center w-24 text-sm font-medium ${
-              step.highlighted ? 'text-grey-21' : 'text-black-0.54'
+            className={`top-0 text-center w-24 text-sm font-medium ${
+              step.highlighted ? 'text-grey-21 !font-bold' : 'text-black-0.54'
             }`}
           >
             {step.description}

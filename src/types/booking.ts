@@ -50,3 +50,9 @@ interface DateProps {
   mb?: string;
   bgColor?: string;
 }
+
+// ============================== FILL INFOMATION ============================= //
+
+interface GuestInformationProps {
+  isReuseOrderData?: boolean;
+}

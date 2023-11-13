@@ -7,4 +7,9 @@ const Path = {
   ENGLIST_DEMO_TEST: (hottel_slug: string) => `/${hottel_slug}/english-test`,
 };
 
+const outsidePath = {
+  HMP_MASTER: 'https://hmpmaster.com',
+};
+
+export { outsidePath };
 export default Path;

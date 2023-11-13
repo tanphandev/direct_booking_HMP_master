@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { useModalContext } from '@/contexts/ModalProvider';
+import { useModalContext } from '@/contexts/TravelXModal';
 import { useOnClickOutside } from '@/hooks/useClickOutSide';
 
 import Schedule from '../BookingChoose/Schedule/Schedule';
@@ -18,7 +18,7 @@ function PackageDetailModal() {
           onClick={() => {
             closeModalWithAnimation(150);
           }}
-          className="z-10 absolute top-4 right-4 flex items-center justify-center w-[40px] h-[40px] transition-colors bg-grey-d9 hover:bg-grey-6c rounded-full"
+          className="z-10 absolute top-4 right-4 flex items-center justify-center w-[40px] h-[40px] transition-colors bg-grey-d9 hover:bg-grey-6c rounded-full cursor-pointer"
         >
           <XmarkIcon width="20px" height="20px" className="text-grey-21" />
         </div>

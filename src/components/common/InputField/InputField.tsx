@@ -12,15 +12,9 @@ function InputField({
     <div className="flex flex-col">
       <label className={`${labelClassName}`} htmlFor={id}>
         {label}
-        {isRequire && <span className="text-red ml-1">*</span>}
+        {isRequire ? <span className="text-red ml-1">*</span> : <span className="text-grey-99 ml-1">(optional)</span>}
       </label>
-      <input
-        className={`${inputClassName} outline-none`}
-        value={value}
-        onChange={onChange}
-        id={id}
-        placeholder={placeHolder}
-      />
+      <input className={`${inputClassName}`} value={value} onChange={onChange} id={id} placeholder={placeHolder} />
     </div>
   );
 }

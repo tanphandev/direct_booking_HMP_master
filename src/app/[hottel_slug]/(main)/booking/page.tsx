@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { StepProvider } from '@/contexts/StepProvider';
 
 import Stepper from '@/components/Booking/Stepper/Stepper';
-import StepperControl from '@/components/Booking/Stepper/StepperControl';
 import FillInfo from '@/components/Booking/Steps/FillInfo';
 import VerifyDetail from '@/components/Booking/Steps/VerifyDetail';
 import ConfirmReservation from '@/components/Booking/Steps/ConfirmReservation';
@@ -36,13 +35,10 @@ function BookingPage() {
   return (
     <div className="w-[960px] mx-auto p-4">
       {/* Stepper */}
-      <Stepper steps={steps} currentStep={currentStep} />
+      <Stepper steps={steps} currentStep={currentStep} setCurrentStep={setCurrentStep} />
       {/* Content Step */}
-      <StepProvider>{displayStep(currentStep)}</StepProvider>
+      <StepProvider handleClick={handleClick}>{displayStep(currentStep)}</StepProvider>
       {/* navigation button */}
-      {currentStep !== steps.length && (
-        <StepperControl handleClick={handleClick} currentStep={currentStep} steps={steps} />
-      )}
     </div>
   );
 }
