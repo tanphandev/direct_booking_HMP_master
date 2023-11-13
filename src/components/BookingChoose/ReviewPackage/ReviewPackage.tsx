@@ -7,7 +7,7 @@ import PackageItemDetail from '../PackageOption/PackageItemDetail';
 import PersonQuanity from '../PersonQuanity/PersonQuanity';
 
 function ReviewPackage({ packageChose, setIsChoosePackage }: PackageProps) {
-  const { hottel_slug } = useParams();
+  const { hotel_slug } = useParams();
 
   return (
     <div className="flex">
@@ -24,7 +24,7 @@ function ReviewPackage({ packageChose, setIsChoosePackage }: PackageProps) {
           >
             BACK
           </button>
-          <Link href={Path.BOOKING(hottel_slug as string)}>
+          <Link href={Path.BOOKING(hotel_slug as string)}>
             <button className="transition-colors w-[150px] h-[56px] text-base font-bold text-white bg-blue-0a hover:bg-blue-09 rounded-md ml-2">
               NEXT
             </button>

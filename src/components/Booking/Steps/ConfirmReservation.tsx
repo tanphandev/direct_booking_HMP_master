@@ -3,7 +3,7 @@ import { useParams } from 'next/navigation';
 import Path from '@/routes/Path';
 
 export default function ConfirmReservation() {
-  const { hottel_slug } = useParams();
+  const { hotel_slug } = useParams();
   return (
     <div className="flex justify-center my-4">
       <div className="bg-white shadow-custom_2 w-[600px] rounded-2xl p-8">
@@ -15,7 +15,7 @@ export default function ConfirmReservation() {
         </p>
         <p className="text-center mb-4">We look forward to having you.</p>
         <div className="text-center mt-12">
-          <Link href={Path.HOME(hottel_slug as string)}>
+          <Link href={Path.HOME(hotel_slug as string)}>
             <button className="text-sm primary-button h-[56px] px-10 rounded-lg">GO BACK TO HOMEPAGE</button>
           </Link>
         </div>
