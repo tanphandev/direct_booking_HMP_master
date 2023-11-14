@@ -3,9 +3,10 @@ import classNames from 'classnames';
 
 type Props = {
   id?: string;
+  name?: string;
   items: string[];
   value: string;
-  onChange(val: string): void;
+  formik: any;
   inputClassName?: string;
   menuWrapperClassName?: string;
   menuItemClassName?: string;
@@ -13,9 +14,10 @@ type Props = {
 
 const Autocomplete = ({
   id,
+  name,
   items,
   value,
-  onChange,
+  formik,
   inputClassName,
   menuWrapperClassName,
   menuItemClassName,
@@ -33,6 +35,7 @@ const Autocomplete = ({
     >
       <input
         id={id}
+        name={name}
         type="text"
         className={classNames(
           'w-full text-base border-[1px] focus:border-blue-80 focus:shadow-[0_0_0_0.2rem_rgba(0,123,255,.25)] outline-none',
@@ -40,9 +43,13 @@ const Autocomplete = ({
         )}
         autoComplete="off"
         value={value}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
         tabIndex={0}
       />
+      {formik.touched[`${name}`] && formik.errors[`${name}`] ? (
+        <div className="text-sm text-red mt-1">{formik.errors[`${name}`]}</div>
+      ) : null}
       {/* Menu */}
       <div
         className={classNames(
@@ -58,7 +65,7 @@ const Autocomplete = ({
                 key={index}
                 tabIndex={index + 1}
                 onClick={() => {
-                  onChange(item);
+                  formik.setFieldValue(name, item);
                   setOpen(false);
                 }}
                 className={classNames('flex items-center', menuItemClassName)}

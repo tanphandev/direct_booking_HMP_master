@@ -55,4 +55,5 @@ interface DateProps {
 
 interface GuestInformationProps {
   isReuseOrderData?: boolean;
+  guestFormRef?: any;
 }

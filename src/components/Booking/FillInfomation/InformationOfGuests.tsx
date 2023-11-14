@@ -1,13 +1,18 @@
 import { useState } from 'react';
 import GuestInformation from './GuestInformation';
 
-function InformationOfGuests() {
+type Props = {
+  guestFormRef: any;
+  addtionalGuestFormRef?: any;
+};
+
+function InformationOfGuests({ guestFormRef, addtionalGuestFormRef }: Props) {
   const [moreGuest, setMoreGuest] = useState<boolean>(false);
   return (
     <div>
-      <GuestInformation isReuseOrderData={true} />
+      <GuestInformation guestFormRef={guestFormRef} isReuseOrderData={true} />
       {moreGuest ? (
-        <GuestInformation isReuseOrderData={true} />
+        <GuestInformation guestFormRef={addtionalGuestFormRef} isReuseOrderData={true} />
       ) : (
         <div className="text-end">
           <button

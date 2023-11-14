@@ -6,10 +6,12 @@ import Autocomplete from './Autocomplete';
 
 type Props = {
   isRequire: boolean;
+  name?: string;
   value: string;
-  setValue: React.Dispatch<React.SetStateAction<string>>;
+  formik: any;
 };
-const CountriesAutocomplete = ({ isRequire, value, setValue }: Props) => {
+
+const CountriesAutocomplete = ({ isRequire, name, value, formik }: Props) => {
   /* get country names  */
   const countryNames = useMemo(() => {
     const countryCodes = Object.keys(Countries) as TCountryCode[];
@@ -39,9 +41,10 @@ const CountriesAutocomplete = ({ isRequire, value, setValue }: Props) => {
       </label>
       <Autocomplete
         id="countries-input"
+        name={name}
+        formik={formik}
         items={items}
         value={value}
-        onChange={setValue}
         inputClassName="border-grey-d9 rounded-md px-[12px] py-[6px]"
         menuWrapperClassName="auto-complete-countries bg-white"
         menuItemClassName="transition-colors h-[48px] px-4 hover:bg-black-0.1"

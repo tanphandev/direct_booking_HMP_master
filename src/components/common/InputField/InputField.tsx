@@ -1,10 +1,11 @@
 function InputField({
   label,
   id,
+  name,
   value,
   placeHolder,
   isRequire = false,
-  onChange,
+  formik,
   labelClassName,
   inputClassName,
 }: InputFieldProps) {
@@ -14,7 +15,18 @@ function InputField({
         {label}
         {isRequire ? <span className="text-red ml-1">*</span> : <span className="text-grey-99 ml-1">(optional)</span>}
       </label>
-      <input className={`${inputClassName}`} value={value} onChange={onChange} id={id} placeholder={placeHolder} />
+      <input
+        name={name}
+        className={`${inputClassName}`}
+        value={value}
+        id={id}
+        placeholder={placeHolder}
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+      />
+      {formik.touched[`${name}`] && formik.errors[`${name}`] ? (
+        <div className="text-sm text-red mt-1">{formik.errors[`${name}`]}</div>
+      ) : null}
     </div>
   );
 }
