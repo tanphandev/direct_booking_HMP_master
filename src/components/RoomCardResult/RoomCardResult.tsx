@@ -133,13 +133,10 @@ const RoomCardResult: React.FC<RoomCardResultProps> = ({ room }) => {
             </div>
           )}
         </div>
-
-
-
       </div>
       <div className='grid grid-cols-6 pb-8'>
         <div className='col-span-3'>
-          <div className='bg-[#636363] p-2 border border-[#636363]'>
+          <div className='bg-[#636363] p-2 border border-[#636363] '>
             <span className='text-white'>Bao gồm</span>
           </div>
 
@@ -194,10 +191,10 @@ const RoomCardResult: React.FC<RoomCardResultProps> = ({ room }) => {
             <span className='text-white'>Số lượng</span>
           </div>
           <div className='border h-full border-[#e4e4e4] p-4'>
-              <div className=''>
-                <span className=''>Phòng</span>
-                <QuantityRoomOption maxQuantity={room.qty_room_available}/>
-              </div>
+            <div className=''>
+              <span className=''>Phòng</span>
+              <QuantityRoomOption maxQuantity={room.qty_room_available} />
+            </div>
           </div>
         </div>
         <div>
@@ -205,10 +202,35 @@ const RoomCardResult: React.FC<RoomCardResultProps> = ({ room }) => {
             <span className='text-white'>Giá cho 1 đêm</span>
           </div>
           <div className='border h-full border-[#e4e4e4] p-4 items-end'>
-              <h2 className='text-[red]'>{room.price_room_total} Đ</h2>
+            <h2 className='text-[red]'>{room.price_room_total} Đ</h2>
           </div>
         </div>
       </div>
+
+      {room.room_type_packages && (
+        <div className='mt-4'>
+          <h2 className='uppercase mb-4 pb-2'>Ưu đãi đặc biệt</h2>
+          <div className='flex flex-wrap'>
+            {room.room_type_packages?.map((roomPackage) => (
+              <div key={roomPackage.id} className='m-w-1/3 w-1/3'>
+                <div className='flex flex-col bg-[#edf5ef] py-6 px-4 mx-2 rounded-md'>
+                  {roomPackage.dbp_short_des.map((des, index) => (
+                    des.lang === lang && (
+                      <div key={index} className='mb-4'>{des.value}</div>
+                    )
+                  ))}
+                  <div className='flex items-center justify-between flex-wrap'>
+                    <div className='font-bold text-xl'>+ {roomPackage.total_price}đ</div>
+                    <div>
+                      <a className='uppercase text-[#0a7cff] font-bold'>+ Thêm</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </>
   );
 };
