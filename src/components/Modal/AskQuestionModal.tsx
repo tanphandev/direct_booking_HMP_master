@@ -11,7 +11,7 @@ function AskQuestionModal() {
   });
   return (
     <div className="z-20 flex justify-center items-center fixed top-0 left-0 right-0 bottom-0 bg-black-0.3">
-      <div id="modal" ref={modalRef} className="transition-all package-detail-modal relative">
+      <div id="modal" ref={modalRef} className="transition-all animate-fadeIn ask-question-modal relative">
         <div className="w-[80vw] bg-white rounded-[4px]">
           <h2 className="text-grey-21 font-semibold px-8 py-4">Ask a Question</h2>
           <div className="px-8 h-[424px] overflow-y-auto">

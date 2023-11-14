@@ -25,7 +25,15 @@ module.exports = {
         custom_4:
           '0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12)',
       },
-      gridTemplateColumns: {},
+      animation: {
+        fadeIn: 'fadeIn 0.15s ease-in-out',
+      },
+      keyframes: () => ({
+        fadeIn: {
+          '0%': { opacity: '0', transform: 'scale(0.8)' },
+          '100%': { opacity: '1', transform: 'scale(1)' },
+        },
+      }),
     },
   },
   plugins: [require('daisyui')],
