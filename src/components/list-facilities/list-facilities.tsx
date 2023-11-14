@@ -1,10 +1,15 @@
+'use client'
 import { business_pf } from "@/api/mock-data/facilities";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 
 const ListFacilities = () => {
-    const lang = "vi";
+    
+  const lang = localStorage.getItem('language')?? 'vi';
     const pathIcon = "/assets/icons";
+
+    
     return (
         <div>
             <h2 className="font-bold">Cơ sở vật chất</h2>

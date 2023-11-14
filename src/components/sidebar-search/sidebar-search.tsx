@@ -10,8 +10,7 @@ import { cp_paragraphs, cp_title } from "@/api/mock-data/faq";
 import Amenities from "@/assets/icons/Amenities";
 const SidebarSearch = () => {
 
-
-  const lang = "vi";
+  const lang = localStorage.getItem('language')?? 'vi';
   function Map() {
     return (<></>
       //     <>

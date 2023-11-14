@@ -1,8 +1,10 @@
+'use client'
 import { roomFeatures } from "@/api/mock-data/room-features";
 import Image from "next/image";
 
 const RoomFeatures = () => {
-    const lang = "vi";
+   const lang = localStorage.getItem('language')?? 'vi';
+
     const pathIcon = "/assets/icons";
     
     return (

@@ -9,7 +9,8 @@ const RoomCardResult: React.FC<RoomCardResultProps> = ({ room }) => {
   const [showSlider, setShowSlider] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
   const photos = room.photos || [];
-  const lang = 'vi';
+  const lang = localStorage.getItem('language')?? 'vi';
+  console.log(lang);
   const pathIcon = "/assets/icons";
   const MAX_DISPLAYED_ITEMS = 27;
   const MAX_DISPLAYED_OFFERS = 15;
