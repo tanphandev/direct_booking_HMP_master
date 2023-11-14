@@ -1,7 +1,7 @@
 export enum LanguageCode {
   VI = 'VI',
   EN = 'EN',
-  TH = 'TH'
+  TH = 'TH',
 }
 
 export type languageProps = {
@@ -12,14 +12,14 @@ export type languageProps = {
 export const language: languageProps[] = [
   {
     label: 'Viet Nam',
-    code: LanguageCode.VI
+    code: LanguageCode.VI,
   },
   {
     label: 'English',
-    code: LanguageCode.EN
+    code: LanguageCode.EN,
   },
   {
     label: 'Thailand',
-    code: LanguageCode.TH
-  }
+    code: LanguageCode.TH,
+  },
 ];

@@ -1,0 +1,35 @@
+.rdrDefinedRangesWrapper {
+  @apply hidden;
+}
+
+.rdrDateDisplayWrapper {
+  @apply hidden;
+}
+
+.rdrCalendarWrapper {
+  @apply rounded-[6px] shadow-custom_4;
+}
+
+.rdrMonthAndYearWrapper {
+  @apply absolute top-0 left-0 right-0 h-[40px];
+}
+
+.rdrMonthAndYearPickers {
+  @apply hidden;
+}
+
+.rdrMonthName {
+  @apply text-center text-lg text-grey-21 font-bold uppercase py-0 py-[10px];
+}
+
+.rdrNextPrevButton {
+  @apply transition-colors bg-white hover:bg-grey-d9;
+}
+
+.rdrWeekDay {
+  @apply text-sm uppercase font-bold text-grey-6c;
+}
+
+.rdrDayNumber {
+  @apply text-sm;
+}

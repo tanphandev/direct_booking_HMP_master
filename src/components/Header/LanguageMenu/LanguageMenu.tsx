@@ -1,16 +1,17 @@
 'use client';
 import { useRef, useState } from 'react';
+import { useOnClickOutside } from '@/hooks/useClickOutSide';
 
 import { LanguageCode, language, languageProps } from '@/types/Language';
-import ArrowDown from '@/components/icons/ArrowDown';
-import { useOnClickOutside } from '@/hooks/useClickOutSide';
+import ArrowDown from '@/assets/icons/ArrowDown';
 
 function LanguageMenu() {
   const languageMenuRef = useRef<HTMLUListElement>(null);
   const [languageValue, setLanguageValue] = useState<languageProps>({
     label: 'Viet Nam',
-    code: LanguageCode.VI
+    code: LanguageCode.VI,
   });
+
   /* Listen even click outside language menu */
   useOnClickOutside(languageMenuRef, () => {
     languageMenuRef.current?.classList.add('hidden');
