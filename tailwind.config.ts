@@ -21,8 +21,19 @@ module.exports = {
       boxShadow: {
         custom_1: '0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12)',
         custom_2: '0 0 16px rgba(0,0,0,.08)',
+        custom_3: '0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12)',
+        custom_4:
+          '0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12)',
       },
-      gridTemplateColumns: {},
+      animation: {
+        fadeIn: 'fadeIn 0.15s ease-in-out',
+      },
+      keyframes: () => ({
+        fadeIn: {
+          '0%': { opacity: '0', transform: 'scale(0.8)' },
+          '100%': { opacity: '1', transform: 'scale(1)' },
+        },
+      }),
     },
   },
   plugins: [require('daisyui')],

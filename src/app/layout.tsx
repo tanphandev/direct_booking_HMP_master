@@ -4,6 +4,7 @@ import { Roboto, Montserrat } from 'next/font/google';
 import '../styles/globalStyle.scss';
 import '../styles/custom.scss';
 import '../styles/scrollBar.scss';
+import '../styles/modal.scss';
 import ProviderWrapper from '@/components/Provider/ProviderWrapper';
 
 // ============================ DEFINE FONT FAMILY ============================ //

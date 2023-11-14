@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { useRef } from 'react';
 import { useOnClickOutside } from '@/hooks/useClickOutSide';
-import { useModalContext } from '@/contexts/TravelXModal';
+import { useModalContext } from '@/contexts/ModalProvider';
 
 import TravelXLogo from '@/../public/assets/image/travelx_logo.png';
 import XmarkIcon from '@/assets/icons/XmarkIcon';
@@ -15,7 +15,7 @@ function TravelXModal() {
   });
   return (
     <div className="z-20 flex justify-center items-center fixed top-0 left-0 right-0 bottom-0 bg-black-0.3">
-      <div id="modal" ref={modalRef} className="transition-all package-detail-modal relative">
+      <div id="modal" ref={modalRef} className="transition-all animate-fadeIn travel-x-modal relative">
         <div
           onClick={() => {
             closeModalWithAnimation(150);
