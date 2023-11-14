@@ -2,4 +2,14 @@
   <g id="tv" transform="translate(0 -27.539)">
     <g id="Group_6848" data-name="Group 6848" transform="translate(0 27.539)">
       <g id="Group_6845" data-name="Group 6845" transform="translate(0 0)">
-        <path id="Path_7582" data-name="Path 7582" d="M0,27.539V43.055H24V27.539ZM23.321,42.377H.679V28.219H23.32S23.321,42.377,23.321,42.377Z" transform="translate(0 -27.539)" fill="
+        <path id="Path_7582" data-name="Path 7582" d="M0,27.539V43.055H24V27.539ZM23.321,42.377H.679V28.219H23.32S23.321,42.377,23.321,42.377Z" transform="translate(0 -27.539)" fill="#010002"></path>
+      </g>
+      <g id="Group_6846" data-name="Group 6846" transform="translate(7.473 16.276)">
+        <path id="Path_7583" data-name="Path 7583" d="M62.78,165.43h8.779v-1.168H62.78Z" transform="translate(-62.78 -164.262)" fill="#010002"></path>
+      </g>
+      <g id="Group_6847" data-name="Group 6847" transform="translate(10.248 4.313)">
+        <path id="Path_7584" data-name="Path 7584" d="M86.271,70.649a.321.321,0,0,0,.34-.043l3.8-3.134a.319.319,0,0,0,0-.493l-3.8-3.134a.32.32,0,0,0-.524.247v6.268A.322.322,0,0,0,86.271,70.649Zm.456-5.879L89.7,67.224,86.727,69.68Z" transform="translate(-86.087 -63.771)" fill="#010002"></path>
+      </g>
+    </g>
+  </g>
+</svg>

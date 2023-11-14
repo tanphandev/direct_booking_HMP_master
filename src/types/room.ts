@@ -4,7 +4,7 @@ interface Photo {
   }
 
 interface RoomAvailable {
-    rid: number,
+    rid?: number,
     title: string,
     info?: string,
     room_type_specs?: string,
@@ -15,21 +15,21 @@ interface RoomAvailable {
     max_children_age?: number,
     extra_adults_rate?:number,
     extra_children_rate?:number,
-    photos: Photo[],
+    photos?: Photo[]| [],
     qty_room_available?:number,
-    room_type_amenities?:RoomTypeAmenity[],
+    room_type_amenities:RoomTypeAmenity[],
     room_type_offers?:RoomTypeOffer[],
     room_type_benefits?: any,
     room_type_features: RoomTypeFeature[],
     room_type_packages?: any,
     season_title?: string,
-    price_room: number,
+    price_room?: number,
     weekdays_price?: any,
     rt_adult_price?: any,
     rt_child_price?:any,
     res_daily_price?:any,
     room_type_daily_price?:any,
-    price_room_total: number
+    price_room_total?: number
   }
 
 interface RoomTypeAmenity {
@@ -37,7 +37,7 @@ interface RoomTypeAmenity {
     custom_title: string,
     custom_label?:string,
     custom_value?:string,
-    custom_icon?: string,
+    custom_icon: string,
     custom_default?:string,
     lang: string
 }

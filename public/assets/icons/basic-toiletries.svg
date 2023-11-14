@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="23.999" height="23.999" viewBox="0 0 23.999 23.999">
+  <g id="basic-toiletries" transform="translate(-16 -16)">
+    <path id="Path_7641" data-name="Path 7641" d="M16.4,25.6h4v2.851a40.908,40.908,0,0,1-.474,6.2,10.12,10.12,0,0,0,.27,4.289,1.461,1.461,0,0,0,2.809,0,10.12,10.12,0,0,0,.27-4.289,40.909,40.909,0,0,1-.475-6.2V25.6h4a.4.4,0,0,0,.4-.4V23.6a.4.4,0,0,0-.4-.4h-4v-6A1.2,1.2,0,0,0,21.6,16H18.4v.8h1.2v.8H18.4v.8h1.2v.8H18.4V20h1.2v.8H18.4v.8h1.434l.566.566V23.2h-4a.4.4,0,0,0-.4.4v1.6A.4.4,0,0,0,16.4,25.6Zm6.083,9.173a9.314,9.314,0,0,1-.248,3.947.661.661,0,0,1-1.27,0,9.313,9.313,0,0,1-.248-3.947,41.709,41.709,0,0,0,.483-6.322V25.6H22v2.851a41.676,41.676,0,0,0,.482,6.312Zm-1.4-13.056-.683-.683V16.8h1.2a.4.4,0,0,1,.4.4v6h-.8V22a.4.4,0,0,0-.117-.283ZM16.8,24h9.6v.8H16.8Z"></path>
+    <path id="Path_7642" data-name="Path 7642" d="M184.8,242.8a.4.4,0,0,0-.4.4v1.6a.4.4,0,0,0,.4.4h5.6a.4.4,0,0,0,.4-.4v-1.6a.4.4,0,0,0-.4-.4h-.029l-.654-8.834a2.122,2.122,0,0,0-4.027-.766H184v.8h1.48l-.059.8H184v.8h1.362l-.059.8H184v.8h1.243l-.059.8H184v.8h1.125l-.3,4Zm5.2,1.6h-4.8v-.8H190Zm-3.719-10.375a1.323,1.323,0,0,1,2.639,0l.65,8.775h-3.938Z" transform="translate(-159.6 -205.205)"></path>
+    <ellipse id="Ellipse_521" data-name="Ellipse 521" cx="0.5" rx="0.5" transform="translate(26.745 30)"></ellipse>
+    <circle id="Ellipse_522" data-name="Ellipse 522" cx="0.5" cy="0.5" r="0.5" transform="translate(27.745 30)"></circle>
+    <ellipse id="Ellipse_523" data-name="Ellipse 523" cx="0.5" rx="0.5" transform="translate(28.745 30)"></ellipse>
+    <circle id="Ellipse_524" data-name="Ellipse 524" cx="0.5" cy="0.5" r="0.5" transform="translate(28.745 31)"></circle>
+    <circle id="Ellipse_525" data-name="Ellipse 525" cx="0.5" cy="0.5" r="0.5" transform="translate(27.745 29)"></circle>
+    <circle id="Ellipse_526" data-name="Ellipse 526" cx="0.5" cy="0.5" r="0.5" transform="translate(26.745 31)"></circle>
+    <circle id="Ellipse_527" data-name="Ellipse 527" cx="0.5" cy="0.5" r="0.5" transform="translate(27.745 32)"></circle>
+    <ellipse id="Ellipse_528" data-name="Ellipse 528" cx="0.5" rx="0.5" transform="translate(28.745 33)"></ellipse>
+    <ellipse id="Ellipse_529" data-name="Ellipse 529" cx="0.5" rx="0.5" transform="translate(26.745 33)"></ellipse>
+    <path id="Path_7643" data-name="Path 7643" d="M328.4,16h-8a.4.4,0,0,0-.4.4V18c0,.009,0,.018,0,.027h0l1.2,17.6a.4.4,0,0,0,.4.373v3.6a.4.4,0,0,0,.4.4h4.8a.4.4,0,0,0,.4-.4V36a.4.4,0,0,0,.4-.373l1.2-17.6h0c0-.009,0-.018,0-.027V16.4A.4.4,0,0,0,328.4,16Zm-7.6.8H328v.8h-7.2Zm6.706,8.431a12.283,12.283,0,0,0-6.068,2.106l-.609-8.937h7.143Zm-6,3.042a11.494,11.494,0,0,1,5.949-2.235l-.625,9.161h-4.853ZM324.4,39.2h-2v-.8h.869a1.2,1.2,0,0,0,2.262,0h.869v.8ZM324,38a.4.4,0,1,1,.4.4A.4.4,0,0,1,324,38Zm2.4-.4h-.869a1.2,1.2,0,0,0-2.262,0H322.4V36h4Z" transform="translate(-288.801)"></path>
+  </g>
+</svg>
