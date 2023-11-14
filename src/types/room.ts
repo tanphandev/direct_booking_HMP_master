@@ -16,7 +16,7 @@ interface RoomAvailable {
     extra_adults_rate?:number,
     extra_children_rate?:number,
     photos?: Photo[]| [],
-    qty_room_available?:number,
+    qty_room_available:number,
     room_type_amenities:RoomTypeAmenity[],
     room_type_offers?:RoomTypeOffer[],
     room_type_benefits?: any,
@@ -45,7 +45,7 @@ interface RoomTypeOffer {
     custom_id: number,
     custom_title: string,
     custom_value?:string,
-    custom_icon?: string,
+    custom_icon: string|"",
     custom_default?:string,
     lang: string
 }

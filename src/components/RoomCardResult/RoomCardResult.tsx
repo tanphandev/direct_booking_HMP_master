@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
+import QuantityRoomOption from '@/components/RoomCardResult/QuantityRoomOption/QuantityRoomOption';
 interface RoomCardResultProps {
   room: RoomAvailable
 }
@@ -11,7 +12,10 @@ const RoomCardResult: React.FC<RoomCardResultProps> = ({ room }) => {
   const lang = 'vi';
   const pathIcon = "/assets/icons";
   const MAX_DISPLAYED_ITEMS = 27;
+  const MAX_DISPLAYED_OFFERS = 15;
   const [displayedItems, setDisplayedItems] = useState(MAX_DISPLAYED_ITEMS);
+  const [displayedItemOffers, setDisplayedItemOffers] = useState(MAX_DISPLAYED_OFFERS);
+
 
   const handleImageClick = (index: number) => {
     setCurrentImage(index);
@@ -31,11 +35,7 @@ const RoomCardResult: React.FC<RoomCardResultProps> = ({ room }) => {
 
   };
 
-
-  const handleShowMore = () => {
-    setDisplayedItems(room.room_type_amenities?.length || 0);
-  };
-  const handleToggleDisplay = () => {
+  const handleToggleDisplayAmenities = () => {
     if (displayedItems === MAX_DISPLAYED_ITEMS) {
       setDisplayedItems(room.room_type_amenities?.length || 0);
     } else {
@@ -43,11 +43,20 @@ const RoomCardResult: React.FC<RoomCardResultProps> = ({ room }) => {
     }
   };
 
+  const handleToggleDisplayOffers = () => {
+    if (displayedItemOffers === MAX_DISPLAYED_OFFERS) {
+      setDisplayedItemOffers(room.room_type_offers?.length || 0);
+    } else {
+      setDisplayedItemOffers(MAX_DISPLAYED_OFFERS);
+    }
+  };
   const displayedAmenities = room.room_type_amenities?.slice(0, displayedItems);
+  const displayedOffers = room.room_type_offers?.slice(0, displayedItemOffers);
+
 
   return (
     <>
-      <h2 className='font-bold text-xl mb-4 pb-2 border-b-2'>{room.title}</h2>
+      <h2 className='font-bold text-2xl mt-12 mb-4 pb-2 border-b-2'>{room.title}</h2>
       <div className='flex flex-around'>
         {photos[0] ? (
           <div className=' w-[30%] h-[200px]'>
@@ -108,7 +117,7 @@ const RoomCardResult: React.FC<RoomCardResultProps> = ({ room }) => {
 
           </div>
           {room.room_type_amenities && room.room_type_amenities.length > MAX_DISPLAYED_ITEMS && (
-            <div className="flex py-3 items-center px-3 cursor-pointer text-blue-500" onClick={handleToggleDisplay}>
+            <div className="flex py-3 items-center px-3 cursor-pointer text-blue-500" onClick={handleToggleDisplayAmenities}>
               {displayedItems === MAX_DISPLAYED_ITEMS ?
                 (
                   <div className='flex'>
@@ -128,7 +137,78 @@ const RoomCardResult: React.FC<RoomCardResultProps> = ({ room }) => {
 
 
       </div>
+      <div className='grid grid-cols-6 pb-8'>
+        <div className='col-span-3'>
+          <div className='bg-[#636363] p-2 border border-[#636363]'>
+            <span className='text-white'>Bao gồm</span>
+          </div>
 
+          <div className=' h-full border border-[#e4e4e4] p-4'>
+            {displayedOffers?.map((offer) => (
+              offer.lang === lang && (
+                <div key={offer.custom_id} className="flex pb-3 items-center ">
+                  <Image src={`${pathIcon}/checked.svg`} alt={offer.custom_title} width={18} height={18} />
+                  <span className="pl-4">{offer.custom_title}</span>
+                </div>
+              )
+            ))}
+            {room.room_type_offers && room.room_type_offers.length > MAX_DISPLAYED_OFFERS && (
+              <div className="flex py-3 items-center  cursor-pointer text-blue-500" onClick={handleToggleDisplayOffers}>
+                {displayedItemOffers === MAX_DISPLAYED_OFFERS ?
+                  (
+                    <div className='flex'>
+                      <Image src={`${pathIcon}/add-icon.svg`} alt='' width={22} height={22} />
+                      <span className='pl-4 underline text-blue-0a'>Xem thêm</span>
+                    </div>
+                  )
+                  :
+                  (<div className='flex'>
+                    <Image src={`${pathIcon}/sub-icon.svg`} alt='' width={22} height={22} />
+                    <span className='pl-4 underline text-blue-0a'>Thu gọn</span>
+                  </div>)}
+              </div>
+            )}
+          </div>
+
+        </div>
+        <div>
+          <div className='bg-[#636363] p-2 border border-[#636363]'>
+            <span className='text-white'>Sức chứa</span>
+          </div>
+          <div className='border h-full border-[#e4e4e4] p-4 '>
+            <div className='flex justify-center'>
+              <div className='flex align-bottom items-end pr-1'>
+                <Image src={`${pathIcon}/adult.svg`} alt="" width={16} height={32} />
+                <span className='ml-2 font-bold text-[#636363]'>x {room.max_adults}</span>
+              </div>
+              <div className='flex align-bottom items-end pl-1'>
+                <Image src={`${pathIcon}/child.svg`} alt="" width={16} height={20} />
+                <span className='ml-2 font-bold text-[#636363]'>x {room.max_children}</span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div>
+          <div className='bg-[#636363] p-2 border border-[#636363]'>
+            <span className='text-white'>Số lượng</span>
+          </div>
+          <div className='border h-full border-[#e4e4e4] p-4'>
+              <div className=''>
+                <span className=''>Phòng</span>
+                <QuantityRoomOption maxQuantity={room.qty_room_available}/>
+              </div>
+          </div>
+        </div>
+        <div>
+          <div className='bg-[#636363] p-2 border border-[#636363]'>
+            <span className='text-white'>Giá cho 1 đêm</span>
+          </div>
+          <div className='border h-full border-[#e4e4e4] p-4 items-end'>
+              <h2 className='text-[red]'>{room.price_room_total} Đ</h2>
+          </div>
+        </div>
+      </div>
     </>
   );
 };
