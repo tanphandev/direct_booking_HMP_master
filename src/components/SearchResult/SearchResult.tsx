@@ -11,6 +11,7 @@ const SearchResult = () => {
             <RoomCardResult room={roomAvailable} />
         </div>
         ))}
+        
     </div>
   )
 }

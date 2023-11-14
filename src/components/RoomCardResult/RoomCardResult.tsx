@@ -227,7 +227,7 @@ const RoomCardResult: React.FC<RoomCardResultProps> = ({ room }) => {
                   </div>
                 </div>
               </div>
-            ))}
+            ))} 
           </div>
         </div>
       )}
