@@ -32,9 +32,8 @@ function LanguageMenu() {
   const handleChangeLanguage = (item: languageProps) => {
     setLanguageValue(item);
     toggleMenu();
-    localStorage.setItem('language', item.code);
+      localStorage.setItem('language', item.code);
   };
-
   /* Toggle menu */
   const toggleMenu = () => {
     languageMenuRef.current?.classList.toggle('hidden');

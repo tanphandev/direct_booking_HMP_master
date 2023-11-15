@@ -8,27 +8,15 @@ import GG_MAP from "@/../public/assets/image/gmap.jpg"
 import QUESTION from "@/assets/icons/question.svg"
 import { cp_paragraphs, cp_title } from "@/api/mock-data/faq";
 import Amenities from "@/assets/icons/Amenities";
+import { useEffect, useState } from "react";
 const SidebarSearch = () => {
+ 
+  const [lang, setLang] = useState('vi');
 
-  const lang = localStorage.getItem('language')?? 'vi';
-  function Map() {
-    return (<></>
-      //     <>
-      //     <GoogleMap zoom={15} center={{ lat: LATITUDE, lng: LONGITUDE }} mapContainerClassName={styles['map-container']}>
-      //     <Marker position={{ lat: LATITUDE, lng: LONGITUDE }} />
-      // </GoogleMap>
-      // </>
-      // <iframe
-      //     width="450"
-      //     height="250"
-      //     frameBorder="0" 
-      //     style={{ border: '0' }}
-      //     referrerPolicy="no-referrer-when-downgrade"
-      //     src={`https://www.google.com/maps/embed/v1/view?key= ${{NEXT_APP_GOOGLE_API_KEY}}&q=26W5%FVC Hải Châu, Đà Nẵng, Việt Nam`}
-      //     allowFullScreen>
-      // </iframe>
-    )
-  }
+  useEffect(() => {
+    const savedLanguage = localStorage.getItem('language') || 'vi';
+    setLang(savedLanguage);
+  }, []);
   return (
     <>
       <div className="rounded-t-md bg-[#636363]">

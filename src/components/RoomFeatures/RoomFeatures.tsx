@@ -1,9 +1,15 @@
 'use client'
 import { roomFeatures } from "@/api/mock-data/room-features";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 const RoomFeatures = () => {
-   const lang = localStorage.getItem('language')?? 'vi';
+  const [lang, setLang] = useState('vi');
+
+  useEffect(() => {
+    const savedLanguage = localStorage.getItem('language') || 'vi';
+    setLang(savedLanguage);
+  }, []);
 
     const pathIcon = "/assets/icons";
     

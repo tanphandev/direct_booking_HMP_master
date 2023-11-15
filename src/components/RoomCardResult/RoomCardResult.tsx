@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+'use client'
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import QuantityRoomOption from '@/components/RoomCardResult/QuantityRoomOption/QuantityRoomOption';
 interface RoomCardResultProps {
@@ -9,15 +10,19 @@ const RoomCardResult: React.FC<RoomCardResultProps> = ({ room }) => {
   const [showSlider, setShowSlider] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
   const photos = room.photos || [];
-  const lang = localStorage.getItem('language')?? 'vi';
-  console.log(lang);
+  
   const pathIcon = "/assets/icons";
   const MAX_DISPLAYED_ITEMS = 27;
   const MAX_DISPLAYED_OFFERS = 15;
   const [displayedItems, setDisplayedItems] = useState(MAX_DISPLAYED_ITEMS);
   const [displayedItemOffers, setDisplayedItemOffers] = useState(MAX_DISPLAYED_OFFERS);
 
+  const [lang, setLang] = useState('vi');
 
+  useEffect(() => {
+    const savedLanguage = localStorage.getItem('language') || 'vi';
+    setLang(savedLanguage);
+  }, []);
   const handleImageClick = (index: number) => {
     setCurrentImage(index);
     setShowSlider(true);
@@ -58,12 +63,14 @@ const RoomCardResult: React.FC<RoomCardResultProps> = ({ room }) => {
   return (
     <>
       <h2 className='font-bold text-2xl mt-12 mb-4 pb-2 border-b-2'>{room.title}</h2>
-      <div className='flex flex-around'>
+      <div className='flex-col md:flex md:flex-around'>
         {photos[0] ? (
-          <div className=' w-[30%] h-[200px]'>
-            <img
+          <div className='md:w-1/3 md:h-[200px] pb-2 h-[180px] '>
+            <Image
               src={photos[0]?.uri_full}
               alt={`Image ${currentImage + 1}`}
+              height={200}
+              width={200}
               className='w-full h-full cursor-pointer'
               onClick={() => handleImageClick(0)}
             />
@@ -76,7 +83,7 @@ const RoomCardResult: React.FC<RoomCardResultProps> = ({ room }) => {
                   >
                     x
                   </button>
-                  <img
+                  <Image
                     src={photos[currentImage]?.uri_full}
                     alt={`Image ${currentImage + 1}`}
                     className='w-full h-full object-contain'
@@ -98,8 +105,8 @@ const RoomCardResult: React.FC<RoomCardResultProps> = ({ room }) => {
             )}
           </div>
         ) : (
-          <div className='w-[30%] h-[200px] flex items-center justify-center bg-[#f5f5f5]'>
-            <img src="/assets/icons/image-default.svg" className='' />
+          <div className=' w-full md:w-[30%] md:h-[200px] mb-2 h-[180px] flex items-center justify-center bg-[#f5f5f5]'>
+            <Image src="/assets/icons/image-default.svg" alt='' className='' width={30} height={30} />
           </div>
         )}
         <div className='pl-4'>
@@ -135,8 +142,8 @@ const RoomCardResult: React.FC<RoomCardResultProps> = ({ room }) => {
           )}
         </div>
       </div>
-      <div className='grid grid-cols-6 pb-8'>
-        <div className='col-span-3'>
+      <div className='grid md:grid-flow-col 3xl:auto-cols-max pb-8 w-full'>
+        <div className=''>
           <div className='bg-[#636363] p-2 border border-[#636363] '>
             <span className='text-white'>Bao gồm</span>
           </div>
@@ -146,7 +153,7 @@ const RoomCardResult: React.FC<RoomCardResultProps> = ({ room }) => {
               offer.lang === lang && (
                 <div key={offer.custom_id} className="flex pb-3 items-center ">
                   <Image src={`${pathIcon}/checked.svg`} alt={offer.custom_title} width={18} height={18} />
-                  <span className="pl-4">{offer.custom_title}</span>
+                  <span className="pl-2 lg:pl-4">{offer.custom_title}</span>
                 </div>
               )
             ))}
@@ -211,9 +218,9 @@ const RoomCardResult: React.FC<RoomCardResultProps> = ({ room }) => {
       {room.room_type_packages && (
         <div className='mt-4'>
           <h2 className='uppercase mb-4 pb-2'>Ưu đãi đặc biệt</h2>
-          <div className='flex flex-wrap'>
+          <div className='flex-col md:flex md:flex-wrap'>
             {room.room_type_packages?.map((roomPackage) => (
-              <div key={roomPackage.id} className='m-w-1/3 w-1/3'>
+              <div key={roomPackage.id} className='md:m-w-1/3 md:w-1/3 w-full py-2'>
                 <div className='flex flex-col bg-[#edf5ef] py-6 px-4 mx-2 rounded-md'>
                   {roomPackage.dbp_short_des.map((des, index) => (
                     des.lang === lang && (
@@ -228,7 +235,7 @@ const RoomCardResult: React.FC<RoomCardResultProps> = ({ room }) => {
                   </div>
                 </div>
               </div>
-            ))} 
+            ))}
           </div>
         </div>
       )}
