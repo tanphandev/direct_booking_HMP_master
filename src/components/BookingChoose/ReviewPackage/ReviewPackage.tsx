@@ -10,9 +10,9 @@ function ReviewPackage({ packageChose, setIsChoosePackage }: PackageProps) {
   const { hotel_slug } = useParams();
 
   return (
-    <div className="flex">
+    <div className="flex flex-col sm:flex-row gap-y-4 sm:gap-0">
       <PackageItemDetail width="250px" height="320px" isActive={true} packageDetail={packageChose!} />
-      <div className="flex-1 ml-4">
+      <div className="flex-1 sm:ml-4">
         <CheckIn />
         <PersonQuanity />
         <div className="flex justify-end">

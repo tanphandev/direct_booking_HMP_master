@@ -33,3 +33,7 @@
 .rdrDayNumber {
   @apply text-sm;
 }
+
+.rdrDateRangePickerWrapper {
+  @apply w-full overflow-x-scroll;
+}

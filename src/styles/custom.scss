@@ -12,3 +12,8 @@
 .order-phone-input:focus ~ .phone-code {
   border-color: #80bdff !important;
 }
+
+.react-horizontal-scrolling-menu--arrow-left,
+.react-horizontal-scrolling-menu--arrow-right {
+  @apply hidden md:flex md:items-center #{!important};
+}

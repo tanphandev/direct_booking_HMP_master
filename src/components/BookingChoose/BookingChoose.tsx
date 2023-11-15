@@ -42,7 +42,7 @@ function BookingChoose() {
     });
   }, [activeTabIndex]);
   return (
-    <div className="h-full flex flex-col justify-center px-4 mx-[106px]">
+    <div className="h-full flex flex-col sm:justify-center py-4 px-4 w-full sm:w-[510px] md:w-[690px] lg:w-[900px] mx-auto">
       <div className="text-grey-21 font-bold mb-4">
         {tabs.map((tab, index) => (
           <button
@@ -52,7 +52,7 @@ function BookingChoose() {
                 tabsRef.current[index] = el;
               }
             }}
-            className="transition-colors w-[200px] h-[80px] py-4 px-9 bg-white hover:bg-blue-0a hover:text-white rounded-[4px] shadow-sm shadow-black-0.1"
+            className="transition-colors w-[140px] md:w-[200px] h-[80px] py-4 bg-white hover:bg-blue-0a hover:text-white rounded-[4px] shadow-sm shadow-black-0.1"
             onClick={() => {
               ChangeTab(index);
             }}
