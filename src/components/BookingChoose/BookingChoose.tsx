@@ -42,7 +42,7 @@ function BookingChoose() {
     });
   }, [activeTabIndex]);
   return (
-    <div className="h-full flex flex-col sm:justify-center py-4 px-4 w-full sm:w-[510px] md:w-[690px] lg:w-[900px] mx-auto">
+    <div className="main-container h-full flex flex-col sm:justify-center py-4 px-4">
       <div className="text-grey-21 font-bold mb-4">
         {tabs.map((tab, index) => (
           <button

@@ -12,9 +12,9 @@ function AskQuestionModal() {
   return (
     <div className="z-20 flex justify-center items-center fixed top-0 left-0 right-0 bottom-0 bg-black-0.3">
       <div id="modal" ref={modalRef} className="transition-all animate-fadeIn ask-question-modal relative">
-        <div className="w-[80vw] bg-white rounded-[4px]">
+        <div className="w-[100vw] h-[100vh] sm:w-[80vw] sm:h-auto bg-white rounded-[4px]">
           <h2 className="text-grey-21 font-semibold px-8 py-4">Ask a Question</h2>
-          <div className="px-8 h-[424px] overflow-y-auto">
+          <div className="lg:h-[424px] lg:overflow-y-auto px-8">
             <InputField isRequire={true} label="Full name" placeHolder="John Doe" inputClassName="mb-4" />
             <InputField isRequire={true} label="Email" placeHolder="johndoe@example.com" inputClassName="mb-4" />
             <TextAreaField
