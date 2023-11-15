@@ -35,7 +35,7 @@ function FAQSPage() {
   });
 
   return (
-    <div className="w-[930px] mx-auto py-8 px-4">
+    <div className="main-container py-8 px-4">
       <h1 className="text-[32px] font-bold mb-2">Frequently Asked Questions</h1>
       <p className="mb-4">
         Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet

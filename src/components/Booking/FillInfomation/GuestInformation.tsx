@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import InformationForm from './InfomationForm';
 
-function GuestInformation({ isReuseOrderData = false, guestFormRef }: GuestInformationProps) {
+function GuestInformation({ inputId, isReuseOrderData = false, guestFormRef }: GuestInformationProps) {
   return (
     <div>
       <div>
@@ -16,8 +16,8 @@ function GuestInformation({ isReuseOrderData = false, guestFormRef }: GuestInfor
               hidden: !isReuseOrderData,
             })}
           >
-            <input id="reuse-data-order" className="w-4 h-4 cursor-pointer" type="checkbox" />
-            <label className="cursor-pointer" htmlFor="reuse-data-order">
+            <input id={inputId} className="w-4 h-4 cursor-pointer" type="checkbox" />
+            <label className="cursor-pointer" htmlFor={inputId}>
               Use the same information above
             </label>
           </div>

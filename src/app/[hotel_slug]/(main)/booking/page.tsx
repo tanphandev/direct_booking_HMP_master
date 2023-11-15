@@ -33,7 +33,7 @@ function BookingPage() {
   };
 
   return (
-    <div className="w-[960px] mx-auto p-4">
+    <div className="w-full sm:w-[540px] md:w-[720px] lg:w-[960px] mx-auto p-4">
       {/* Stepper */}
       <Stepper steps={steps} currentStep={currentStep} setCurrentStep={setCurrentStep} />
       {/* Content Step */}

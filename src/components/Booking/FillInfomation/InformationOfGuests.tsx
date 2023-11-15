@@ -10,9 +10,9 @@ function InformationOfGuests({ guestFormRef, addtionalGuestFormRef }: Props) {
   const [moreGuest, setMoreGuest] = useState<boolean>(false);
   return (
     <div>
-      <GuestInformation guestFormRef={guestFormRef} isReuseOrderData={true} />
+      <GuestInformation inputId="guest-info-1" guestFormRef={guestFormRef} isReuseOrderData={true} />
       {moreGuest ? (
-        <GuestInformation guestFormRef={addtionalGuestFormRef} isReuseOrderData={true} />
+        <GuestInformation inputId="guset-info-2" guestFormRef={addtionalGuestFormRef} isReuseOrderData={true} />
       ) : (
         <div className="text-end">
           <button

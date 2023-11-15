@@ -17,7 +17,7 @@ function AdditionalInformation({ guestFormRef }: Props) {
       case OrderChooseValue.VALUE1:
         return;
       case OrderChooseValue.VALUE2:
-        return <GuestInformation guestFormRef={guestFormRef} />;
+        return <GuestInformation inputId="main-guest" guestFormRef={guestFormRef} />;
       case OrderChooseValue.VALUE3:
         return (
           <div className="transition-all border-[1px] border-grey-21 focus-within:border-2 rounded-md pt-4 pb-3 mb-7">

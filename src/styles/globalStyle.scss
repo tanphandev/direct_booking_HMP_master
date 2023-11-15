@@ -24,6 +24,9 @@
 // ============================== CUSTOM CLASSES ============================== //
 
 @layer components {
+  .main-container {
+    @apply w-full sm:w-[510px] md:w-[690px] lg:w-[900px] mx-auto;
+  }
   .container {
     @apply min-w-full py-4;
   }

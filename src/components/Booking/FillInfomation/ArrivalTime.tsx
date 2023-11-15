@@ -12,12 +12,12 @@ function ArrivalTime() {
       <p className="text-base text-grey-21">
         We will provide specific directions to help you get to us from your departing location, if applicable.
       </p>
-      <div className="grid grid-cols-3 gap-x-[10px] mt-4">
-        <div>
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-x-[10px] mt-4">
+        <div className="mb-4">
           <p className="text-base text-grey-21 font-bold mb-2">Arrival at</p>
           <TimeSelect arrivalAt={arrivalAt} setArrivalAt={setArrivalAt} />
         </div>
-        <div>
+        <div className="mb-4">
           <p className="text-base text-grey-21 font-bold mb-2">Departing from</p>
           <input
             value={departFrom}
@@ -26,7 +26,7 @@ function ArrivalTime() {
             className="primary-input"
           />
         </div>
-        <div>
+        <div className="mb-4">
           <p className="text-base text-grey-21 font-bold mb-2">Via</p>
           <input
             value={via}
