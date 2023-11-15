@@ -6,6 +6,10 @@ import viTranslation from '@/api/mock-data/vi.json';
 import thTranslation from '@/api/mock-data/th.json';
 import enTranslation from '@/api/mock-data/en.json';
 
+const isBrowser = typeof window !== 'undefined';
+const savedLanguage = isBrowser ? localStorage.getItem('language') || 'vi' : 'vi';
+
+
 const resources = {
   vi: { translation: viTranslation },
   th: { translation: thTranslation },
@@ -13,15 +17,14 @@ const resources = {
 };
 
 i18n
-  .use(initReactI18next) // passes i18n down to react-i18next
+  .use(initReactI18next)
   .init({
     resources,
-    lng: 'vi', // default language
-    fallbackLng: 'vi', // fallback language if a translation is not found
+    lng: savedLanguage || 'vi',
+    fallbackLng: 'vi',
     interpolation: {
-      escapeValue: false, // react already safes from xss
+      escapeValue: false,
     },
   });
-
 
 export default i18n;

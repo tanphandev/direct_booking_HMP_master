@@ -12,8 +12,9 @@ function LanguageMenu() {
     code: LanguageCode.VI,
   });
   useEffect(() => {
-
-    const savedLanguage = localStorage.getItem('language');
+    const isBrowser = typeof window !== 'undefined';
+    const savedLanguage = isBrowser ? localStorage.getItem('language') || 'vi' : 'vi';
+    // const savedLanguage = localStorage.getItem('language');
 
     if (savedLanguage) {
       const selectedLanguage = language.find(item => item.code === savedLanguage);

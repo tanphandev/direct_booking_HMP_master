@@ -6,6 +6,8 @@ import { createRef, useImperativeHandle, useState } from 'react';
 import { useOnClickOutside } from '@/hooks/useClickOutSide';
 import Calendar from '@/components/BookingChoose/Calendar/Calendar';
 import '@/i18n/i18n';
+import { useTranslation } from 'react-i18next';
+import i18n from "@/i18n/i18n";
 const BookingSearchBox = () => {
   const [isHideCheckinCalendar, setIsHideCheckinCalendar] = useState<boolean>(true);
 
