@@ -20,11 +20,11 @@ function TravelXModal() {
           onClick={() => {
             closeModalWithAnimation(150);
           }}
-          className="z-10 absolute top-4 right-4 flex items-center justify-center w-[40px] h-[40px] transition-colors cursor-pointer "
+          className="z-10 absolute top-3 right-3 flex items-center justify-center w-[40px] h-[40px] transition-colors cursor-pointer "
         >
           <XmarkIcon width="20px" height="20px" className="transition-colors text-grey-6c hover:text-grey-21" />
         </div>
-        <div className="flex flex-col justify-between w-[500px] h-[550px] bg-white rounded-sm">
+        <div className="flex flex-col justify-between w-[100vw] h-[100vh] sm:w-[500px] sm:h-[550px] bg-white rounded-sm">
           <div className="px-8 pt-8">
             <div className="flex justify-center">
               <Image src={TravelXLogo} alt="travel-x-logo" width={300} height={78} className="mb-4" />
