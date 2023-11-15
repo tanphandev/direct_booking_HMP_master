@@ -1,12 +1,13 @@
 import { useContext } from 'react';
-import { VisibilityContext } from 'react-horizontal-scrolling-menu';
 import { useModalContext } from '@/contexts/ModalProvider';
 
+import { VisibilityContext } from 'react-horizontal-scrolling-menu';
 import { MODAL_NAME } from '@/types/modal';
 
 type PackageItemDetail = {
   width?: string;
   height?: string;
+  className?: string;
   padding?: string;
   margin?: string;
   packageDetail: PackageDetail;
@@ -17,6 +18,7 @@ type PackageItemDetail = {
 function PackageItemDetail({
   width,
   height,
+  className,
   padding,
   margin,
   packageDetail,
@@ -33,8 +35,6 @@ function PackageItemDetail({
   return (
     <div
       style={{
-        width: width,
-        height: height,
         padding: padding,
         margin: margin,
       }}
@@ -42,7 +42,7 @@ function PackageItemDetail({
         handleChoosePackage && handleChoosePackage(packageDetail);
         handleClickItem && handleClickItem(visibility);
       }}
-      className={`flex flex-col justify-between transition-colors text-grey-21 bg-white cursor-pointer rounded-md ${
+      className={`${className} flex flex-col justify-between transition-colors text-grey-21 bg-white cursor-pointer rounded-md ${
         isActive ? 'text-white !bg-blue-0a' : ''
       } p-4`}
     >

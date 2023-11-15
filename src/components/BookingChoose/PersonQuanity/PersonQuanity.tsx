@@ -19,9 +19,9 @@ function PersonQuanity() {
     <div className="relative">
       <div onClick={toggleShowPopper} className="h-[80px] flex items-center bg-white text-grey-21 rounded-md p-4 mb-2">
         <PersonIcon width="24px" height="24px" color="#212529" className="mr-4" />
-        <p className="text-lg font-bold">{adultQuantity} Adults</p>
+        <p className="text-base md:text-lg font-bold">{adultQuantity} Adults</p>
         <span className="px-2 text-black-0.2">●</span>
-        <p className="text-lg font-bold">{childQuantity} Child</p>
+        <p className="text-base md:text-lg font-bold">{childQuantity} Child</p>
       </div>
       <PersonQuantityPopper
         ref={personQuantityPopperRef}

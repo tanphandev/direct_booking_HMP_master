@@ -1,8 +1,11 @@
+import { createContext, useCallback, useContext, useMemo, useState } from 'react';
+
+import TravelXModal from '@/components/Modal/TravelXModal';
 import PackageDetailModal from '@/components/Modal/PackageDetailModal';
 import { HANDLE_STATUS } from '@/types/handle';
 import { MODAL_NAME } from '@/types/modal';
 import { sleep } from '@/utils/helper';
-import { createContext, useCallback, useContext, useMemo, useState } from 'react';
+import AskQuestionModal from '@/components/Modal/AskQuestionModal';
 
 type ModalContextType = {
   modal: MODAL_NAME;
@@ -20,6 +23,8 @@ const ModalContext = createContext(null as any);
 /* Modal List */
 const Modal: any = {
   [MODAL_NAME.PACKAGE_DETAIL]: <PackageDetailModal />,
+  [MODAL_NAME.TRAVELX]: <TravelXModal />,
+  [MODAL_NAME.ASK_QUESTION]: <AskQuestionModal />,
 };
 
 // ============================= Use modal context ============================ //

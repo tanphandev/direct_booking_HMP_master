@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu';
 
 import PackageItemDetail from './PackageItemDetail';
@@ -170,16 +170,17 @@ function PackageOption({ packageChose, setIsChoosePackage, setPackageChose }: Pa
   const GotoReviewPackage = () => {
     setIsChoosePackage && setIsChoosePackage(true);
   };
-
+  const wapperRef = useRef<HTMLDivElement>(null);
+  console.log('wapperRef', wapperRef.current?.clientWidth);
   return (
     <div>
-      <div className="rounded-md mx-[-56px] text-grey-21 mb-2">
+      <div ref={wapperRef} className="rounded-md md:mx-[-56px] text-grey-21 mb-2">
         <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow} onInit={restorePosition} onScroll={savePosition}>
           {packages.map((packageItem, index) => (
             <PackageItemDetail
               key={index}
-              width="382px"
               margin="0 8px"
+              className="w-[382px]"
               isActive={packageItem.name === packageChose?.name}
               packageDetail={packageItem}
               handleChoosePackage={handleChoosePackage}
@@ -191,7 +192,7 @@ function PackageOption({ packageChose, setIsChoosePackage, setPackageChose }: Pa
       <div className="flex justify-end">
         <button
           onClick={() => {
-            GotoReviewPackage();
+            packageChose && GotoReviewPackage();
           }}
           className={`transition-all w-[150px] h-[56px] text-white bg-grey-6c font-bold rounded-md opacity-60 ${
             packageChose ? '!bg-blue-0a !opacity-100 hover:!bg-blue-09' : 'cursor-not-allowed'
