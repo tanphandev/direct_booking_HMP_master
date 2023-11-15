@@ -6,6 +6,7 @@ import { HANDLE_STATUS } from '@/types/handle';
 import { MODAL_NAME } from '@/types/modal';
 import { sleep } from '@/utils/helper';
 import AskQuestionModal from '@/components/Modal/AskQuestionModal';
+import HMPMap from '@/components/Modal/HMPMapModal';
 
 type ModalContextType = {
   modal: MODAL_NAME;
@@ -25,6 +26,7 @@ const Modal: any = {
   [MODAL_NAME.PACKAGE_DETAIL]: <PackageDetailModal />,
   [MODAL_NAME.TRAVELX]: <TravelXModal />,
   [MODAL_NAME.ASK_QUESTION]: <AskQuestionModal />,
+  [MODAL_NAME.HMP_MAP]: <HMPMap />,
 };
 
 // ============================= Use modal context ============================ //
