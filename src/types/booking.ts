@@ -54,6 +54,7 @@ interface DateProps {
 // ============================== FILL INFOMATION ============================= //
 
 interface GuestInformationProps {
+  inputId: string;
   isReuseOrderData?: boolean;
   guestFormRef?: any;
 }

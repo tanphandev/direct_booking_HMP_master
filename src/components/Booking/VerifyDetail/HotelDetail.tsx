@@ -3,8 +3,14 @@ import HotelLogo from '@/../public/assets/logo/Logo.png';
 
 function HotelDetail() {
   return (
-    <div className="flex gap-x-4">
-      <Image src={HotelLogo} alt="hotel-logo" width={150} height={150} />
+    <div className="flex flex-col lg:flex-row items-center gap-x-4">
+      <Image
+        src={HotelLogo}
+        alt="hotel-logo"
+        width={0}
+        height={0}
+        className="w-[250px] h-[250px] lg:w-[150px] lg:h-[150px]"
+      />
       <div>
         <p className="text-[18px] font-bold underline mb-2">Contact Us</p>
         <div className="grid grid-cols-3 grid-rows-3">
