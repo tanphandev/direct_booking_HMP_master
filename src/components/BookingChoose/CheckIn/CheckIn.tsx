@@ -53,7 +53,12 @@ const CheckIn = forwardRef<RangeDate, Props>(function Component({ quantityNight 
           <p className="text-base md:text-lg font-bold">{displayDateFormat(rangeDate[0].endDate)}</p>
         </div>
       </div>
-      <Calendar isHide={isHideCalendar} rangeDate={rangeDate} setRangeDate={setRangeDate} />
+      <Calendar
+        isHide={isHideCalendar}
+        rangeDate={rangeDate}
+        setRangeDate={setRangeDate}
+        className="absolute top-0 left-0 translate-y-[82px]"
+      />
     </div>
   );
 });

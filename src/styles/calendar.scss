@@ -7,7 +7,7 @@
 }
 
 .rdrCalendarWrapper {
-  @apply rounded-[6px] shadow-custom_4;
+  @apply relative rounded-[6px] shadow-custom_4;
 }
 
 .rdrMonthAndYearWrapper {
@@ -35,5 +35,9 @@
 }
 
 .rdrDateRangePickerWrapper {
-  @apply w-full ;
+  @apply w-full;
+}
+
+.rdrDateRangePickerWrapper {
+  @apply w-[338px] overflow-x-scroll sm:w-auto sm:overflow-hidden;
 }
