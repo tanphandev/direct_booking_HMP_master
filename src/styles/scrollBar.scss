@@ -1,3 +1,5 @@
+// ========================= PACKAGE DETAIL SCROLLBAR ========================= //
+
 /* width */
 .package-detail-scrollbar::-webkit-scrollbar {
   @apply w-1;
@@ -5,5 +7,35 @@
 
 /* Handle */
 .package-detail-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-grey-d9 rounded-md;
+}
+
+// ========================= COUNTRIES SCROLLBAR, TIME LIST ========================= //
+
+.select-time-scrollbar::-webkit-scrollbar,
+.country-list::-webkit-scrollbar,
+.auto-complete-countries::-webkit-scrollbar {
+  @apply w-3;
+}
+
+.select-time-scrollbar::-webkit-scrollbar-track,
+.country-list::-webkit-scrollbar-track,
+.auto-complete-countries::-webkit-scrollbar-track {
+  @apply bg-grey-f5;
+}
+
+.select-time-scrollbar::-webkit-scrollbar-thumb,
+.country-list::-webkit-scrollbar-thumb,
+.auto-complete-countries::-webkit-scrollbar-thumb {
+  @apply bg-grey-d9 rounded-sm;
+}
+
+// ================================= TEXTAREA ================================= //
+
+.textarea-srollbar::-webkit-scrollbar {
+  @apply w-1;
+}
+
+.textarea-srollbar::-webkit-scrollbar-thumb {
   @apply bg-grey-d9 rounded-md;
 }

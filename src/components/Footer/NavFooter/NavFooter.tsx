@@ -5,11 +5,11 @@ import { useParams } from 'next/navigation';
 import { navFooter } from '../constants';
 
 function NavFooter() {
-  const { hottel_slug } = useParams();
+  const { hotel_slug } = useParams();
   return (
-    <div className="mb-4 text-base font-normal text-white">
+    <div className="flex flex-col sm:flex-row items-center mb-4 text-base font-normal text-white">
       {navFooter.map((item, index) => (
-        <Link key={index} href={item.path(hottel_slug)} className="my-2 mx-4 hover:underline">
+        <Link key={index} href={item.path(hotel_slug)} className="my-2 mx-4 hover:underline">
           {item.title}
         </Link>
       ))}
