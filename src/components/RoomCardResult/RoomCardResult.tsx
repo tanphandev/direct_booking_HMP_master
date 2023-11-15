@@ -10,6 +10,7 @@ const RoomCardResult: React.FC<RoomCardResultProps> = ({ room }) => {
   const [showSlider, setShowSlider] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
   const photos = room.photos || [];
+  const packages =room.room_type_packages||[];
   
   const pathIcon = "/assets/icons";
   const MAX_DISPLAYED_ITEMS = 27;
@@ -215,11 +216,11 @@ const RoomCardResult: React.FC<RoomCardResultProps> = ({ room }) => {
         </div>
       </div>
 
-      {room.room_type_packages && (
+      {packages[0] && (
         <div className='mt-4'>
           <h2 className='uppercase mb-4 pb-2'>Ưu đãi đặc biệt</h2>
           <div className='flex-col md:flex md:flex-wrap'>
-            {room.room_type_packages?.map((roomPackage) => (
+            {packages?.map((roomPackage) => (
               <div key={roomPackage.id} className='md:m-w-1/3 md:w-1/3 w-full py-2'>
                 <div className='flex flex-col bg-[#edf5ef] py-6 px-4 mx-2 rounded-md'>
                   {roomPackage.dbp_short_des.map((des, index) => (

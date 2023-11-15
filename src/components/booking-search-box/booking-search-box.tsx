@@ -5,11 +5,11 @@ import CheckoutNew from "@/assets/icons/CheckoutNew";
 import { createRef, useImperativeHandle, useState } from "react";
 import { useOnClickOutside } from "@/hooks/useClickOutSide";
 import Calendar from "@/components/BookingChoose/Calendar/Calendar";
-
+import '@/i18n/i18n';
 const BookingSearchBox = () => {
     const [isHideCheckinCalendar, setIsHideCheckinCalendar] = useState<boolean>(true);
     const [isHideCheckoutCalendar, setIsHideCheckoutCalendar] = useState<boolean>(true);
-    
+
     let calendarRef = null;
     if (typeof document !== 'undefined') {
         calendarRef = document.querySelector('.rdrDateRangePickerWrapper') as Element;
@@ -23,13 +23,13 @@ const BookingSearchBox = () => {
             key: 'selection',
         },
     ]);
-    let quantityNight: number = (rangeDate[0].endDate - rangeDate[0].startDate)/86400000;
+    let quantityNight: number = (rangeDate[0].endDate - rangeDate[0].startDate) / 86400000;
     const checkInRef = createRef<RangeDate>();
 
     useImperativeHandle(checkInRef, () => ({
         startDate: rangeDate[0].startDate,
         endDate: rangeDate[0].endDate,
-      }));
+    }));
     const [isSearchBoxVisible, setIsSearchBoxVisible] = useState(false);
     const toggleSearchBox = () => {
         setIsSearchBoxVisible(!isSearchBoxVisible);

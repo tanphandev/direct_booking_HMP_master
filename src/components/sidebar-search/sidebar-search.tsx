@@ -32,9 +32,7 @@ const SidebarSearch = () => {
       </button>
       <div>
         <div className="relative">
-          {/* <div className="">
-                        {isLoaded && <Map />}
-                    </div> */}
+
           <Image src={GG_MAP} alt="GG_MAP" className="w-full" />
           <button className="absolute p-2 rounded-sm top-[50%] left-[50%] bg-[#EE3840] translate-y-[-50%] translate-x-[-50%]">
             <span className="text-white"> {t('SEARCH.SEARCH_RESULT_PAGE.SEE_MAP')}</span>
