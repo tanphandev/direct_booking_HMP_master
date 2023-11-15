@@ -81,7 +81,7 @@ const Stepper = ({
           onClick={() => {
             step.completed && setCurrentStep(index + 1);
           }}
-          className="flex items-center cursor-pointer"
+          className="flex flex-col sm:flex-row items-center cursor-pointer"
         >
           <div
             className={`rounded-full transition duration-500 ease-in-out w-6 h-6 text-white flex items-center justify-center ${
@@ -102,6 +102,6 @@ const Stepper = ({
     );
   });
 
-  return <div className="h-[72px] flex justify-between items-center">{stepsDisplay}</div>;
+  return <div className="h-[72px] flex justify-between items-center overflow-hidden">{stepsDisplay}</div>;
 };
 export default Stepper;

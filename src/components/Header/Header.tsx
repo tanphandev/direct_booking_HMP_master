@@ -11,7 +11,7 @@ function Header() {
   const { hotel_slug } = useParams();
   return (
     <div className="container shadow-[0_3px_6px_rgba(0,0,0,.16)]">
-      <div className="flex justify-between items-center px-[15px] mx-[94px]">
+      <div className="flex justify-between items-center px-[15px] md:mx-6 lg:mx-[116px]">
         <Link href={Path.HOME(hotel_slug as string)}>
           <Image src={Logo} alt="Royal Hotel" width={68} height={68} />
         </Link>

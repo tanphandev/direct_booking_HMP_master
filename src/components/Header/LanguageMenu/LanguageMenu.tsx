@@ -1,5 +1,5 @@
 'use client';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useOnClickOutside } from '@/hooks/useClickOutSide';
 
 import { LanguageCode, language, languageProps } from '@/types/Language';
@@ -11,6 +11,17 @@ function LanguageMenu() {
     label: 'Viet Nam',
     code: LanguageCode.VI,
   });
+  useEffect(() => {
+
+    const savedLanguage = localStorage.getItem('language');
+
+    if (savedLanguage) {
+      const selectedLanguage = language.find(item => item.code === savedLanguage);
+      if (selectedLanguage) {
+        setLanguageValue(selectedLanguage);
+      }
+    }
+  }, []);
 
   /* Listen even click outside language menu */
   useOnClickOutside(languageMenuRef, () => {
@@ -21,8 +32,8 @@ function LanguageMenu() {
   const handleChangeLanguage = (item: languageProps) => {
     setLanguageValue(item);
     toggleMenu();
+      localStorage.setItem('language', item.code);
   };
-
   /* Toggle menu */
   const toggleMenu = () => {
     languageMenuRef.current?.classList.toggle('hidden');
@@ -30,10 +41,13 @@ function LanguageMenu() {
   return (
     <div className="relative">
       <div onClick={toggleMenu} className="flex justify-center items-center cursor-pointer">
-        <p className="text-base text-grey-21 font-bold mr-1">{languageValue.code}</p>
+        <p className="text-base text-grey-21 font-bold mr-1 uppercase">{languageValue.code}</p>
         <ArrowDown width="24px" height="24px" />
       </div>
-      <ul ref={languageMenuRef} className="hidden absolute top-8 w-[112px] bg-white rounded-md shadow-custom_1 py-2">
+      <ul
+        ref={languageMenuRef}
+        className="hidden absolute top-8 right-0 lg:left-0 w-[112px] bg-white rounded-md shadow-custom_1 py-2"
+      >
         {language.map((item, index) => (
           <li
             className="transition-colors h-[48px] text-sm px-4 leading-[48px] hover:bg-black-0.1"

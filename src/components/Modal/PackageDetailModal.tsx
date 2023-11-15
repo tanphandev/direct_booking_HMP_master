@@ -22,7 +22,7 @@ function PackageDetailModal() {
         >
           <XmarkIcon width="20px" height="20px" className="text-grey-21" />
         </div>
-        <div className="package-detail-scrollbar w-[500px] max-h-[550px] overflow-y-scroll bg-white px-8 rounded-md">
+        <div className="package-detail-scrollbar w-[100vw] h-[100vh] md:w-[500px] md:max-h-[550px] overflow-y-scroll bg-white px-8 rounded-md">
           <h2 className="font-bold text-center p-4">Title</h2>
           <div className="border-[1px] w-[280px] p-4 mb-4 border-grey-d9 rounded-lg">
             <p className="font-bold">Duration: 2 days, 1 night</p>

@@ -12,9 +12,10 @@ type Props = {
   isHide: boolean;
   rangeDate: any[];
   setRangeDate: React.Dispatch<React.SetStateAction<any[]>>;
+  className?: string;
 };
 
-const Calendar = forwardRef<any, Props>(function Component({ isHide, rangeDate, setRangeDate }, ref) {
+const Calendar = forwardRef<any, Props>(function Component({ isHide, rangeDate, setRangeDate, className }, ref) {
   const handleOnChange = (ranges: any) => {
     const { selection } = ranges;
     setRangeDate([selection]);
@@ -22,7 +23,7 @@ const Calendar = forwardRef<any, Props>(function Component({ isHide, rangeDate, 
   return (
     <DateRangePicker
       ref={ref}
-      className={`${isHide ? '!hidden' : ''} absolute top-0 left-0 translate-y-[82px] z-10`}
+      className={`${isHide ? '!hidden' : ''} z-10 ${className}`}
       onChange={handleOnChange}
       moveRangeOnFirstSelection={false}
       months={2}

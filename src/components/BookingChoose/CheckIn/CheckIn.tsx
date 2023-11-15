@@ -45,15 +45,20 @@ const CheckIn = forwardRef<RangeDate, Props>(function Component({ quantityNight 
           <CalendarIcon width="24px" height="24px" color="#212529" className="mr-4" />
           <div>
             <p className="text-sm font-medium">CHECK-IN</p>
-            <p className="text-lg font-bold">{displayDateFormat(rangeDate[0].startDate)}</p>
+            <p className="text-base md:text-lg font-bold">{displayDateFormat(rangeDate[0].startDate)}</p>
           </div>
         </div>
         <div className="p-4">
           <p className="text-sm font-medium">CHECK-OUT</p>
-          <p className="text-lg font-bold">{displayDateFormat(rangeDate[0].endDate)}</p>
+          <p className="text-base md:text-lg font-bold">{displayDateFormat(rangeDate[0].endDate)}</p>
         </div>
       </div>
-      <Calendar isHide={isHideCalendar} rangeDate={rangeDate} setRangeDate={setRangeDate} />
+      <Calendar
+        isHide={isHideCalendar}
+        rangeDate={rangeDate}
+        setRangeDate={setRangeDate}
+        className="absolute top-0 left-0 translate-y-[82px]"
+      />
     </div>
   );
 });

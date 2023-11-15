@@ -2,9 +2,13 @@ import { createRef } from 'react';
 
 import CheckIn from '../CheckIn/CheckIn';
 import PersonQuanity from '../PersonQuanity/PersonQuanity';
+import Link from 'next/link';
+import { useParams } from 'next/navigation';
+import Path from '@/routes/Path';
 
 function Rooms() {
   const checkInRef = createRef<RangeDate>();
+  const { hotel_slug } = useParams();
   return (
     <div>
       <div>
@@ -20,9 +24,11 @@ function Rooms() {
           </button>
         </div>
         <div className="flex justify-end">
-          <button className="transition-colors w-[150px] h-[56px] text-base font-bold bg-blue-0a hover:bg-blue-09 rounded-md">
-            NEXT
-          </button>
+          <Link href={Path.SEARCH(hotel_slug as string)}>
+            <button className="transition-colors w-[150px] h-[56px] text-base font-bold bg-blue-0a hover:bg-blue-09 rounded-md">
+              NEXT
+            </button>
+          </Link>
         </div>
       </div>
     </div>

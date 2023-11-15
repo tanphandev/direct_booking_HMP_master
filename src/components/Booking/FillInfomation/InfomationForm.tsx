@@ -30,8 +30,8 @@ const InformationForm = forwardRef<any, Props>(function Component({ type }, ref)
   }));
 
   return (
-    <form onSubmit={formik.handleSubmit} className="mb-4">
-      <div className="grid grid-cols-2 gap-x-[10px] gap-y-4">
+    <form onSubmit={formik.handleSubmit} className="mb-4 overflow-hidden">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-[10px] gap-y-4">
         <InputField
           labelClassName="text-base text-grey-21 mb-2"
           inputClassName="primary-input"

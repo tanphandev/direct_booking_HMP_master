@@ -1,7 +1,7 @@
 export enum LanguageCode {
-  VI = 'VI',
-  EN = 'EN',
-  TH = 'TH',
+  VI = 'vi',
+  EN = 'en',
+  TH = 'th'
 }
 
 export type languageProps = {

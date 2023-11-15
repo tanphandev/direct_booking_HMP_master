@@ -46,7 +46,7 @@ function OrderInfomation() {
       <InformationOfGuests guestFormRef={guestFormRef} addtionalGuestFormRef={additionalGuestFormRef} />
       <SpecialRequire />
       <ArrivalTime />
-      <div className="text-end mt-12">
+      <div className="text-end mt-8">
         <button
           onClick={() => {
             handleSubmit();
