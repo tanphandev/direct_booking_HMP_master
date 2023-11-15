@@ -9,8 +9,10 @@ import QUESTION from "@/assets/icons/question.svg"
 import { cp_paragraphs, cp_title } from "@/api/mock-data/faq";
 import Amenities from "@/assets/icons/Amenities";
 import { useEffect, useState } from "react";
+import { useTranslation } from 'react-i18next';
 const SidebarSearch = () => {
- 
+  const { t } = useTranslation();
+  console.log(t('SEARCH.SEARCH_RESULT_PAGE.SEE_MAP'));
   const [lang, setLang] = useState('vi');
 
   useEffect(() => {
@@ -35,7 +37,7 @@ const SidebarSearch = () => {
                     </div> */}
           <Image src={GG_MAP} alt="GG_MAP" className="w-full" />
           <button className="absolute p-2 rounded-sm top-[50%] left-[50%] bg-[#EE3840] translate-y-[-50%] translate-x-[-50%]">
-            <span className="text-white"> Xem bản đồ</span>
+            <span className="text-white"> {t('SEARCH.SEARCH_RESULT_PAGE.SEE_MAP')}</span>
           </button>
         </div>
         <div className="uppercase p-5 font-semibold">

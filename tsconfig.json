@@ -22,6 +22,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/api/ApiGoogleMap.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts","**/*.json", "src/api/ApiGoogleMap.js", "src/i18n/i18n.translations"],
   "exclude": ["node_modules"]
 }
