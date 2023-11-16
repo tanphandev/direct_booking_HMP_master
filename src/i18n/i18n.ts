@@ -20,8 +20,7 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    lng: savedLanguage || 'vi',
-    fallbackLng: 'vi',
+    lng: savedLanguage,
     interpolation: {
       escapeValue: false,
     },

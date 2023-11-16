@@ -4,6 +4,8 @@ import { useOnClickOutside } from '@/hooks/useClickOutSide';
 
 import { LanguageCode, language, languageProps } from '@/types/Language';
 import ArrowDown from '@/assets/icons/ArrowDown';
+import i18n from "@/i18n/i18n";
+
 
 function LanguageMenu() {
   const languageMenuRef = useRef<HTMLUListElement>(null);
@@ -14,8 +16,6 @@ function LanguageMenu() {
   useEffect(() => {
     const isBrowser = typeof window !== 'undefined';
     const savedLanguage = isBrowser ? localStorage.getItem('language') || 'vi' : 'vi';
-    // const savedLanguage = localStorage.getItem('language');
-
     if (savedLanguage) {
       const selectedLanguage = language.find(item => item.code === savedLanguage);
       if (selectedLanguage) {
@@ -34,6 +34,8 @@ function LanguageMenu() {
     setLanguageValue(item);
     toggleMenu();
       localStorage.setItem('language', item.code);
+    i18n?.changeLanguage(item.code)
+    
   };
   /* Toggle menu */
   const toggleMenu = () => {
