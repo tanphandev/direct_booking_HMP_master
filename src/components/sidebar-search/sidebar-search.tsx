@@ -17,25 +17,41 @@ import i18n from "@/i18n/i18n";
 const SidebarSearch = () => {
   const { openModal } = useModalContext();  
   const { t } = useTranslation();
-  const [lang, setLang] = useState('vi');
+  const [lang, setLang] = useState(i18n.language);
   
 
-  useEffect(() => {
-    const savedLanguage = localStorage.getItem('language') || 'vi';
-    setLang(savedLanguage);
+  // useEffect(() => {
+  //   const savedLanguage = localStorage.getItem('language')||'vi';
+  //   setLang(savedLanguage);
 
-    // Update i18n language whenever lang changes
-    i18n.changeLanguage(savedLanguage);
-  },[]);
+  //   // Update i18n language whenever lang changes
+  //   i18n.changeLanguage(savedLanguage);
+  // },[]);
 
-  useEffect(() => {
-    // Re-fetch translations when lang changes
-    i18n.reloadResources();
-  }, [lang]);
+  // useEffect(() => {
+  //   // Re-fetch translations when lang changes
+  //   i18n.reloadResources();
+  // }, [lang]);
  
+  // useEffect(() => {
+  //   const loadTranslations = async () => {
+  //     try {
+  //       const savedLanguage = localStorage.getItem('language')||'vi';
+  //       await i18n.changeLanguage(savedLanguage);
+  //       setLang(savedLanguage);
+
+  //       i18n.reloadResources();
+  //     } catch (error) {
+  //       console.error('Error loading translations:', error);
+  //     }
+  //   };
   
+  //   loadTranslations();
+  // }, [lang]);
+
   return (
     <>
+    {/* <Suspense fallback={<Loading />}> */}
       <div className="rounded-t-md bg-[#636363]">
         <BookingSearchBox />
       </div>
@@ -113,6 +129,7 @@ const SidebarSearch = () => {
           <p className="mb-2">Vietnamese demo test</p>
         </div>
       </div>
+      {/* </Suspense> */}
     </>
   );
 };
