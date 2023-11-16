@@ -23,7 +23,7 @@ function* getBusiness({ payload }: any): Generator {
   const { business_slug, router } = payload;
   yield put(enableLoading(BUSINESS));
   try {
-    const data: any = yield call(ApiCaller.get, API.get_business_by_slug(business_slug));
+    const data: any = yield call(ApiCaller.get, API.get_business_by_slug, { slug: business_slug });
     const basic_business_info = pick(data, basic_business_info_field);
     yield put(getBasicBusinessInfoSuccess(basic_business_info));
     yield put(getBusinessPFSuccess(data.business_pf));
@@ -43,7 +43,7 @@ function* getBusiness({ payload }: any): Generator {
 
 function* checkCouponCode({ payload }: any): Generator {
   const { bodyData } = payload;
-  enableLoading(CHECK_COUPON_CODE);
+  yield put(enableLoading(CHECK_COUPON_CODE));
   try {
     const data: any = yield call(ApiCaller.post, API.direct_booking_check_coupon_code, bodyData);
     if (!data[0]) {
@@ -54,10 +54,10 @@ function* checkCouponCode({ payload }: any): Generator {
   } catch (error: any) {
     yield put(checkCouponFailed(error));
   } finally {
-    disableLoading(CHECK_COUPON_CODE);
+    yield put(disableLoading(CHECK_COUPON_CODE));
   }
 }
-export default function* postSaga() {
+export default function* businessSaga() {
   yield all([
     takeLatest(businessAction.getBusiness, getBusiness),
     takeLatest(businessAction.checkCouponCode, checkCouponCode),

@@ -11,7 +11,11 @@ function ReviewPackage({ packageChose, setIsChoosePackage }: PackageProps) {
 
   return (
     <div className="flex flex-col sm:flex-row gap-y-4 sm:gap-0">
-      <PackageItemDetail width="250px" height="320px" isActive={true} packageDetail={packageChose!} />
+      <PackageItemDetail
+        isActive={true}
+        packageDetail={packageChose!}
+        className="w-full h-[320px] sm:w-[250px] sm:h-[320px]"
+      />
       <div className="flex-1 sm:ml-4">
         <CheckIn />
         <PersonQuanity />
