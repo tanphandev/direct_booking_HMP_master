@@ -171,7 +171,6 @@ function PackageOption({ packageChose, setIsChoosePackage, setPackageChose }: Pa
     setIsChoosePackage && setIsChoosePackage(true);
   };
   const wapperRef = useRef<HTMLDivElement>(null);
-  console.log('wapperRef', wapperRef.current?.clientWidth);
   return (
     <div>
       <div ref={wapperRef} className="rounded-md md:mx-[-56px] text-grey-21 mb-2">

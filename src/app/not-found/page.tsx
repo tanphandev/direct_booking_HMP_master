@@ -9,7 +9,7 @@ function NotFound() {
         <span className="character">!</span>
       </div>
       <p className="text-xl font-agbalumo px-[5px] py-[10px] shadow-md shadow-[rgba(0,0,0,.1)] rounded-[5px]">
-        40 - THE PAGE CAN&apos;T BE FOUND
+        404 - THE PAGE CAN&apos;T BE FOUND
       </p>
     </div>
   );
