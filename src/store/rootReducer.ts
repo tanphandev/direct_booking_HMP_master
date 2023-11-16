@@ -1,13 +1,10 @@
 import { combineReducers } from '@reduxjs/toolkit';
 import common from './common/commonSlice';
-import post from './post/postSlice';
-import store from './index';
+import business from './business/businessSlice';
 
 const rootReducer = combineReducers({
   common,
-  post
+  business,
 });
 
-export type AppState = ReturnType<typeof rootReducer>;
-export type AppDispatch = typeof store.dispatch;
 export default rootReducer;
