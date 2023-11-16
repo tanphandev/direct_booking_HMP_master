@@ -17,7 +17,6 @@ function OrderInfomation() {
 
   /* validate form */
   const handleSubmit = () => {
-    console.log(orderFormRef.current.formik);
     orderFormRef.current.formik.submitForm();
     orderAdditionalInfoFormRef?.current?.formik?.submitForm();
     guestFormRef.current.formik.submitForm();

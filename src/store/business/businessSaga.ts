@@ -8,6 +8,7 @@ import {
   getBasicBusinessInfoFailed,
   getBasicBusinessInfoSuccess,
   getBusinessPFSuccess,
+  getFooterNavigationSuccess,
   getPaymentsMethodSuccess,
   getSettingSuccess,
 } from './businessSlice';
@@ -25,6 +26,7 @@ function* getBusiness({ payload }: any): Generator {
     yield put(getBasicBusinessInfoSuccess(basic_business_info));
     yield put(getBusinessPFSuccess(data.business_pf));
     yield put(getSettingSuccess(data.direct_booking_setting));
+    yield put(getFooterNavigationSuccess(data.direct_booking_setting.navigation));
     yield put(getPaymentsMethodSuccess(data.payment_method));
   } catch (error: any) {
     yield put(getBasicBusinessInfoFailed(error));

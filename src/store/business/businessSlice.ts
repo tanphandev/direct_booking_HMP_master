@@ -4,6 +4,7 @@ const initialState = {
   basic_business_info: {},
   business_pf: [],
   setting: {},
+  footer_navigation: [],
   payments_method: [],
   error: {},
 } as any;
@@ -24,6 +25,9 @@ const businessSlice = createSlice({
     getSettingSuccess: (state, action) => {
       state.setting = action.payload;
     },
+    getFooterNavigationSuccess: (state, action) => {
+      state.footer_navigation = action.payload;
+    },
     getPaymentsMethodSuccess: (state, action) => {
       state.payment_method = action.payload;
     },
@@ -35,6 +39,7 @@ export const {
   getBasicBusinessInfoFailed,
   getBusinessPFSuccess,
   getSettingSuccess,
+  getFooterNavigationSuccess,
   getPaymentsMethodSuccess,
 } = businessSlice.actions;
 export default businessSlice.reducer;

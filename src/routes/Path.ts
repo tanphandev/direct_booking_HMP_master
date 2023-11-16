@@ -5,7 +5,8 @@ const Path = {
   SEARCH: (hotel_slug: string) => `/${hotel_slug}/search`,
   ABOUT: (hotel_slug: string) => `/${hotel_slug}/about`,
   FAQS: (hotel_slug: string) => `/${hotel_slug}/faqs`,
-  ENGLIST_DEMO_TEST: (hotel_slug: string) => `/${hotel_slug}/english-test`,
+  ENGLIST_DEMO_TEST: (hotel_slug: string) => `/${hotel_slug}/english_test`,
+  GET_PAGE_BY_NAME: (hotel_slug: string, page_name: string) => `/${hotel_slug}/${page_name}`,
 };
 
 const outsidePath = {
