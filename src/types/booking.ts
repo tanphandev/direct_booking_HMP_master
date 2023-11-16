@@ -8,16 +8,27 @@ interface PackageProps {
 }
 
 interface PackageDetail {
-  name: string;
-  detail: {
-    duration: string;
-    max_adult: number;
-    max_children: number;
-    adult_price: string;
-    child_price: string;
-    signle_price: string;
-    description: string;
-  };
+  pid: string;
+  uid: string;
+  title: string;
+  type: string;
+  packages_night_stay: number;
+  db_max_adult: number;
+  db_max_children: number;
+  packages_adult_rate: number;
+  packages_child_rate: number;
+  packages_single_rate: number;
+  packages_note: string;
+  packages_room_type: Array<{
+    entity_id: number;
+    title: string;
+  }>;
+  packages_days: Array<{
+    activities: Array<{
+      type: string;
+      title: string;
+    }>;
+  }>;
 }
 
 // =========================== PERSON QUANTITY TYPE =========================== //
@@ -38,9 +49,7 @@ interface PersonQuantityPopperProps extends AdultProps, ChildProps {}
 
 interface SchelduleProps {
   day: string;
-  transfer?: string;
-  excursion?: string;
-  FAndB?: string;
+  activities: any[];
 }
 
 interface DateProps {

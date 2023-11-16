@@ -5,7 +5,7 @@ export const useLoading = (sections: string[]) => {
   const [loading, setLoading] = useState<boolean>(true);
   const { loading: loadingItems } = useAppSelector((state) => state.common);
   useEffect(() => {
-    if (!loadingItems.length) return;
+    if (!loadingItems.length) setLoading(false);
 
     const result = sections.some((section) => {
       return loadingItems.includes(section);

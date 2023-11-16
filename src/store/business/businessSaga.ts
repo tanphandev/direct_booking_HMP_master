@@ -43,7 +43,7 @@ function* getBusiness({ payload }: any): Generator {
 
 function* checkCouponCode({ payload }: any): Generator {
   const { bodyData } = payload;
-  enableLoading(CHECK_COUPON_CODE);
+  yield put(enableLoading(CHECK_COUPON_CODE));
   try {
     const data: any = yield call(ApiCaller.post, API.direct_booking_check_coupon_code, bodyData);
     if (!data[0]) {
@@ -54,7 +54,7 @@ function* checkCouponCode({ payload }: any): Generator {
   } catch (error: any) {
     yield put(checkCouponFailed(error));
   } finally {
-    disableLoading(CHECK_COUPON_CODE);
+    yield put(disableLoading(CHECK_COUPON_CODE));
   }
 }
 export default function* businessSaga() {

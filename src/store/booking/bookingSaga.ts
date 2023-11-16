@@ -9,18 +9,17 @@ import { getBookingPackageFailed, getBookingPackageSuccess } from './bookingSlic
 
 function* getBookingPackages({ payload }: any): Generator {
   const { bid, datecreated } = payload;
-  enableLoading(BOOKING_PACKAGES);
+  yield put(enableLoading(BOOKING_PACKAGES));
   try {
     const data: any = yield call(ApiCaller.get, API.get_booking_packages, {
       bid,
       datecreated,
     });
-    console.log('data', data);
     yield put(getBookingPackageSuccess(data));
   } catch (error: any) {
     yield put(getBookingPackageFailed(error));
   } finally {
-    disableLoading(BOOKING_PACKAGES);
+    yield put(disableLoading(BOOKING_PACKAGES));
   }
 }
 

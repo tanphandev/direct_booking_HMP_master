@@ -8,13 +8,17 @@ import PersonQuanity from '../PersonQuanity/PersonQuanity';
 import Path from '@/routes/Path';
 import { getDateFormatTimestamp, getDateNowTimestamp } from '@/utils/helper';
 import { checkCouponCode } from '@/store/business/businessAction';
+import { useLoading } from '@/hooks/useLoading';
+import { CHECK_COUPON_CODE } from '@/store/common/constants';
+import SecondLoading from '@/components/Loading/SecondLoading';
 
 function Rooms() {
-  const dispatch = useAppDispatch();
-  const checkInRef = createRef<RangeDate>();
   const { hotel_slug } = useParams();
-  const [couponCode, setCouponCode] = useState<string>('');
+  const dispatch = useAppDispatch();
+  const { loading } = useLoading([CHECK_COUPON_CODE]);
+  const checkInRef = createRef<RangeDate>();
   const { basic_business_info } = useAppSelector((state) => state.business);
+  const [couponCode, setCouponCode] = useState<string>('');
 
   /* check coupon code */
   const handleCheckCouponCode = (code: string) => {
@@ -55,6 +59,8 @@ function Rooms() {
             </button>
           </Link>
         </div>
+        {/* show loading when check coupon */}
+        {loading && <SecondLoading />}
       </div>
     </div>
   );
