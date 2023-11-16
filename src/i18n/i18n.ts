@@ -25,5 +25,5 @@ i18n
       escapeValue: false,
     },
   });
-
+//  export const { appWithTranslation, withTranslation } = i18n;
 export default i18n;
