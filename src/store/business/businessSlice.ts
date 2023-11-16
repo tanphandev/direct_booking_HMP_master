@@ -31,6 +31,9 @@ const businessSlice = createSlice({
     getPaymentsMethodSuccess: (state, action) => {
       state.payment_method = action.payload;
     },
+    checkCouponFailed: (state, action) => {
+      state.error = action.payload;
+    },
   },
 });
 
@@ -41,5 +44,6 @@ export const {
   getSettingSuccess,
   getFooterNavigationSuccess,
   getPaymentsMethodSuccess,
+  checkCouponFailed,
 } = businessSlice.actions;
 export default businessSlice.reducer;

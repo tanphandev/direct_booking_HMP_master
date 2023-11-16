@@ -5,6 +5,7 @@ import API from '@/api/api';
 import ApiCaller from '@/api/ApiCaller';
 import * as businessAction from './businessAction';
 import {
+  checkCouponFailed,
   getBasicBusinessInfoFailed,
   getBasicBusinessInfoSuccess,
   getBusinessPFSuccess,
@@ -13,9 +14,10 @@ import {
   getSettingSuccess,
 } from './businessSlice';
 import { disableLoading, enableLoading } from '../common/commonSlice';
-import { BUSINESS } from '../common/constants';
+import { BUSINESS, CHECK_COUPON_CODE } from '../common/constants';
 import { basic_business_info_field } from './constant';
 import Path from '@/routes/Path';
+import { toast } from 'react-toastify';
 
 function* getBusiness({ payload }: any): Generator {
   const { business_slug, router } = payload;
@@ -39,6 +41,25 @@ function* getBusiness({ payload }: any): Generator {
   }
 }
 
+function* checkCouponCode({ payload }: any): Generator {
+  const { bodyData } = payload;
+  enableLoading(CHECK_COUPON_CODE);
+  try {
+    const data: any = yield call(ApiCaller.post, API.direct_booking_check_coupon_code, bodyData);
+    if (!data[0]) {
+      toast.error('Mã của bạn không hợp lệ');
+    } else {
+      toast.success('Mã đã được áp dụng');
+    }
+  } catch (error: any) {
+    yield put(checkCouponFailed(error));
+  } finally {
+    disableLoading(CHECK_COUPON_CODE);
+  }
+}
 export default function* postSaga() {
-  yield all([takeLatest(businessAction.getBusiness, getBusiness)]);
+  yield all([
+    takeLatest(businessAction.getBusiness, getBusiness),
+    takeLatest(businessAction.checkCouponCode, checkCouponCode),
+  ]);
 }
