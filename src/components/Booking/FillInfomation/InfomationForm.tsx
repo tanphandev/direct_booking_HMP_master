@@ -6,12 +6,14 @@ import CountriesAutocomplete from '@/components/common/AutoComplete/CountriesAut
 import 'react-phone-input-2/lib/style.css';
 import { GUEST_INFO_SCHEMA, ORDER_INFO_SCHEMA } from '@/utils/schema';
 import PhoneInput from 'react-phone-input-2';
+import { useStepContext } from '@/contexts/StepProvider';
 
 type Props = {
   type: 'order' | 'guest';
 };
 
 const InformationForm = forwardRef<any, Props>(function Component({ type }, ref) {
+  const { setOrderData, setGuestData } = useStepContext();
   const formik = useFormik({
     initialValues: {
       fullName: '',
@@ -20,9 +22,7 @@ const InformationForm = forwardRef<any, Props>(function Component({ type }, ref)
       country: '',
     },
     validationSchema: type === 'order' ? ORDER_INFO_SCHEMA : GUEST_INFO_SCHEMA,
-    onSubmit: (values) => {
-      console.log('values', values);
-    },
+    onSubmit: (values) => {},
   });
 
   useImperativeHandle(ref, () => ({

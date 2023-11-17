@@ -13,7 +13,7 @@ function OrderInfomation() {
   const orderAdditionalInfoFormRef = createRef<any>();
   const guestFormRef = createRef<any>();
   const additionalGuestFormRef = createRef<any>();
-  const { handleClick } = useStepContext();
+  const { handleClick, setOrderData, setGuestData } = useStepContext();
 
   /* validate form */
   const handleSubmit = () => {
@@ -34,9 +34,15 @@ function OrderInfomation() {
     const isAdditionalGuestFormValid =
       (additionalGuestFormRef.current?.formik?.dirty && additionalGuestFormRef.current?.formik?.isValid) ?? true;
     if (isOrderFormValid && isOrderAdditionalInfoFormValid && isGuestFormValid && isAdditionalGuestFormValid) {
+      /* store data */
+      setOrderData(orderFormRef.current?.formik?.values);
+      setGuestData((preValue: any) => [...preValue, guestFormRef.current?.formik?.values]);
+      additionalGuestFormRef.current &&
+        setGuestData((preValue: any) => [...preValue, additionalGuestFormRef.current?.formik?.values]);
+
+      /* next */
       handleClick('next');
     }
-    console.log('orderFormRef?.current?.formik?', orderFormRef?.current?.formik);
   };
 
   /* handle use order data */
@@ -47,7 +53,6 @@ function OrderInfomation() {
       orderFormRef.current.formik.submitForm();
       return;
     }
-    console.log('next step');
     /* set data */
     formRef?.current?.formik.setFieldValue('fullName', orderFormRef.current.formik.values.fullName);
     formRef?.current?.formik.setFieldValue('email', orderFormRef.current.formik.values.email);
