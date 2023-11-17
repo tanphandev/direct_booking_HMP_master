@@ -1,4 +1,4 @@
-import { forwardRef, memo, useImperativeHandle, useState } from 'react';
+import { forwardRef, memo, useEffect, useImperativeHandle, useState } from 'react';
 import { useOnClickOutside } from '@/hooks/useClickOutSide';
 
 import Calendar from '../Calendar/Calendar';
@@ -7,10 +7,12 @@ import { displayDateFormat } from '@/utils/format';
 
 type Props = {
   quantityNight?: number;
+  isValidate?: boolean;
 };
 
-const CheckIn = forwardRef<RangeDate, Props>(function Component({ quantityNight = 1 }, ref) {
+const CheckIn = forwardRef<RangeDate, Props>(function Component({ quantityNight = 1, isValidate = false }, ref) {
   const [isHideCalendar, setIsHideCalendar] = useState<boolean>(true);
+  const [isValid, setIsValid] = useState<boolean>(true);
   let calendarRef = null;
   if (typeof document !== 'undefined') {
     calendarRef = document.querySelector('.rdrDateRangePickerWrapper') as Element;
@@ -26,9 +28,17 @@ const CheckIn = forwardRef<RangeDate, Props>(function Component({ quantityNight 
     },
   ]);
 
+  useEffect(() => {
+    const millisecondsInADay = 1000 * 60 * 60 * 24;
+    let range = (rangeDate[0].endDate - rangeDate[0].startDate) / millisecondsInADay;
+    /* validate range date */
+    range > quantityNight ? setIsValid(false) : setIsValid(true);
+  }, [quantityNight, rangeDate]);
+
   useImperativeHandle(ref, () => ({
     startDate: rangeDate[0].startDate,
     endDate: rangeDate[0].endDate,
+    isValid: isValid,
   }));
 
   const toggleCalendar = () => {
@@ -38,6 +48,7 @@ const CheckIn = forwardRef<RangeDate, Props>(function Component({ quantityNight 
   useOnClickOutside(calendarRef, () => {
     setIsHideCalendar(true);
   });
+
   return (
     <div className="relative">
       <div onClick={toggleCalendar} className="h-[80px] grid grid-cols-2 bg-white text-grey-21 rounded-md mb-2">
@@ -53,6 +64,11 @@ const CheckIn = forwardRef<RangeDate, Props>(function Component({ quantityNight 
           <p className="text-base md:text-lg font-bold">{displayDateFormat(rangeDate[0].endDate)}</p>
         </div>
       </div>
+      {isValidate && !isValid && (
+        <div className="absolute bottom-0 left-0 right-0 text-xs text-red pl-4 leading-[1.8]">
+          Check-in check-out is invalid
+        </div>
+      )}
       <Calendar
         isHide={isHideCalendar}
         rangeDate={rangeDate}
