@@ -54,7 +54,7 @@ interface SchelduleProps {
 
 interface DateProps {
   title: string;
-  date: any;
+  date: Date;
   time: string;
   mb?: string;
   bgColor?: string;

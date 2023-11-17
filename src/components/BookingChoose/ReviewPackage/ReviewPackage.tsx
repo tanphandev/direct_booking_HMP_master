@@ -10,6 +10,7 @@ import { toast } from 'react-toastify';
 import SecondLoading from '@/components/Loading/SecondLoading';
 import { useLoading } from '@/hooks/useLoading';
 import { PACKAGE_CAL_PRICE } from '@/store/common/constants';
+import { getBookingInfo } from '@/store/booking/bookingSlice';
 
 function ReviewPackage({ packageChose, setIsChoosePackage }: PackageProps) {
   const { hotel_slug } = useParams();
@@ -27,6 +28,17 @@ function ReviewPackage({ packageChose, setIsChoosePackage }: PackageProps) {
     const check_out = checkInRef.current && checkInRef.current.endDate;
     const adults = personQuantityRef.current?.adults;
     const child = personQuantityRef.current?.child;
+
+    /* store booking_info */
+    dispatch(
+      getBookingInfo({
+        check_in,
+        check_out,
+        night: packageChose?.packages_night_stay,
+      }),
+    );
+
+    /* call api PackageCalPrice */
     isValid
       ? dispatch(packageCalculatePrice({ bid, pid, check_in, check_out, adults, child, hotel_slug, router }))
       : toast.error('Check-In Check-Out is invalid');

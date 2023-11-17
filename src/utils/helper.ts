@@ -11,3 +11,5 @@ export const getDateNowTimestamp = () => Math.floor(Date.now() / 1000);
 export const getDateFormatTimestamp = (date: string) => {
   return Math.floor(new Date(date).getTime() / 1000); // Convert to seconds
 };
+
+export const formatCurrency = (number: number) => number?.toLocaleString('vi', { style: 'currency', currency: 'VND' });
