@@ -7,21 +7,27 @@ import { useOnClickOutside } from '@/hooks/useClickOutSide';
 import Calendar from '@/components/BookingChoose/Calendar/Calendar';
 import '@/i18n/i18n';
 import { useTranslation } from "next-i18next";
+import { useParams } from 'next/navigation';
 const BookingSearchBox = () => {
   const { t } = useTranslation();
-
+  
   const [isHideCheckinCalendar, setIsHideCheckinCalendar] = useState<boolean>(true);
 
   let calendarRef = null;
   if (typeof document !== 'undefined') {
     calendarRef = document.querySelector('.rdrDateRangePickerWrapper') as Element;
   }
+
+  
   const currentDay = new Date();
   const nextDay = new Date(currentDay);
+  // const {checkin, checkout}= useParams()
   const [rangeDate, setRangeDate] = useState<CalendarRangeProps[]>([
     {
       startDate: currentDay,
       endDate: nextDay,
+      // startDate: checkin,
+      // endDate: checkout,
       key: 'selection',
     },
   ]);
