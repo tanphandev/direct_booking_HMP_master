@@ -3,6 +3,7 @@ import { useModalContext } from '@/contexts/ModalProvider';
 
 import { VisibilityContext } from 'react-horizontal-scrolling-menu';
 import { MODAL_NAME } from '@/types/modal';
+import { useTranslation } from 'next-i18next';
 
 type PackageItemDetail = {
   width?: string;
@@ -32,6 +33,8 @@ function PackageItemDetail({
   const showPackageDetail = () => {
     openModal(MODAL_NAME.PACKAGE_DETAIL);
   };
+  const { t } = useTranslation();
+
   return (
     <div
       style={{
@@ -48,17 +51,17 @@ function PackageItemDetail({
     >
       <div>
         <h3 className="font-bold text-center">{packageDetail.name}</h3>
-        <p className="font-bold">Duration: {packageDetail.detail.duration}</p>
-        <p className="font-bold">Max Adult: {packageDetail.detail.max_adult}</p>
-        <p className="font-bold">Max Children: {packageDetail.detail.max_children}</p>
-        <p className="font-bold">Adult Price: {packageDetail.detail.adult_price}</p>
-        <p className="font-bold">Child Price: {packageDetail.detail.child_price}</p>
-        <p className="font-bold">Signle Price: {packageDetail.detail.signle_price}</p>
+        <p className="font-bold">{t('HOMEPAGE.DURATION')}: {packageDetail.detail.duration}</p>
+        <p className="font-bold">{t('HOMEPAGE.MAX_ADULT')}: {packageDetail.detail.max_adult}</p>
+        <p className="font-bold">{t('HOMEPAGE.MAX_CHILDREN')}: {packageDetail.detail.max_children}</p>
+        <p className="font-bold">{t('HOMEPAGE.CHILDREN')}  {t('HOMEPAGE.PRICE')}: {packageDetail.detail.adult_price}</p>
+        <p className="font-bold">{t('HOMEPAGE.ADULT')} {t('HOMEPAGE.PRICE')}: {packageDetail.detail.child_price}</p>
+        <p className="font-bold">{t('HOMEPAGE.SINGLE_PRICE')}: {packageDetail.detail.signle_price}</p>
         <p>{packageDetail.detail.description}</p>
       </div>
       <div className="w-full text-end">
         <button onClick={showPackageDetail} className=" hover:text-grey-21 underline">
-          More details
+        {t('HOMEPAGE.MORE_DETAILS')}
         </button>
       </div>
     </div>

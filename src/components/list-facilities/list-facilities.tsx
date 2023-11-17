@@ -3,6 +3,7 @@ import { business_pf } from "@/api/mock-data/facilities";
 import { useTranslation } from "next-i18next";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { db_languages } from '@/api/mock-data/db_languages'
 
 
 const ListFacilities = () => {
@@ -10,7 +11,7 @@ const ListFacilities = () => {
   const [lang, setLang] = useState('vi');
 
   useEffect(() => {
-    const savedLanguage = localStorage.getItem('language') || 'vi';
+    const savedLanguage = localStorage.getItem('language') || db_languages.id;
     setLang(savedLanguage);
   }, []);
     const pathIcon = "/assets/icons";

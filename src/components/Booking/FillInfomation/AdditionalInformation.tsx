@@ -3,12 +3,15 @@ import { Fragment, useRef, useState } from 'react';
 import GuestInformation from './GuestInformation';
 import { OrderChooseValue } from './constants';
 import { auto_grow } from '@/utils/helper';
+import { useTranslation } from 'next-i18next';
 
 type Props = {
   guestFormRef?: any;
 };
 
 function AdditionalInformation({ guestFormRef }: Props) {
+  const { t } = useTranslation();
+
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [orderChooseValue, setOrderChooseValue] = useState<OrderChooseValue>(OrderChooseValue.VALUE1);
 
@@ -49,9 +52,11 @@ function AdditionalInformation({ guestFormRef }: Props) {
             value={OrderChooseValue.VALUE1}
           />
           <label htmlFor="choose-1">
-            <p>
+          {t('BOOKING_FORM.STEP1.BOOK_FOR_MYSELF',{value: 'HMP Master'})}
+
+            {/* <p>
               I will be staying at <span className="font-bold">HMP Master</span> on the dates selected
-            </p>
+            </p> */}
           </label>
         </div>
         <div className="flex gap-x-2">
@@ -65,7 +70,8 @@ function AdditionalInformation({ guestFormRef }: Props) {
             value={OrderChooseValue.VALUE2}
           />
           <label htmlFor="choose-2">
-            <p>I am booking this stay for someone else</p>
+            {/* <p>I am booking this stay for someone else</p> */}
+            <p>{t('BOOKING_FORM.STEP1.BOOK_FOR_OTHER')}</p>
           </label>
         </div>
         <div className="flex gap-x-2">
@@ -79,7 +85,7 @@ function AdditionalInformation({ guestFormRef }: Props) {
             value={OrderChooseValue.VALUE3}
           />
           <label htmlFor="choose-3">
-            <p>Other</p>
+            <p>{t('BOOKING_FORM.STEP1.BOOK_OTHER')}</p>
           </label>
         </div>
       </div>

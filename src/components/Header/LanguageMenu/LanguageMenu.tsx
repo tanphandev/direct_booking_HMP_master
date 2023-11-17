@@ -2,20 +2,24 @@
 import { useEffect, useRef, useState } from 'react';
 import { useOnClickOutside } from '@/hooks/useClickOutSide';
 
-import { LanguageCode, language, languageProps } from '@/types/Language';
+import {  language, languageProps } from '@/types/Language';
+
 import ArrowDown from '@/assets/icons/ArrowDown';
 import i18n from "@/i18n/i18n";
+import { db_languages } from '@/api/mock-data/db_languages'
 
 
 function LanguageMenu() {
   const languageMenuRef = useRef<HTMLUListElement>(null);
+  
   const [languageValue, setLanguageValue] = useState<languageProps>({
-    label: 'Viet Nam',
-    code: LanguageCode.VI,
+    label: db_languages.title,
+    code: db_languages.id,
   });
+  // localStorage.getItem('language')??localStorage.setItem('language', db_languages.id);
   useEffect(() => {
     const isBrowser = typeof window !== 'undefined';
-    const savedLanguage = isBrowser ? localStorage.getItem('language') || 'vi' : 'vi';
+    const savedLanguage = isBrowser ? localStorage.getItem('language') || db_languages.id : db_languages.id;
     if (savedLanguage) {
       const selectedLanguage = language.find(item => item.code === savedLanguage);
       if (selectedLanguage) {
@@ -34,7 +38,7 @@ function LanguageMenu() {
     setLanguageValue(item);
     toggleMenu();
       localStorage.setItem('language', item.code);
-    i18n?.changeLanguage(item.code)
+     i18n.changeLanguage(item.code)
     
   };
   /* Toggle menu */
