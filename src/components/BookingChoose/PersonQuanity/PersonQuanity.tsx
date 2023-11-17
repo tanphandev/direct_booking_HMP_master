@@ -1,10 +1,15 @@
-import { createRef, useState } from 'react';
+import { createRef, forwardRef, useImperativeHandle, useState } from 'react';
 import { useOnClickOutside } from '@/hooks/useClickOutSide';
 
 import PersonIcon from '@/assets/icons/PersonIcon';
 import PersonQuantityPopper from './PersonQuantityPopper';
 
-function PersonQuanity() {
+export type PersonQuanityRefProps = {
+  adults: number;
+  child: number;
+};
+
+const PersonQuanity = forwardRef<PersonQuanityRefProps, {}>(function Component({}, ref) {
   const [adultQuantity, setAdultQuantity] = useState<number>(2);
   const [childQuantity, setChildQuantity] = useState<number>(0);
   const personQuantityPopperRef = createRef<HTMLElement>();
@@ -15,6 +20,11 @@ function PersonQuanity() {
   useOnClickOutside(personQuantityPopperRef, () => {
     personQuantityPopperRef.current?.classList.add('hidden');
   });
+
+  useImperativeHandle(ref, () => ({
+    adults: adultQuantity,
+    child: childQuantity,
+  }));
   return (
     <div className="relative">
       <div onClick={toggleShowPopper} className="h-[80px] flex items-center bg-white text-grey-21 rounded-md p-4 mb-2">
@@ -32,6 +42,6 @@ function PersonQuanity() {
       />
     </div>
   );
-}
+});
 
 export default PersonQuanity;

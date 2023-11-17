@@ -2,10 +2,17 @@ import { all, call, put, takeLatest } from 'redux-saga/effects';
 
 import API from '@/api/api';
 import ApiCaller from '@/api/ApiCaller';
-import { BOOKING_PACKAGES } from '../common/constants';
+import { BOOKING_PACKAGES, PACKAGE_CAL_PRICE } from '../common/constants';
 import * as bookingAction from './bookingAction';
 import { disableLoading, enableLoading } from '../common/commonSlice';
-import { getBookingPackageFailed, getBookingPackageSuccess } from './bookingSlice';
+import {
+  getBookingPackageFailed,
+  getBookingPackageSuccess,
+  getYourBookingPriceFailed,
+  getYourBookingPriceSuccess,
+} from './bookingSlice';
+import Path from '@/routes/Path';
+import { toast } from 'react-toastify';
 
 function* getBookingPackages({ payload }: any): Generator {
   const { bid, datecreated } = payload;
@@ -23,6 +30,32 @@ function* getBookingPackages({ payload }: any): Generator {
   }
 }
 
+function* packageCalculatePrice({ payload }: any): Generator {
+  const { bid, pid, check_in, check_out, adults, child, datecreated, hotel_slug, router } = payload;
+  yield put(enableLoading(PACKAGE_CAL_PRICE));
+  try {
+    const data: any = yield call(ApiCaller.post, API.package_cal_price, {
+      bid,
+      pid,
+      check_in,
+      check_out,
+      adults,
+      child,
+      datecreated,
+    });
+    yield put(getYourBookingPriceSuccess(data));
+    router.push(Path.BOOKING(hotel_slug));
+  } catch (error: any) {
+    yield put(getYourBookingPriceFailed(error));
+    toast.error(error?.response?.data[0]);
+  } finally {
+    yield put(disableLoading(PACKAGE_CAL_PRICE));
+  }
+}
+
 export default function* bookingSaga() {
-  yield all([takeLatest(bookingAction.getBookingPackages, getBookingPackages)]);
+  yield all([
+    takeLatest(bookingAction.getBookingPackages, getBookingPackages),
+    takeLatest(bookingAction.packageCalculatePrice, packageCalculatePrice),
+  ]);
 }

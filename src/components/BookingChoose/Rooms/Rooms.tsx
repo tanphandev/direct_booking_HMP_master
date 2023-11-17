@@ -60,7 +60,7 @@ function Rooms() {
           </Link>
         </div>
         {/* show loading when check coupon */}
-        {loading && <SecondLoading />}
+        {loading && <SecondLoading  />}
       </div>
     </div>
   );
