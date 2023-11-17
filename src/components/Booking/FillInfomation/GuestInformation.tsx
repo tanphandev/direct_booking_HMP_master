@@ -1,7 +1,19 @@
+import { ChangeEvent } from 'react';
 import classNames from 'classnames';
 import InformationForm from './InfomationForm';
 
-function GuestInformation({ inputId, isReuseOrderData = false, guestFormRef }: GuestInformationProps) {
+function GuestInformation({
+  inputId,
+  isReuseOrderData = false,
+  guestFormRef,
+  handleUseOrderData = () => {},
+}: GuestInformationProps) {
+  const handleChecked = (e: ChangeEvent<HTMLInputElement>) => {
+    const isChecked = e.target.checked;
+    if (isChecked) {
+      handleUseOrderData(guestFormRef);
+    }
+  };
   return (
     <div>
       <div>
@@ -16,7 +28,7 @@ function GuestInformation({ inputId, isReuseOrderData = false, guestFormRef }: G
               hidden: !isReuseOrderData,
             })}
           >
-            <input id={inputId} className="w-4 h-4 cursor-pointer" type="checkbox" />
+            <input id={inputId} className="w-4 h-4 cursor-pointer" type="checkbox" onChange={handleChecked} />
             <label className="cursor-pointer" htmlFor={inputId}>
               Use the same information above
             </label>

@@ -66,4 +66,5 @@ interface GuestInformationProps {
   inputId: string;
   isReuseOrderData?: boolean;
   guestFormRef?: any;
+  handleUseOrderData?: Function;
 }

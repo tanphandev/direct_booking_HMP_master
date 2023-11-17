@@ -47,8 +47,9 @@ function AdditionalInformation({ guestFormRef }: Props) {
             id="choose-1"
             name="addtional-order-choose"
             value={OrderChooseValue.VALUE1}
+            className="cursor-pointer"
           />
-          <label htmlFor="choose-1">
+          <label htmlFor="choose-1" className="cursor-pointer">
             <p>
               I will be staying at <span className="font-bold">HMP Master</span> on the dates selected
             </p>
@@ -63,8 +64,9 @@ function AdditionalInformation({ guestFormRef }: Props) {
             id="choose-2"
             name="addtional-order-choose"
             value={OrderChooseValue.VALUE2}
+            className="cursor-pointer"
           />
-          <label htmlFor="choose-2">
+          <label htmlFor="choose-2" className="cursor-pointer">
             <p>I am booking this stay for someone else</p>
           </label>
         </div>
@@ -77,8 +79,9 @@ function AdditionalInformation({ guestFormRef }: Props) {
             id="choose-3"
             name="addtional-order-choose"
             value={OrderChooseValue.VALUE3}
+            className="cursor-pointer"
           />
-          <label htmlFor="choose-3">
+          <label htmlFor="choose-3" className="cursor-pointer">
             <p>Other</p>
           </label>
         </div>
