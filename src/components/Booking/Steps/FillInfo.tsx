@@ -6,7 +6,9 @@ export default function FillInfo({ currentStep, step }: FillInfoProp) {
   return (
     <div
       className={classNames({
-        hidden: currentStep !== step,
+        hidden: currentStep.stepNumber !== step,
+        'back-step-type': currentStep?.type === 'back',
+        'next-step-type': currentStep?.type === 'next',
       })}
     >
       <BookingLayout>

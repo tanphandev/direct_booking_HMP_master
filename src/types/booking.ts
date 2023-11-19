@@ -63,7 +63,7 @@ interface DateProps {
 // =================================== STEP =================================== //
 
 interface Step {
-  currentStep: number;
+  currentStep: any;
   step: number;
 }
 

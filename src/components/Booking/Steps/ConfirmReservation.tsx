@@ -14,7 +14,9 @@ export default function ConfirmReservation({ currentStep, step }: ConfirmReserva
   return (
     <div
       className={classNames('flex justify-center my-4', {
-        hidden: currentStep !== step,
+        hidden: currentStep?.stepNumber !== step,
+        'back-step-type': currentStep?.type === 'back',
+        'next-step-type': currentStep?.type === 'next',
       })}
     >
       {loading ? (

@@ -61,7 +61,9 @@ export default function VerifyDetail({ currentStep, step }: VerifyDetailProps) {
   return (
     <div
       className={classNames({
-        hidden: currentStep !== step,
+        hidden: currentStep?.stepNumber !== step,
+        'back-step-type': currentStep?.type === 'back',
+        'next-step-type': currentStep?.type === 'next',
       })}
     >
       <BookingLayout>

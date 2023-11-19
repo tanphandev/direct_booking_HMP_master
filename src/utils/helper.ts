@@ -28,3 +28,12 @@ export const trimObjectValues = (obj: InputObject): InputObject => {
 
   return trimmedData;
 };
+
+export const scrollOnTop = () => {
+  if (window.scrollY !== 0) {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }
+};

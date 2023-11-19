@@ -1,3 +1,4 @@
+import { CurrentStepType } from '@/app/[hotel_slug]/(main)/booking/page';
 import React, { useState, useEffect, useRef } from 'react';
 
 const Stepper = ({
@@ -7,7 +8,7 @@ const Stepper = ({
 }: {
   steps: string[];
   currentStep: number;
-  setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
+  setCurrentStep: React.Dispatch<React.SetStateAction<CurrentStepType>>;
 }) => {
   const [newStep, setNewStep] = useState<any[]>([]);
   const stepsRef = useRef<any>();
@@ -79,7 +80,12 @@ const Stepper = ({
         ></div>
         <div
           onClick={() => {
-            !newStep[newStep.length - 1].completed && step.completed && setCurrentStep(index + 1);
+            !newStep[newStep.length - 1].completed &&
+              step.completed &&
+              setCurrentStep({
+                stepNumber: index + 1,
+                type: 'back',
+              });
           }}
           className="flex flex-col sm:flex-row items-center cursor-pointer"
         >

@@ -7,7 +7,8 @@ import InformationForm from './InfomationForm';
 import InformationOfGuests from './InformationOfGuests';
 import SpecialRequire, { SpecialRequireRefType } from './SpecialRequire';
 import StayManagementCheckbox from './StayManagementCheckbox';
-import { trimObjectValues } from '@/utils/helper';
+import { scrollOnTop, trimObjectValues } from '@/utils/helper';
+import { toast } from 'react-toastify';
 
 function OrderInfomation() {
   const orderFormRef = createRef<any>();
@@ -33,7 +34,6 @@ function OrderInfomation() {
 
   /* set data form*/
   useEffect(() => {
-    // console.log('orderFormRef.current.formik', orderFormRef.current.formik);
     orderData && orderFormRef.current.formik.setValues(orderData);
   }, []);
 
@@ -81,6 +81,9 @@ function OrderInfomation() {
       setArrivalTime(arrivalTImeRef.current?.value);
       /* handle next event*/
       handleClick('next');
+    } else {
+      scrollOnTop();
+      toast.error('Please enter Information to continue!');
     }
   };
 

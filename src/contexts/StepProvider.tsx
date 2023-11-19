@@ -12,11 +12,6 @@ export function StepProvider({ children, handleClick }: { children: React.ReactN
   const [bookFor, setBookFor] = useState<OrderChooseValue>(OrderChooseValue.VALUE1);
   const [specialRequire, setSpecialRequire] = useState(null);
   const [arrivalTime, setArrivalTime] = useState<ArrivalTimeType>();
-
-  console.log('orderData', orderData);
-  console.log('guestData', guestData);
-  console.log('specialRequire', specialRequire);
-  console.log('arrivalTime', arrivalTime);
   return (
     <StepperContext.Provider
       value={{
