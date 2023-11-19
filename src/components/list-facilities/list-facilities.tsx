@@ -1,15 +1,17 @@
 'use client'
 import { business_pf } from "@/api/mock-data/facilities";
+import { useTranslation } from "next-i18next";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { db_languages } from '@/api/mock-data/db_languages'
 
 
 const ListFacilities = () => {
-    
+  const { t } = useTranslation();
   const [lang, setLang] = useState('vi');
 
   useEffect(() => {
-    const savedLanguage = localStorage.getItem('language') || 'vi';
+    const savedLanguage = localStorage.getItem('language') || db_languages.id;
     setLang(savedLanguage);
   }, []);
     const pathIcon = "/assets/icons";
@@ -17,7 +19,7 @@ const ListFacilities = () => {
     
     return (
         <div>
-            <h2 className="font-bold">Cơ sở vật chất</h2>
+            <h2 className="font-bold">{t('SEARCH.SEARCH_RESULT_PAGE.PROPERTY_FACILITIES')}</h2>
             <div className="grid md:grid-cols-3 grid-cols-2">
             {business_pf?.map((facility) => (
             facility.lang === lang && (

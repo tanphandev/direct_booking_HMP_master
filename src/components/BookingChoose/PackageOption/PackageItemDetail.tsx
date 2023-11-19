@@ -4,6 +4,7 @@ import { useModalContext } from '@/contexts/ModalProvider';
 import { VisibilityContext } from 'react-horizontal-scrolling-menu';
 import { MODAL_NAME } from '@/types/modal';
 import { HANDLE_STATUS } from '@/types/handle';
+import { useTranslation } from 'next-i18next';
 
 type PackageItemDetail = {
   width?: string;
@@ -33,6 +34,8 @@ function PackageItemDetail({
     setPayload(packageDetail);
     openModal(MODAL_NAME.PACKAGE_DETAIL);
   };
+  const { t } = useTranslation();
+
   return (
     <div
       style={{
@@ -61,7 +64,7 @@ function PackageItemDetail({
       </div>
       <div className="w-full text-end">
         <button onClick={showPackageDetail} className=" hover:text-grey-21 underline">
-          More details
+        {t('HOMEPAGE.MORE_DETAILS')}
         </button>
       </div>
     </div>

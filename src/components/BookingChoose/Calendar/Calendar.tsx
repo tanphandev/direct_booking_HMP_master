@@ -15,7 +15,8 @@ type Props = {
   className?: string;
 };
 
-const Calendar = forwardRef<any, Props>(function Component({ isHide, rangeDate, setRangeDate, className }, ref) {
+
+  const Calendar = forwardRef<any, Props>(function Component({ isHide, rangeDate, setRangeDate, className }, ref) {
   const handleOnChange = (ranges: any) => {
     const { selection } = ranges;
     setRangeDate([selection]);
@@ -23,7 +24,7 @@ const Calendar = forwardRef<any, Props>(function Component({ isHide, rangeDate, 
   return (
     <DateRangePicker
       ref={ref}
-      className={`${isHide ? '!hidden' : ''} z-10 ${className}`}
+      className={`${isHide ? '!hidden' : ''} z-10 ${className}`}  
       onChange={handleOnChange}
       moveRangeOnFirstSelection={false}
       months={2}
