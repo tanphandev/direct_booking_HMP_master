@@ -1,17 +1,22 @@
 import { createContext, useContext, useState } from 'react';
+import { OrderChooseValue } from '@/components/Booking/FillInfomation/constants';
 
 const StepperContext = createContext(null as any);
 
 export function StepProvider({ children, handleClick }: { children: React.ReactNode; handleClick: Function }) {
-  const [orderData, setOrderData] = useState(null);
+  const [orderData, setOrderData] = useState<PersonInformation>();
   const [guestData, setGuestData] = useState<any[]>([]);
+  const [forSomeOne, setForSomeOne] = useState<PersonInformation>();
+  const [forOther, setForOther] = useState<string>();
+  const [viaTravelX, setViaTravelX] = useState<boolean>();
+  const [bookFor, setBookFor] = useState<OrderChooseValue>(OrderChooseValue.VALUE1);
   const [specialRequire, setSpecialRequire] = useState(null);
-  const [arrivalTime, setArrivalTime] = useState(null);
+  const [arrivalTime, setArrivalTime] = useState<ArrivalTimeType>();
 
   console.log('orderData', orderData);
   console.log('guestData', guestData);
-  // console.log('specialRequire', specialRequire);
-  // console.log('arrivalTime', arrivalTime);
+  console.log('specialRequire', specialRequire);
+  console.log('arrivalTime', arrivalTime);
   return (
     <StepperContext.Provider
       value={{
@@ -19,6 +24,14 @@ export function StepProvider({ children, handleClick }: { children: React.ReactN
         setOrderData,
         guestData,
         setGuestData,
+        forSomeOne,
+        setForSomeOne,
+        forOther,
+        viaTravelX,
+        setViaTravelX,
+        setForOther,
+        bookFor,
+        setBookFor,
         specialRequire,
         setSpecialRequire,
         arrivalTime,
@@ -37,6 +50,14 @@ export function useStepContext() {
     setOrderData,
     guestData,
     setGuestData,
+    forSomeOne,
+    setForSomeOne,
+    forOther,
+    setForOther,
+    bookFor,
+    viaTravelX,
+    setViaTravelX,
+    setBookFor,
     specialRequire,
     setSpecialRequire,
     arrivalTime,
@@ -49,6 +70,14 @@ export function useStepContext() {
     setOrderData,
     guestData,
     setGuestData,
+    forSomeOne,
+    setForSomeOne,
+    forOther,
+    setForOther,
+    bookFor,
+    viaTravelX,
+    setViaTravelX,
+    setBookFor,
     specialRequire,
     setSpecialRequire,
     arrivalTime,

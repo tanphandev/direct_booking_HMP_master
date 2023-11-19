@@ -1,16 +1,16 @@
 import Image from 'next/image';
 import { useAppSelector } from '@/hooks';
-import HotelLogo from '@/../public/assets/logo/Logo.png';
 
 function HotelDetail() {
-  const { basic_business_info } = useAppSelector((state) => state.business);
+  const { basic_business_info, setting } = useAppSelector((state) => state.business);
   return (
     <div className="flex flex-col lg:flex-row items-center gap-x-4">
       <Image
-        src={HotelLogo}
+        src={setting?.db_header_logo?.uri_full}
         alt="hotel-logo"
         width={0}
         height={0}
+        sizes="100vw"
         className="w-[250px] h-[250px] lg:w-[150px] lg:h-[150px]"
       />
       <div>

@@ -32,8 +32,11 @@ function ReviewPackage({ packageChose, setIsChoosePackage }: PackageProps) {
     /* store booking_info */
     dispatch(
       getBookingInfo({
+        packageChose: packageChose,
         check_in,
         check_out,
+        adults,
+        child,
         night: packageChose?.packages_night_stay,
       }),
     );

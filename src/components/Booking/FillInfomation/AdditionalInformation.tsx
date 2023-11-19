@@ -1,14 +1,19 @@
-import { Fragment, useRef, useState } from 'react';
+import { Fragment, forwardRef, useImperativeHandle, useRef, useState } from 'react';
 
 import GuestInformation from './GuestInformation';
 import { OrderChooseValue } from './constants';
 import { auto_grow } from '@/utils/helper';
 
 type Props = {
-  guestFormRef?: any;
+  forSomeOneRef?: any;
 };
 
-function AdditionalInformation({ guestFormRef }: Props) {
+export type BookForRef = {
+  value: OrderChooseValue;
+  forOtherRef: any;
+};
+
+const AdditionalInformation = forwardRef<BookForRef, Props>(function Component({ forSomeOneRef }, ref) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [orderChooseValue, setOrderChooseValue] = useState<OrderChooseValue>(OrderChooseValue.VALUE1);
 
@@ -17,7 +22,7 @@ function AdditionalInformation({ guestFormRef }: Props) {
       case OrderChooseValue.VALUE1:
         return;
       case OrderChooseValue.VALUE2:
-        return <GuestInformation inputId="main-guest" guestFormRef={guestFormRef} />;
+        return <GuestInformation inputId="main-guest" guestFormRef={forSomeOneRef} />;
       case OrderChooseValue.VALUE3:
         return (
           <div className="transition-all border-[1px] border-grey-21 focus-within:border-2 rounded-md pt-4 pb-3 mb-7">
@@ -33,7 +38,10 @@ function AdditionalInformation({ guestFormRef }: Props) {
         );
     }
   };
-
+  useImperativeHandle(ref, () => ({
+    value: orderChooseValue,
+    forOtherRef: textareaRef,
+  }));
   return (
     <Fragment>
       <div className="flex flex-col gap-y-2 mb-2">
@@ -41,7 +49,7 @@ function AdditionalInformation({ guestFormRef }: Props) {
           <input
             defaultChecked
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setOrderChooseValue(e.target.value as OrderChooseValue);
+              setOrderChooseValue(parseInt(e.target.value) as OrderChooseValue);
             }}
             type="radio"
             id="choose-1"
@@ -58,7 +66,7 @@ function AdditionalInformation({ guestFormRef }: Props) {
         <div className="flex gap-x-2">
           <input
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setOrderChooseValue(e.target.value as OrderChooseValue);
+              setOrderChooseValue(parseInt(e.target.value) as OrderChooseValue);
             }}
             type="radio"
             id="choose-2"
@@ -73,7 +81,7 @@ function AdditionalInformation({ guestFormRef }: Props) {
         <div className="flex gap-x-2">
           <input
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setOrderChooseValue(e.target.value as OrderChooseValue);
+              setOrderChooseValue(parseInt(e.target.value) as OrderChooseValue);
             }}
             type="radio"
             id="choose-3"
@@ -90,6 +98,6 @@ function AdditionalInformation({ guestFormRef }: Props) {
       <div>{AdditionInfo(orderChooseValue)}</div>
     </Fragment>
   );
-}
+});
 
 export default AdditionalInformation;

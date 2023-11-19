@@ -79,7 +79,7 @@ const Stepper = ({
         ></div>
         <div
           onClick={() => {
-            step.completed && setCurrentStep(index + 1);
+            !newStep[newStep.length - 1].completed && step.completed && setCurrentStep(index + 1);
           }}
           className="flex flex-col sm:flex-row items-center cursor-pointer"
         >

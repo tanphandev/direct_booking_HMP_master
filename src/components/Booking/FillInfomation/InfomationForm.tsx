@@ -6,19 +6,17 @@ import CountriesAutocomplete from '@/components/common/AutoComplete/CountriesAut
 import 'react-phone-input-2/lib/style.css';
 import { GUEST_INFO_SCHEMA, ORDER_INFO_SCHEMA } from '@/utils/schema';
 import PhoneInput from 'react-phone-input-2';
-import { useStepContext } from '@/contexts/StepProvider';
 
 type Props = {
   type: 'order' | 'guest';
 };
 
 const InformationForm = forwardRef<any, Props>(function Component({ type }, ref) {
-  const { setOrderData, setGuestData } = useStepContext();
   const formik = useFormik({
     initialValues: {
-      fullName: '',
-      email: '',
-      phone: '',
+      full_name: '',
+      mail: '',
+      phone_number: '',
       country: '',
     },
     validationSchema: type === 'order' ? ORDER_INFO_SCHEMA : GUEST_INFO_SCHEMA,
@@ -37,10 +35,10 @@ const InformationForm = forwardRef<any, Props>(function Component({ type }, ref)
           inputClassName="primary-input"
           isRequire={true}
           id="order-fullname"
-          name="fullName"
+          name="full_name"
           label="Full Name"
           placeHolder="John Doe"
-          value={formik.values.fullName}
+          value={formik.values.full_name}
           formik={formik}
         />
         <InputField
@@ -48,10 +46,10 @@ const InformationForm = forwardRef<any, Props>(function Component({ type }, ref)
           inputClassName="primary-input"
           isRequire={type === 'order' ? true : false}
           id="order-email"
-          name="email"
+          name="mail"
           label="Email"
           placeHolder="johndoe@example.com"
-          value={formik.values.email}
+          value={formik.values.mail}
           formik={formik}
         />
         <div className="flex flex-col">
@@ -72,14 +70,14 @@ const InformationForm = forwardRef<any, Props>(function Component({ type }, ref)
               buttonClass="phone-code"
               dropdownClass="!w-[292px] !mt-[1px] !shadow-custom_1"
               country={'vn'}
-              value={formik.values.phone}
-              onChange={(phone) => {
-                formik.setFieldValue('phone', phone);
+              value={formik.values.phone_number}
+              onChange={(phone_number) => {
+                formik.setFieldValue('phone_number', phone_number);
               }}
               onBlur={formik.handleBlur}
             />
-            {formik.touched.phone && formik.errors.phone ? (
-              <div className="text-sm text-red mt-1">{formik.errors.phone}</div>
+            {formik.touched.phone_number && formik.errors.phone_number ? (
+              <div className="text-sm text-red mt-1">{formik.errors.phone_number}</div>
             ) : null}
           </div>
         </div>

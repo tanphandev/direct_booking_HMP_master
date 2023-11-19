@@ -1,11 +1,19 @@
-import { memo, useState } from 'react';
+import { forwardRef, memo, useImperativeHandle, useState } from 'react';
 import { timeList } from './constants';
 
-function ArrivalTime() {
-  const [arrivalAt, setArrivalAt] = useState<string>('12:00');
-  const [departFrom, setDepartFrom] = useState<string>('');
+const ArrivalTime = forwardRef<BaseRefProps<ArrivalTimeType>, {}>(function Component({}, ref) {
+  const [arrivalAt, setArrivalAt] = useState<string>('');
+  const [departingFrom, setDepartingFrom] = useState<string>('');
   const [via, setVia] = useState<string>('');
-  console.log(departFrom, via);
+
+  useImperativeHandle(ref, () => ({
+    value: {
+      arrivalAt,
+      departingFrom: departingFrom.toString().trim(),
+      via: via.toString().trim(),
+    },
+  }));
+
   return (
     <div className="mt-8">
       <h2 className="font-bold mb-2">Let the property know how and when you plan to arrive</h2>
@@ -20,8 +28,8 @@ function ArrivalTime() {
         <div className="mb-4">
           <p className="text-base text-grey-21 font-bold mb-2">Departing from</p>
           <input
-            value={departFrom}
-            onChange={(e) => setDepartFrom(e.target.value)}
+            value={departingFrom}
+            onChange={(e) => setDepartingFrom(e.target.value)}
             placeholder="ex: Airport"
             className="primary-input"
           />
@@ -38,7 +46,7 @@ function ArrivalTime() {
       </div>
     </div>
   );
-}
+});
 
 const TimeSelect = memo(function Component({
   arrivalAt,

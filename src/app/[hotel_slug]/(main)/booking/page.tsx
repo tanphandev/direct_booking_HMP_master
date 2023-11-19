@@ -12,17 +12,17 @@ function BookingPage() {
 
   const steps: string[] = ['Fill out your information', 'Verify details', 'Confirm reservation'];
 
-  const displayStep = (step: number) => {
-    switch (step) {
-      case 1:
-        return <FillInfo />;
-      case 2:
-        return <VerifyDetail />;
-      case 3:
-        return <ConfirmReservation />;
-      default:
-    }
-  };
+  // const displayStep = (step: number) => {
+  //   switch (step) {
+  //     case 1:
+  //       return <FillInfo />;
+  //     case 2:
+  //       return <VerifyDetail />;
+  //     case 3:
+  //       return <ConfirmReservation />;
+  //     default:
+  //   }
+  // };
 
   const handleClick = (direction: any) => {
     let newStep = currentStep;
@@ -37,7 +37,12 @@ function BookingPage() {
       {/* Stepper */}
       <Stepper steps={steps} currentStep={currentStep} setCurrentStep={setCurrentStep} />
       {/* Content Step */}
-      <StepProvider handleClick={handleClick}>{displayStep(currentStep)}</StepProvider>
+      {/* <StepProvider handleClick={handleClick}>{displayStep(currentStep)}</StepProvider> */}
+      <StepProvider handleClick={handleClick}>
+        <FillInfo step={1} currentStep={currentStep} />
+        <VerifyDetail step={2} currentStep={currentStep} />
+        <ConfirmReservation step={3} currentStep={currentStep} />
+      </StepProvider>
       {/* navigation button */}
     </div>
   );

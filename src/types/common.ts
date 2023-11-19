@@ -11,3 +11,7 @@ interface InputFieldProps {
   labelClassName?: string;
   inputClassName?: string;
 }
+
+interface BaseRefProps<T> {
+  value: T;
+}
