@@ -2,11 +2,14 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import QuantityRoomOption from '@/components/RoomCardResult/QuantityRoomOption/QuantityRoomOption';
+import { useTranslation } from 'next-i18next';
 interface RoomCardResultProps {
   room: RoomAvailable
 }
 
 const RoomCardResult: React.FC<RoomCardResultProps> = ({ room }) => {
+  const { t } = useTranslation();
+
   const [showSlider, setShowSlider] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
   const photos = room.photos || [];
@@ -64,14 +67,14 @@ const RoomCardResult: React.FC<RoomCardResultProps> = ({ room }) => {
   return (
     <>
       <h2 className='font-bold text-2xl mt-12 mb-4 pb-2 border-b-2'>{room.title}</h2>
-      <div className='flex-col md:flex md:flex-around'>
+      <div className='flex flex-col md:flex-row '>
         {photos[0] ? (
           <div className='md:w-1/3 md:h-[200px] pb-2 h-[180px] '>
             <Image
               src={photos[0]?.uri_full}
               alt={`Image ${currentImage + 1}`}
               height={200}
-              width={200}
+              width={100}
               className='w-full h-full cursor-pointer'
               onClick={() => handleImageClick(0)}
             />
@@ -112,7 +115,7 @@ const RoomCardResult: React.FC<RoomCardResultProps> = ({ room }) => {
         )}
         <div className='pl-4'>
           <div className='flex flex-col '>
-            <h4 className='uppercase font-bold'>Tiện nghi phòng</h4>
+            <h4 className='uppercase font-bold'>{t('SEARCH.ROOM_TYPE.ROOM_AMENITIES')}</h4>
             <div className='grid md:grid-cols-3 grid-cols-2'>
               {displayedAmenities?.map((amenity) => (
                 amenity.lang === lang && (
@@ -131,13 +134,13 @@ const RoomCardResult: React.FC<RoomCardResultProps> = ({ room }) => {
                 (
                   <div className='flex'>
                     <Image src={`${pathIcon}/add-icon.svg`} alt='' width={24} height={24} />
-                    <span className='pl-4 underline'>Xem thêm</span>
+                    <span className='pl-4 underline'>{t('SEARCH.ROOM_TYPE.SHOW_MORE')}</span>
                   </div>
                 )
                 :
                 (<div className='flex'>
                   <Image src={`${pathIcon}/sub-icon.svg`} alt='' width={24} height={24} />
-                  <span className='pl-4 underline'>Thu gọn</span>
+                  <span className='pl-4 underline'>{t('SEARCH.ROOM_TYPE.SHOW_LESS')}</span>
                 </div>)}
             </div>
           )}
@@ -146,7 +149,7 @@ const RoomCardResult: React.FC<RoomCardResultProps> = ({ room }) => {
       <div className='grid md:grid-flow-col 3xl:auto-cols-max pb-8 w-full'>
         <div className=''>
           <div className='bg-[#636363] p-2 border border-[#636363] '>
-            <span className='text-white'>Bao gồm</span>
+            <span className='text-white'>{t('SEARCH.ROOM_TYPE.ROOM_INCLUDES')}</span>
           </div>
 
           <div className=' h-full border border-[#e4e4e4] p-4'>
@@ -164,13 +167,13 @@ const RoomCardResult: React.FC<RoomCardResultProps> = ({ room }) => {
                   (
                     <div className='flex'>
                       <Image src={`${pathIcon}/add-icon.svg`} alt='' width={22} height={22} />
-                      <span className='pl-4 underline text-blue-0a'>Xem thêm</span>
+                      <span className='pl-4 underline text-blue-0a'>{t('SEARCH.ROOM_TYPE.SHOW_MORE')}</span>
                     </div>
                   )
                   :
                   (<div className='flex'>
                     <Image src={`${pathIcon}/sub-icon.svg`} alt='' width={22} height={22} />
-                    <span className='pl-4 underline text-blue-0a'>Thu gọn</span>
+                    <span className='pl-4 underline text-blue-0a'>{t('SEARCH.ROOM_TYPE.SHOW_LESS')}</span>
                   </div>)}
               </div>
             )}
@@ -179,7 +182,7 @@ const RoomCardResult: React.FC<RoomCardResultProps> = ({ room }) => {
         </div>
         <div>
           <div className='bg-[#636363] p-2 border border-[#636363]'>
-            <span className='text-white'>Sức chứa</span>
+            <span className='text-white'>{t('SEARCH.ROOM_TYPE.ROOM_SLEEPS')}</span>
           </div>
           <div className='border h-full border-[#e4e4e4] p-4 '>
             <div className='flex justify-center'>
@@ -197,18 +200,18 @@ const RoomCardResult: React.FC<RoomCardResultProps> = ({ room }) => {
         </div>
         <div>
           <div className='bg-[#636363] p-2 border border-[#636363]'>
-            <span className='text-white'>Số lượng</span>
+            <span className='text-white'>{t('SEARCH.ROOM_TYPE.ROOM_QUANTITY')}</span>
           </div>
           <div className='border h-full border-[#e4e4e4] p-4'>
             <div className=''>
-              <span className=''>Phòng</span>
+              <span className=''>{t('SEARCH.BOX_SEARCH.ROOM')}</span>
               <QuantityRoomOption maxQuantity={room.qty_room_available} />
             </div>
           </div>
         </div>
         <div>
           <div className='bg-[#636363] p-2 border border-[#636363]'>
-            <span className='text-white'>Giá cho 1 đêm</span>
+            <span className='text-white'>{t('SEARCH.ROOM_TYPE.ROOM_PRICE_NIGHT',{value: 1})}</span>
           </div>
           <div className='border h-full border-[#e4e4e4] p-4 items-end'>
             <h2 className='text-[red]'>{room.price_room_total} Đ</h2>
@@ -218,8 +221,8 @@ const RoomCardResult: React.FC<RoomCardResultProps> = ({ room }) => {
 
       {packages[0] && (
         <div className='mt-4'>
-          <h2 className='uppercase mb-4 pb-2'>Ưu đãi đặc biệt</h2>
-          <div className='flex-col md:flex md:flex-wrap'>
+          <h2 className='uppercase mb-4 pb-2'>{t('SEARCH.ROOM_TYPE.SPECIAL_OFFERS')}</h2>
+          <div className='flex flex-col md:flex-row md:flex-wrap'>
             {packages?.map((roomPackage) => (
               <div key={roomPackage.id} className='md:m-w-1/3 md:w-1/3 w-full py-2'>
                 <div className='flex flex-col bg-[#edf5ef] py-6 px-4 mx-2 rounded-md'>
@@ -231,7 +234,7 @@ const RoomCardResult: React.FC<RoomCardResultProps> = ({ room }) => {
                   <div className='flex items-center justify-between flex-wrap'>
                     <div className='font-bold text-xl'>+ {roomPackage.total_price}đ</div>
                     <div>
-                      <a className='uppercase text-[#0a7cff] font-bold'>+ Thêm</a>
+                      <a className='uppercase text-[#0a7cff] font-bold'>{t('SEARCH.ROOM_TYPE.ADD')}</a>
                     </div>
                   </div>
                 </div>

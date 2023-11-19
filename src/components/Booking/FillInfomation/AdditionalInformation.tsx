@@ -3,6 +3,7 @@ import { Fragment, forwardRef, useImperativeHandle, useRef, useState } from 'rea
 import GuestInformation from './GuestInformation';
 import { OrderChooseValue } from './constants';
 import { auto_grow } from '@/utils/helper';
+import { useTranslation } from 'next-i18next';
 
 type Props = {
   forSomeOneRef?: any;
@@ -60,7 +61,7 @@ const AdditionalInformation = forwardRef<BookForRef, Props>(function Component({
           <label htmlFor="choose-1" className="cursor-pointer">
             <p>
               I will be staying at <span className="font-bold">HMP Master</span> on the dates selected
-            </p>
+            </p> */}
           </label>
         </div>
         <div className="flex gap-x-2">
@@ -74,7 +75,7 @@ const AdditionalInformation = forwardRef<BookForRef, Props>(function Component({
             value={OrderChooseValue.VALUE2}
             className="cursor-pointer"
           />
-          <label htmlFor="choose-2" className="cursor-pointer">
+          <label htmlFor="choose-2">
             <p>I am booking this stay for someone else</p>
           </label>
         </div>
@@ -89,7 +90,7 @@ const AdditionalInformation = forwardRef<BookForRef, Props>(function Component({
             value={OrderChooseValue.VALUE3}
             className="cursor-pointer"
           />
-          <label htmlFor="choose-3" className="cursor-pointer">
+          <label htmlFor="choose-3">
             <p>Other</p>
           </label>
         </div>

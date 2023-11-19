@@ -1,9 +1,11 @@
 'use client'
 import { roomFeatures } from "@/api/mock-data/room-features";
+import { useTranslation } from "next-i18next";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const RoomFeatures = () => {
+  const { t } = useTranslation();
   const [lang, setLang] = useState('vi');
 
   useEffect(() => {
@@ -15,7 +17,7 @@ const RoomFeatures = () => {
     
     return (
         <div className="mt-4">
-            <h2 className="font-bold mb-4 pb-2 border-b-2">Tiện nghi nổi bật</h2>
+            <h2 className="font-bold mb-4 pb-2 border-b-2">{t('SEARCH.SEARCH_RESULT_PAGE.ROOM_FEATURES')}</h2>
             <div className="flex flex-wrap gap-3">
             {roomFeatures?.map((feature) => (
             feature.lang === lang && (

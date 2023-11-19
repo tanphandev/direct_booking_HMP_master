@@ -20,9 +20,11 @@ function Rooms() {
   const { basic_business_info } = useAppSelector((state) => state.business);
   const [couponCode, setCouponCode] = useState<string>('');
 
+
   /* check coupon code */
+
   const handleCheckCouponCode = (code: string) => {
-    const checkIn = checkInRef.current?.startDate;
+  const checkIn = checkInRef.current?.startDate;
     const bodyData = {
       bid: basic_business_info?.bid,
       check_in: getDateFormatTimestamp(checkIn),
@@ -31,6 +33,10 @@ function Rooms() {
     };
     dispatch(checkCouponCode({ bodyData }));
   };
+
+  const handleSearch = (checkin: string, checkout: string)=>{
+    
+  }
   return (
     <div>
       <div>
@@ -53,7 +59,8 @@ function Rooms() {
           </button>
         </div>
         <div className="flex justify-end">
-          <Link href={Path.SEARCH(hotel_slug as string)}>
+
+          <Link href={Path.SEARCH(hotel_slug as string,checkInRef.current?.startDate as string , checkInRef.current?.endDate as string)}>
             <button className="transition-colors w-[150px] h-[56px] text-base font-bold bg-blue-0a hover:bg-blue-09 rounded-md">
               NEXT
             </button>

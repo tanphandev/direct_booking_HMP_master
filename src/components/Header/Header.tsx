@@ -5,7 +5,10 @@ import { useParams } from 'next/navigation';
 import { useAppSelector } from '@/hooks';
 
 import LanguageMenu from './LanguageMenu/LanguageMenu';
+const LanguageMenuNoSSR = dynamic(() => import('./LanguageMenu/LanguageMenu'), { ssr: false })
+
 import Path from '@/routes/Path';
+import dynamic from 'next/dynamic';
 
 function Header() {
   const { hotel_slug } = useParams();
@@ -16,7 +19,8 @@ function Header() {
         <Link href={Path.HOME(hotel_slug as string)}>
           <Image src={setting?.db_header_logo?.uri_full} alt="Royal Hotel" width={68} height={68} />
         </Link>
-        <LanguageMenu />
+        {/* <LanguageMenu /> */}
+        <LanguageMenuNoSSR />
       </div>
     </div>
   );
