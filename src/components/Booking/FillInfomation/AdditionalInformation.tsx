@@ -1,4 +1,4 @@
-import { Fragment, useRef, useState } from 'react';
+import { Fragment, forwardRef, useImperativeHandle, useRef, useState } from 'react';
 
 import GuestInformation from './GuestInformation';
 import { OrderChooseValue } from './constants';
@@ -6,12 +6,15 @@ import { auto_grow } from '@/utils/helper';
 import { useTranslation } from 'next-i18next';
 
 type Props = {
-  guestFormRef?: any;
+  forSomeOneRef?: any;
 };
 
-function AdditionalInformation({ guestFormRef }: Props) {
-  const { t } = useTranslation();
+export type BookForRef = {
+  value: OrderChooseValue;
+  forOtherRef: any;
+};
 
+const AdditionalInformation = forwardRef<BookForRef, Props>(function Component({ forSomeOneRef }, ref) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [orderChooseValue, setOrderChooseValue] = useState<OrderChooseValue>(OrderChooseValue.VALUE1);
 
@@ -20,7 +23,7 @@ function AdditionalInformation({ guestFormRef }: Props) {
       case OrderChooseValue.VALUE1:
         return;
       case OrderChooseValue.VALUE2:
-        return <GuestInformation inputId="main-guest" guestFormRef={guestFormRef} />;
+        return <GuestInformation inputId="main-guest" guestFormRef={forSomeOneRef} />;
       case OrderChooseValue.VALUE3:
         return (
           <div className="transition-all border-[1px] border-grey-21 focus-within:border-2 rounded-md pt-4 pb-3 mb-7">
@@ -36,7 +39,10 @@ function AdditionalInformation({ guestFormRef }: Props) {
         );
     }
   };
-
+  useImperativeHandle(ref, () => ({
+    value: orderChooseValue,
+    forOtherRef: textareaRef,
+  }));
   return (
     <Fragment>
       <div className="flex flex-col gap-y-2 mb-2">
@@ -44,17 +50,16 @@ function AdditionalInformation({ guestFormRef }: Props) {
           <input
             defaultChecked
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setOrderChooseValue(e.target.value as OrderChooseValue);
+              setOrderChooseValue(parseInt(e.target.value) as OrderChooseValue);
             }}
             type="radio"
             id="choose-1"
             name="addtional-order-choose"
             value={OrderChooseValue.VALUE1}
+            className="cursor-pointer"
           />
-          <label htmlFor="choose-1">
-          {t('BOOKING_FORM.STEP1.BOOK_FOR_MYSELF',{value: 'HMP Master'})}
-
-            {/* <p>
+          <label htmlFor="choose-1" className="cursor-pointer">
+            <p>
               I will be staying at <span className="font-bold">HMP Master</span> on the dates selected
             </p> */}
           </label>
@@ -62,30 +67,31 @@ function AdditionalInformation({ guestFormRef }: Props) {
         <div className="flex gap-x-2">
           <input
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setOrderChooseValue(e.target.value as OrderChooseValue);
+              setOrderChooseValue(parseInt(e.target.value) as OrderChooseValue);
             }}
             type="radio"
             id="choose-2"
             name="addtional-order-choose"
             value={OrderChooseValue.VALUE2}
+            className="cursor-pointer"
           />
           <label htmlFor="choose-2">
-            {/* <p>I am booking this stay for someone else</p> */}
-            <p>{t('BOOKING_FORM.STEP1.BOOK_FOR_OTHER')}</p>
+            <p>I am booking this stay for someone else</p>
           </label>
         </div>
         <div className="flex gap-x-2">
           <input
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setOrderChooseValue(e.target.value as OrderChooseValue);
+              setOrderChooseValue(parseInt(e.target.value) as OrderChooseValue);
             }}
             type="radio"
             id="choose-3"
             name="addtional-order-choose"
             value={OrderChooseValue.VALUE3}
+            className="cursor-pointer"
           />
           <label htmlFor="choose-3">
-            <p>{t('BOOKING_FORM.STEP1.BOOK_OTHER')}</p>
+            <p>Other</p>
           </label>
         </div>
       </div>
@@ -93,6 +99,6 @@ function AdditionalInformation({ guestFormRef }: Props) {
       <div>{AdditionInfo(orderChooseValue)}</div>
     </Fragment>
   );
-}
+});
 
 export default AdditionalInformation;
