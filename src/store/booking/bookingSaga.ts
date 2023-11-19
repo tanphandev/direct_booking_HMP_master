@@ -2,12 +2,14 @@ import { all, call, put, takeLatest } from 'redux-saga/effects';
 
 import API from '@/api/api';
 import ApiCaller from '@/api/ApiCaller';
-import { BOOKING_PACKAGES, PACKAGE_CAL_PRICE } from '../common/constants';
+import { BOOKING_PACKAGES, PACKAGE_CAL_PRICE, PACKAGE_CREATE } from '../common/constants';
 import * as bookingAction from './bookingAction';
 import { disableLoading, enableLoading } from '../common/commonSlice';
 import {
   getBookingPackageFailed,
   getBookingPackageSuccess,
+  getReservationFailed,
+  getReservationSuccess,
   getYourBookingPriceFailed,
   getYourBookingPriceSuccess,
 } from './bookingSlice';
@@ -53,9 +55,24 @@ function* packageCalculatePrice({ payload }: any): Generator {
   }
 }
 
+function* packageCreate({ payload }: any): Generator {
+  const { bodyData } = payload;
+  yield put(enableLoading(PACKAGE_CREATE));
+  try {
+    const data: any = yield call(ApiCaller.post, API.package_create, bodyData);
+    yield put(getReservationSuccess(data));
+  } catch (error: any) {
+    yield put(getReservationFailed(error));
+    toast.error(error?.response?.data[0]);
+  } finally {
+    yield put(disableLoading(PACKAGE_CREATE));
+  }
+}
+
 export default function* bookingSaga() {
   yield all([
     takeLatest(bookingAction.getBookingPackages, getBookingPackages),
     takeLatest(bookingAction.packageCalculatePrice, packageCalculatePrice),
+    takeLatest(bookingAction.packageCreate, packageCreate),
   ]);
 }

@@ -60,10 +60,39 @@ interface DateProps {
   bgColor?: string;
 }
 
+// =================================== STEP =================================== //
+
+interface Step {
+  currentStep: any;
+  step: number;
+}
+
+interface FillInfoProp extends Step {}
+interface VerifyDetailProps extends Step {}
+interface ConfirmReservationProps extends Step {}
+
 // ============================== FILL INFOMATION ============================= //
 
 interface GuestInformationProps {
   inputId: string;
   isReuseOrderData?: boolean;
   guestFormRef?: any;
+  handleUseOrderData?: Function;
+}
+interface ArrivalTimeType {
+  arrivalAt: string;
+  departingFrom: string;
+  via: string;
+}
+
+interface PersonInformation {
+  full_name: string;
+  mail: string;
+  phone_number: string;
+  country: string;
+}
+
+// ================================= PAYMENTS ================================= //
+interface PaymentProps {
+  handlePayAtHotel: Function;
 }

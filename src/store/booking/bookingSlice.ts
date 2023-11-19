@@ -2,8 +2,9 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   booking_packages: [],
-  booking_info: {},
+  booking_info: null,
   your_booking_price: {},
+  reservation: {},
   error: [],
 } as any;
 
@@ -26,6 +27,12 @@ const bookingSlice = createSlice({
     getYourBookingPriceFailed: (state, action) => {
       state.error = action.payload;
     },
+    getReservationSuccess: (state, action) => {
+      state.reservation = action.payload;
+    },
+    getReservationFailed: (state, action) => {
+      state.error = action.payload;
+    },
   },
 });
 
@@ -35,5 +42,7 @@ export const {
   getBookingInfo,
   getYourBookingPriceSuccess,
   getYourBookingPriceFailed,
+  getReservationSuccess,
+  getReservationFailed,
 } = bookingSlice.actions;
 export default bookingSlice.reducer;

@@ -1,14 +1,14 @@
+import { useRef } from 'react';
 import { useParams, useRouter } from 'next/navigation';
+import { useAppDispatch, useAppSelector } from '@/hooks';
+import { useLoading } from '@/hooks/useLoading';
+import { toast } from 'react-toastify';
 
 import CheckIn from '../CheckIn/CheckIn';
 import PackageItemDetail from '../PackageOption/PackageItemDetail';
 import PersonQuanity, { PersonQuanityRefProps } from '../PersonQuanity/PersonQuanity';
-import { useAppDispatch, useAppSelector } from '@/hooks';
-import { useRef } from 'react';
 import { packageCalculatePrice } from '@/store/booking/bookingAction';
-import { toast } from 'react-toastify';
 import SecondLoading from '@/components/Loading/SecondLoading';
-import { useLoading } from '@/hooks/useLoading';
 import { PACKAGE_CAL_PRICE } from '@/store/common/constants';
 import { getBookingInfo } from '@/store/booking/bookingSlice';
 
@@ -32,8 +32,11 @@ function ReviewPackage({ packageChose, setIsChoosePackage }: PackageProps) {
     /* store booking_info */
     dispatch(
       getBookingInfo({
+        packageChose: packageChose,
         check_in,
         check_out,
+        adults,
+        child,
         night: packageChose?.packages_night_stay,
       }),
     );
@@ -43,7 +46,6 @@ function ReviewPackage({ packageChose, setIsChoosePackage }: PackageProps) {
       ? dispatch(packageCalculatePrice({ bid, pid, check_in, check_out, adults, child, hotel_slug, router }))
       : toast.error('Check-In Check-Out is invalid');
   };
-  console.log('loading', loading);
   return (
     <div className="flex flex-col sm:flex-row gap-y-4 sm:gap-0">
       <PackageItemDetail

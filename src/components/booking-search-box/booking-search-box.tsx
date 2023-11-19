@@ -23,7 +23,6 @@ const BookingSearchBox = () => {
     },
   ]);
 
-  console.log('reangeDate', rangeDate);
   let quantityNight: number = (rangeDate[0].endDate - rangeDate[0].startDate) / 86400000;
   const checkInRef = createRef<RangeDate>();
 
