@@ -38,7 +38,7 @@ function OrderInfomation() {
 
   return (
     <div className="flex-1">
-      <h2 className="font-bold mb-2">Information</h2>
+      <h2 className="font-bold mb-2 mt-6 lg:mt-0">Information</h2>
       <InformationForm ref={orderFormRef} type="order" />
       <AdditionalInformation guestFormRef={orderAdditionalInfoFormRef} />
       <StayManagementCheckbox />

@@ -3,6 +3,7 @@ import { useModalContext } from '@/contexts/ModalProvider';
 
 import { VisibilityContext } from 'react-horizontal-scrolling-menu';
 import { MODAL_NAME } from '@/types/modal';
+import { HANDLE_STATUS } from '@/types/handle';
 import { useTranslation } from 'next-i18next';
 
 type PackageItemDetail = {
@@ -17,8 +18,6 @@ type PackageItemDetail = {
   handleClickItem?: Function;
 };
 function PackageItemDetail({
-  width,
-  height,
   className,
   padding,
   margin,
@@ -27,10 +26,12 @@ function PackageItemDetail({
   handleClickItem,
   handleChoosePackage,
 }: PackageItemDetail) {
-  const { openModal, closeModalWithAnimation } = useModalContext();
+  const { openModal, setStatus, setPayload } = useModalContext();
   const visibility = useContext(VisibilityContext);
 
   const showPackageDetail = () => {
+    setStatus(HANDLE_STATUS.IN_PROGRESS);
+    setPayload(packageDetail);
     openModal(MODAL_NAME.PACKAGE_DETAIL);
   };
   const { t } = useTranslation();
@@ -50,14 +51,16 @@ function PackageItemDetail({
       } p-4`}
     >
       <div>
-        <h3 className="font-bold text-center">{packageDetail.name}</h3>
-        <p className="font-bold">{t('HOMEPAGE.DURATION')}: {packageDetail.detail.duration}</p>
-        <p className="font-bold">{t('HOMEPAGE.MAX_ADULT')}: {packageDetail.detail.max_adult}</p>
-        <p className="font-bold">{t('HOMEPAGE.MAX_CHILDREN')}: {packageDetail.detail.max_children}</p>
-        <p className="font-bold">{t('HOMEPAGE.CHILDREN')}  {t('HOMEPAGE.PRICE')}: {packageDetail.detail.adult_price}</p>
-        <p className="font-bold">{t('HOMEPAGE.ADULT')} {t('HOMEPAGE.PRICE')}: {packageDetail.detail.child_price}</p>
-        <p className="font-bold">{t('HOMEPAGE.SINGLE_PRICE')}: {packageDetail.detail.signle_price}</p>
-        <p>{packageDetail.detail.description}</p>
+        <h3 className="font-bold text-center">{packageDetail.title}</h3>
+        <p className="font-bold">
+          Duration: {packageDetail.packages_night_stay + 1} days, {packageDetail.packages_night_stay} nights
+        </p>
+        <p className="font-bold">Max Adult: {packageDetail.db_max_adult}</p>
+        <p className="font-bold">Max Children: {packageDetail.db_max_children}</p>
+        <p className="font-bold">Adult Price: {packageDetail.packages_adult_rate}đ</p>
+        <p className="font-bold">Child Price: {packageDetail.packages_child_rate}đ</p>
+        <p className="font-bold">Single Price: {packageDetail.packages_single_rate}đ</p>
+        <p className="line-clamp-2">{packageDetail.packages_note}</p>
       </div>
       <div className="w-full text-end">
         <button onClick={showPackageDetail} className=" hover:text-grey-21 underline">

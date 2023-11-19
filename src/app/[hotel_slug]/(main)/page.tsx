@@ -1,18 +1,16 @@
 'use client';
-import { useEffect } from 'react';
-import { useParams, useRouter } from 'next/navigation';
 import { useAppDispatch, useAppSelector } from '@/hooks';
-
 import BookingChoose from '@/components/BookingChoose/BookingChoose';
-import { getBusiness } from '@/store/business/businessAction';
+import { useEffect } from 'react';
+import { getBookingPackages } from '@/store/booking/bookingAction';
+import { getDateNowTimestamp } from '@/utils/helper';
 
 function HomePage() {
-  const { hotel_slug } = useParams();
-  const router = useRouter();
   const { setting } = useAppSelector((state) => state.business);
+  const { basic_business_info } = useAppSelector((state) => state.business);
   const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch(getBusiness({ business_slug: hotel_slug, router }));
+    dispatch(getBookingPackages({ bid: basic_business_info.bid, datecreated: getDateNowTimestamp() }));
   }, []);
   return (
     <div
