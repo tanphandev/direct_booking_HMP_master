@@ -7,18 +7,22 @@ import { useOnClickOutside } from '@/hooks/useClickOutSide';
 import Calendar from '@/components/BookingChoose/Calendar/Calendar';
 import '@/i18n/i18n';
 import { useTranslation } from "next-i18next";
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
+import { useAppDispatch, useAppSelector } from '@/hooks';
+import { getDateFormatTimestamp } from '@/utils/helper';
+import { getPublicRoomAvailable } from '@/store/room/roomAction';
+import { toast } from 'react-toastify';
 const BookingSearchBox = () => {
+  const { hotel_slug,adults,child,datecreated} = useParams();
+  const router = useRouter();
+  const dispatch = useAppDispatch();
+  const { basic_business_info } = useAppSelector((state) => state.business);
   const { t } = useTranslation();
-  
   const [isHideCheckinCalendar, setIsHideCheckinCalendar] = useState<boolean>(true);
-
   let calendarRef = null;
   if (typeof document !== 'undefined') {
     calendarRef = document.querySelector('.rdrDateRangePickerWrapper') as Element;
   }
-
-  
   const currentDay = new Date();
   const nextDay = new Date(currentDay);
   // const {check_in, check_out}= useParams()
@@ -49,6 +53,12 @@ const BookingSearchBox = () => {
   useOnClickOutside(calendarRef, () => {
     setIsHideCheckinCalendar(true);
   });
+  const handleLoadRoomAvailable = () => {
+    const bid = basic_business_info.bid;
+    const check_in = checkInRef.current && getDateFormatTimestamp(checkInRef.current?.startDate);
+    const check_out = checkInRef.current && getDateFormatTimestamp(checkInRef.current?.endDate);
+    dispatch(getPublicRoomAvailable({ bid, check_in, check_out, adults, child, datecreated, hotel_slug, router }))
+  };
   return (
     <div className={'flex flex-col w-full px-2 py-2 md:px-4 lg:px-6 lg:py-3'}>
       <div className={'flex items-center justify-between'}>
@@ -85,7 +95,7 @@ const BookingSearchBox = () => {
             </div>
           </div>
           <h4 className="text-md py-5 text-white">{t('SEARCH.BOX_SEARCH.NIGHTS_STAY',{value:quantityNight})}</h4>
-          <button className={`px-6 bg-blue-600 py-2 text-md rounded-md text-white uppercase bg-[#0A7CFF]`}>
+          <button onClick={handleLoadRoomAvailable}className={`px-6 bg-blue-600 py-2 text-md rounded-md text-white uppercase bg-[#0A7CFF]`}>
           {t('SEARCH.BOX_SEARCH.SEARCH_BUTTON')}
           </button>
         </div>
