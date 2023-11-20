@@ -28,6 +28,7 @@ function PackageItemDetail({
   handleClickItem,
   handleChoosePackage,
 }: PackageItemDetail) {
+  const { t } = useTranslation();
   const { business_currency } = useAppSelector((state) => state.business.basic_business_info);
   const { openModal, setStatus, setPayload } = useModalContext();
   const visibility = useContext(VisibilityContext);
@@ -37,7 +38,6 @@ function PackageItemDetail({
     setPayload(packageDetail);
     openModal(MODAL_NAME.PACKAGE_DETAIL);
   };
-  const { t } = useTranslation();
 
   return (
     <div
@@ -56,18 +56,27 @@ function PackageItemDetail({
       <div>
         <h3 className="font-bold text-center line-clamp-2">{packageDetail.title}</h3>
         <p className="font-bold">
-          Duration: {packageDetail.packages_night_stay + 1} days, {packageDetail.packages_night_stay} nights
-        </p>
-        <p className="font-bold">Max Adult: {packageDetail.db_max_adult}</p>
-        <p className="font-bold">Max Children: {packageDetail.db_max_children}</p>
-        <p className="font-bold">
-          Adult Price: {formatCurrency(business_currency).format(packageDetail.packages_adult_rate)}
+          {t('HOMEPAGE.DURATION')}: {packageDetail.packages_night_stay + 1}{' '}
+          {packageDetail.packages_night_stay + 1 <= 1 ? t('BOOKING_FORM.SIDEBAR.DAY') : t('BOOKING_FORM.SIDEBAR.DAYS')},{' '}
+          {packageDetail.packages_night_stay}{' '}
+          {packageDetail.packages_night_stay <= 1 ? t('BOOKING_FORM.SIDEBAR.NIGHT') : t('BOOKING_FORM.SIDEBAR.NIGHTS')}
         </p>
         <p className="font-bold">
-          Child Price: {formatCurrency(business_currency).format(packageDetail.packages_child_rate)}
+          {t('HOMEPAGE.MAX_ADULT')}: {packageDetail.db_max_adult}
         </p>
         <p className="font-bold">
-          Single Price: {formatCurrency(business_currency).format(packageDetail.packages_single_rate)}
+          {t('HOMEPAGE.MAX_CHILDREN')}: {packageDetail.db_max_children}
+        </p>
+        <p className="font-bold">
+          {t('HOMEPAGE.ADULT')} {t('HOMEPAGE.PRICE')}:{' '}
+          {formatCurrency(business_currency).format(packageDetail.packages_adult_rate)}
+        </p>
+        <p className="font-bold">
+          {t('HOMEPAGE.CHILD')} {t('HOMEPAGE.PRICE')}:{' '}
+          {formatCurrency(business_currency).format(packageDetail.packages_child_rate)}
+        </p>
+        <p className="font-bold">
+          {t('HOMEPAGE.SINGLE_PRICE')}: {formatCurrency(business_currency).format(packageDetail.packages_single_rate)}
         </p>
         <p className="line-clamp-2">{packageDetail.packages_note}</p>
       </div>

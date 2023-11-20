@@ -1,5 +1,6 @@
 import { createRef, useEffect } from 'react';
 import { useStepContext } from '@/contexts/StepProvider';
+import { useTranslation } from 'react-i18next';
 
 import AdditionalInformation, { BookForRef } from './AdditionalInformation';
 import ArrivalTime from './ArrivalTime';
@@ -11,6 +12,7 @@ import { scrollOnTop, trimObjectValues } from '@/utils/helper';
 import { toast } from 'react-toastify';
 
 function OrderInfomation() {
+  const { t } = useTranslation();
   const orderFormRef = createRef<any>();
   const forSomeOneRef = createRef<any>();
   const bookForRef = createRef<BookForRef>();
@@ -100,7 +102,7 @@ function OrderInfomation() {
   };
   return (
     <div className="flex-1">
-      <h2 className="font-bold mb-2 mt-6 lg:mt-0">Information</h2>
+      <h2 className="font-bold mb-2 mt-6 lg:mt-0">{t('BOOKING_FORM.STEP1.INFORMATION_TITLE')}</h2>
       <InformationForm ref={orderFormRef} type="order" />
       <AdditionalInformation ref={bookForRef} forSomeOneRef={forSomeOneRef} />
       <StayManagementCheckbox ref={viaTravelXRef} />
@@ -118,7 +120,7 @@ function OrderInfomation() {
           }}
           className="primary-button h-9 rounded-md"
         >
-          Next
+          {t('BOOKING_FORM.STEP1.NEXT_STEP')}
         </button>
       </div>
     </div>
