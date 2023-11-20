@@ -61,17 +61,17 @@ const RoomCardResult: React.FC<RoomCardResultProps> = ({ room }) => {
   const displayedOffers = room.room_type_offers?.slice(0, displayedItemOffers);
 
 
-  return (
+ return (
     <>
       <h2 className='font-bold text-2xl mt-12 mb-4 pb-2 border-b-2'>{room.title}</h2>
-      <div className='flex-col md:flex md:flex-around'>
+      <div className='flex flex-col md:flex-row '>
         {photos[0] ? (
           <div className='md:w-1/3 md:h-[200px] pb-2 h-[180px] '>
             <Image
               src={photos[0]?.uri_full}
               alt={`Image ${currentImage + 1}`}
               height={200}
-              width={200}
+              width={100}
               className='w-full h-full cursor-pointer'
               onClick={() => handleImageClick(0)}
             />
@@ -87,7 +87,9 @@ const RoomCardResult: React.FC<RoomCardResultProps> = ({ room }) => {
                   <Image
                     src={photos[currentImage]?.uri_full}
                     alt={`Image ${currentImage + 1}`}
-                    className='w-full h-full object-contain'
+                    height={200}
+                    width={100}
+                    className='w-screen h-screen object-fit'
                   />
                   <button
                     className='absolute ml-3 top-1/2 -translate-y-1/2 left-4 text-white text-2xl cursor-pointer'
@@ -219,7 +221,7 @@ const RoomCardResult: React.FC<RoomCardResultProps> = ({ room }) => {
       {packages[0] && (
         <div className='mt-4'>
           <h2 className='uppercase mb-4 pb-2'>Ưu đãi đặc biệt</h2>
-          <div className='flex-col md:flex md:flex-wrap'>
+          <div className='flex flex-col md:flex-row md:flex-wrap'>
             {packages?.map((roomPackage) => (
               <div key={roomPackage.id} className='md:m-w-1/3 md:w-1/3 w-full py-2'>
                 <div className='flex flex-col bg-[#edf5ef] py-6 px-4 mx-2 rounded-md'>
@@ -231,7 +233,7 @@ const RoomCardResult: React.FC<RoomCardResultProps> = ({ room }) => {
                   <div className='flex items-center justify-between flex-wrap'>
                     <div className='font-bold text-xl'>+ {roomPackage.total_price}đ</div>
                     <div>
-                      <a className='uppercase text-[#0a7cff] font-bold'>+ Thêm</a>
+                      <a className='uppercase text-[#0a7cff] font-bold'>Thêm</a>
                     </div>
                   </div>
                 </div>
@@ -245,4 +247,3 @@ const RoomCardResult: React.FC<RoomCardResultProps> = ({ room }) => {
 };
 
 export default RoomCardResult;
-

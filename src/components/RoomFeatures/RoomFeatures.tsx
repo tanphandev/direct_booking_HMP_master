@@ -5,8 +5,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const RoomFeatures = () => {
-  const roomFeatures: RoomTypeFeature[] = useAppSelector((state) => state.room.room_type_features);
-
+  const roomFeatures: RoomTypeFeature[] = useAppSelector((state) => state.room.public_room_available[0]?.room_type_features);
   const [lang, setLang] = useState('vi');
 
   useEffect(() => {
