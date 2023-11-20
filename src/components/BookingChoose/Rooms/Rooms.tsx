@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { createRef, useRef, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { useAppDispatch, useAppSelector } from '@/hooks';
@@ -6,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 
 import CheckIn from '../CheckIn/CheckIn';
 import PersonQuanity, { PersonQuanityRefProps } from '../PersonQuanity/PersonQuanity';
-import Path from '@/routes/Path';
 import { getDateFormatTimestamp, getDateNowTimestamp } from '@/utils/helper';
 import { checkCouponCode } from '@/store/business/businessAction';
 import { useLoading } from '@/hooks/useLoading';
@@ -39,7 +37,7 @@ function Rooms() {
     dispatch(checkCouponCode({ bodyData }));
   };
 
-  const handleLoadRoomAvailable = ()=>{
+  const handleLoadRoomAvailable = () => {
     const isValid = checkInRef.current && checkInRef.current.isValid;
     const bid = basic_business_info.bid;
     const check_in = checkInRef.current && getDateFormatTimestamp(checkInRef.current?.startDate);
@@ -48,11 +46,9 @@ function Rooms() {
     const child = personQuantityRef.current?.child&&0;
     const datecreated = getDateNowTimestamp()
     isValid
-    ? dispatch(getPublicRoomAvailable({ bid, check_in, check_out,adults,child,datecreated,hotel_slug,router}))
-    : toast.error('Check-In Check-Out is invalid');
-
-
-  }
+      ? dispatch(getPublicRoomAvailable({ bid, check_in, check_out, adults, child, datecreated, hotel_slug, router }))
+      : toast.error('Check-In Check-Out is invalid');
+  };
   return (
     <div>
       <div>

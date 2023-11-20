@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { useAppDispatch, useAppSelector } from '@/hooks';
 import { useLoading } from '@/hooks/useLoading';
+import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 
 import CheckIn from '../CheckIn/CheckIn';
@@ -13,6 +14,7 @@ import { PACKAGE_CAL_PRICE } from '@/store/common/constants';
 import { getBookingInfo } from '@/store/booking/bookingSlice';
 
 function ReviewPackage({ packageChose, setIsChoosePackage }: PackageProps) {
+  const { t } = useTranslation();
   const { hotel_slug } = useParams();
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -63,14 +65,14 @@ function ReviewPackage({ packageChose, setIsChoosePackage }: PackageProps) {
             }}
             className="transition-colors w-[150px] h-[56px] text-base font-bold text-grey-21 bg-white hover:bg-grey-d9 rounded-md"
           >
-            BACK
+            {t('HOMEPAGE.BACK')}
           </button>
           <SecondLoading isLoading={loading}>
             <button
               onClick={handleCalculatePrice}
               className="transition-colors w-[150px] h-[56px] text-base font-bold text-white bg-blue-0a hover:bg-blue-09 rounded-md ml-2"
             >
-              NEXT
+              {t('HOMEPAGE.NEXT')}
             </button>
           </SecondLoading>
         </div>

@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { useModalContext } from '@/contexts/ModalProvider';
 import { useOnClickOutside } from '@/hooks/useClickOutSide';
 import { useAppSelector } from '@/hooks';
+import { useTranslation } from 'react-i18next';
 
 import Schedule from '../BookingChoose/Schedule/Schedule';
 import XmarkIcon from '@/assets/icons/XmarkIcon';
@@ -9,6 +10,7 @@ import { HANDLE_STATUS } from '@/types/handle';
 import { formatCurrency } from '@/utils/helper';
 
 function PackageDetailModal() {
+  const { t } = useTranslation();
   const modalRef = useRef<HTMLDivElement>(null);
   const { business_currency } = useAppSelector((state) => state.business.basic_business_info);
   const { payload: packageDetail, setStatus, closeModalWithAnimation } = useModalContext();
@@ -32,27 +34,42 @@ function PackageDetailModal() {
           <h2 className="font-bold text-center p-4">{packageDetail?.title}</h2>
           <div className="border-[1px] w-[280px] p-4 mb-4 border-grey-d9 rounded-lg">
             <p className="font-bold">
-              Duration: {packageDetail?.packages_night_stay + 1} days, {packageDetail?.packages_night_stay} night
+              {t('HOMEPAGE.DURATION')}: {packageDetail.packages_night_stay + 1}{' '}
+              {packageDetail.packages_night_stay + 1 <= 1
+                ? t('BOOKING_FORM.SIDEBAR.DAY')
+                : t('BOOKING_FORM.SIDEBAR.DAYS')}
+              , {packageDetail.packages_night_stay}{' '}
+              {packageDetail.packages_night_stay <= 1
+                ? t('BOOKING_FORM.SIDEBAR.NIGHT')
+                : t('BOOKING_FORM.SIDEBAR.NIGHTS')}
             </p>
             <div className="py-2 my-2 border-b-2 border-grey-21">
-              <p className="font-bold">Max Adult: {packageDetail?.db_max_adult}</p>
-              <p className="font-bold">Max Children: {packageDetail?.db_max_children}</p>
+              <p className="font-bold">
+                {' '}
+                {t('HOMEPAGE.MAX_ADULT')}: {packageDetail.db_max_adult}
+              </p>
+              <p className="font-bold">
+                {t('HOMEPAGE.MAX_CHILDREN')}: {packageDetail.db_max_children}
+              </p>
             </div>
             <div className="py-2 my-2 border-b-2 border-grey-21">
               <p className="font-bold">
-                Adult Price: {formatCurrency(business_currency).format(packageDetail?.packages_adult_rate)}đ
+                {t('HOMEPAGE.ADULT')} {t('HOMEPAGE.PRICE')}:{' '}
+                {formatCurrency(business_currency).format(packageDetail?.packages_adult_rate)}đ
               </p>
               <p className="font-bold">
-                Child Price: {formatCurrency(business_currency).format(packageDetail?.packages_child_rate)}đ
+                {t('HOMEPAGE.CHILD')} {t('HOMEPAGE.PRICE')}: :{' '}
+                {formatCurrency(business_currency).format(packageDetail?.packages_child_rate)}đ
               </p>
               <p className="font-bold">
-                Single Price: {formatCurrency(business_currency).format(packageDetail?.packages_single_rate)}đ
+                {t('HOMEPAGE.SINGLE_PRICE')}:{' '}
+                {formatCurrency(business_currency).format(packageDetail?.packages_single_rate)}đ
               </p>
             </div>
           </div>
           <p>{packageDetail.packages_note}</p>
           <div className="my-6">
-            <p className="text-lg font-bold mb-2">Room</p>
+            <p className="text-lg font-bold mb-2">{t('HOMEPAGE.ROOM')}</p>
             {packageDetail.packages_room_type.map((item: any, index: number) => (
               <p key={index} className="font-bold">
                 {item?.title}
@@ -60,7 +77,7 @@ function PackageDetailModal() {
             ))}
           </div>
           {packageDetail?.packages_days.map((package_day: any, index: number) => (
-            <Schedule activities={package_day?.activities} key={index} day={`Day ${index + 1}`} />
+            <Schedule activities={package_day?.activities} key={index} day={`${t('HOMEPAGE.DAY')} ${index + 1}`} />
           ))}
         </div>
       </div>

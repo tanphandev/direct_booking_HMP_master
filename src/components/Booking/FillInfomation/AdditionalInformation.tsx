@@ -1,5 +1,6 @@
 import { Fragment, forwardRef, useImperativeHandle, useRef, useState } from 'react';
 import { useAppSelector } from '@/hooks';
+import { useTranslation } from 'react-i18next';
 
 import GuestInformation from './GuestInformation';
 import { OrderChooseValue } from './constants';
@@ -15,6 +16,7 @@ export type BookForRef = {
 };
 
 const AdditionalInformation = forwardRef<BookForRef, Props>(function Component({ forSomeOneRef }, ref) {
+  const { t } = useTranslation();
   const { title: bussinessName } = useAppSelector((state) => state.business.basic_business_info);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [orderChooseValue, setOrderChooseValue] = useState<OrderChooseValue>(OrderChooseValue.VALUE1);
@@ -60,9 +62,9 @@ const AdditionalInformation = forwardRef<BookForRef, Props>(function Component({
             className="cursor-pointer"
           />
           <label htmlFor="choose-1" className="cursor-pointer">
-            <p>
-              I will be staying at <span className="font-bold">{bussinessName}</span> on the dates selected
-            </p>
+            <p
+              dangerouslySetInnerHTML={{ __html: t('BOOKING_FORM.STEP1.BOOK_FOR_MYSELF', { value: bussinessName }) }}
+            />
           </label>
         </div>
         <div className="flex gap-x-2">
@@ -77,7 +79,7 @@ const AdditionalInformation = forwardRef<BookForRef, Props>(function Component({
             className="cursor-pointer"
           />
           <label htmlFor="choose-2">
-            <p>I am booking this stay for someone else</p>
+            <p>{t('BOOKING_FORM.STEP1.BOOK_FOR_OTHER')}</p>
           </label>
         </div>
         <div className="flex gap-x-2">
@@ -92,7 +94,7 @@ const AdditionalInformation = forwardRef<BookForRef, Props>(function Component({
             className="cursor-pointer"
           />
           <label htmlFor="choose-3">
-            <p>Other</p>
+            <p>{t('BOOKING_FORM.STEP1.BOOK_OTHER')}</p>
           </label>
         </div>
       </div>
