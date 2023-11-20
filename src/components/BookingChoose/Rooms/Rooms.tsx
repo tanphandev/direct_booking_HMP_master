@@ -42,8 +42,9 @@ function Rooms() {
     const check_out = checkInRef.current && checkInRef.current.endDate;
     const adults = personQuantityRef.current?.adults&&0;
     const child = personQuantityRef.current?.child&&0;
+    const datecreated = getDateNowTimestamp()
     isValid
-    ? dispatch(getPublicRoomAvailable({ bid, check_in, check_out}))
+    ? dispatch(getPublicRoomAvailable({ bid, check_in, check_out,datecreated}))
     : toast.error('Check-In Check-Out is invalid');
 
 
