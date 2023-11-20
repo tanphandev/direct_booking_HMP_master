@@ -1,6 +1,5 @@
 'use client'
 import React from 'react'
-// import { ListRoomAvailable } from '@/api/mock-data/room-available'
 import RoomCardResult from '../RoomCardResult/RoomCardResult'
 import { useAppSelector } from '@/hooks'
 const SearchResult = () => {

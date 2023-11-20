@@ -21,13 +21,13 @@ const BookingSearchBox = () => {
   
   const currentDay = new Date();
   const nextDay = new Date(currentDay);
-  // const {checkin, checkout}= useParams()
+  // const {check_in, check_out}= useParams()
   const [rangeDate, setRangeDate] = useState<CalendarRangeProps[]>([
     {
       startDate: currentDay,
       endDate: nextDay,
-      // startDate: checkin,
-      // endDate: checkout,
+      // startDate: check_in,
+      // endDate: check_out,
       key: 'selection',
     },
   ]);
@@ -53,7 +53,7 @@ const BookingSearchBox = () => {
   return (
     <div className={'flex flex-col w-full px-2 py-2 md:px-4 lg:px-6 lg:py-3'}>
       <div className={'flex items-center justify-between'}>
-        {/* <span className={' text-xl lg:text-2xl text-white font-light '}>Tìm kiếm</span> */}
+
         <span className={' text-xl lg:text-2xl text-white font-light '}>{t('SEARCH.BOX_SEARCH.SEARCH')}</span>
 
         <button className="" onClick={toggleSearchBox}>
@@ -63,7 +63,7 @@ const BookingSearchBox = () => {
       {isSearchBoxVisible && (
         <div className={' flex flex-col border-1 pb-2'}>
           <div className={'pt-5 relative'}>
-            {/* <h4 className="text-white pb-2 text-md">Ngày nhận phòng</h4> */}
+
             <h4 className="text-white pb-2 text-md">{t('SEARCH.BOX_SEARCH.CHECKIN_DATE')}</h4>
 
             <div onClick={toggleCheckinCalendar} className={'flex items-center bg-white p-2 rounded-md'}>

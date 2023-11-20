@@ -21,7 +21,8 @@ import { useAppSelector } from '@/hooks';
 const SidebarSearch = () => {
   const { openModal } = useModalContext();  
   const { t } = useTranslation();
-  const [lang, setLang] = useState(i18n.language);
+  const lang=i18n.language
+
   
   const business_navigation = useAppSelector((state) => state.business.basic_business_info.business_navigation);
   const business_nav = business_navigation.find((item: business_navigation) => item.cp_slug === "faqs");
