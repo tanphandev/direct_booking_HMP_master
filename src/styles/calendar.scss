@@ -35,9 +35,5 @@
 }
 
 .rdrDateRangePickerWrapper {
-  @apply w-full;
-}
-
-.rdrDateRangePickerWrapper {
-  @apply w-[338px] overflow-x-scroll sm:w-auto sm:overflow-hidden;
+  @apply w-[338px] overflow-x-scroll sm:w-auto sm:overflow-hidden shadow-custom_1;
 }

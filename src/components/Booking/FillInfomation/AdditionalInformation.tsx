@@ -1,9 +1,9 @@
 import { Fragment, forwardRef, useImperativeHandle, useRef, useState } from 'react';
+import { useAppSelector } from '@/hooks';
 
 import GuestInformation from './GuestInformation';
 import { OrderChooseValue } from './constants';
 import { auto_grow } from '@/utils/helper';
-import { useTranslation } from 'next-i18next';
 
 type Props = {
   forSomeOneRef?: any;
@@ -15,6 +15,7 @@ export type BookForRef = {
 };
 
 const AdditionalInformation = forwardRef<BookForRef, Props>(function Component({ forSomeOneRef }, ref) {
+  const { title: bussinessName } = useAppSelector((state) => state.business.basic_business_info);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [orderChooseValue, setOrderChooseValue] = useState<OrderChooseValue>(OrderChooseValue.VALUE1);
 
@@ -60,8 +61,8 @@ const AdditionalInformation = forwardRef<BookForRef, Props>(function Component({
           />
           <label htmlFor="choose-1" className="cursor-pointer">
             <p>
-              I will be staying at <span className="font-bold">HMP Master</span> on the dates selected
-            </p> */}
+              I will be staying at <span className="font-bold">{bussinessName}</span> on the dates selected
+            </p>
           </label>
         </div>
         <div className="flex gap-x-2">

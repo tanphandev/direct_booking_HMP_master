@@ -1,3 +1,4 @@
+import { CurrencyType, currency as currencyCountry } from '@/constants/currency';
 type InputObject = Record<string, any>;
 
 export const sleep = (milliseconds: number) => {
@@ -14,7 +15,12 @@ export const getDateFormatTimestamp = (date: string) => {
   return Math.floor(new Date(date).getTime() / 1000); // Convert to seconds
 };
 
-export const formatCurrency = (number: number) => number?.toLocaleString('vi', { style: 'currency', currency: 'VND' });
+export const formatCurrency = (currency: CurrencyType) => {
+  return new Intl.NumberFormat(currencyCountry[currency]?.locate, {
+    style: 'currency',
+    currency: currencyCountry[currency]?.currency ?? 'USD',
+  });
+};
 
 export const trimObjectValues = (obj: InputObject): InputObject => {
   const trimmedData: InputObject = {};
