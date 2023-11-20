@@ -5,18 +5,21 @@ import { useAppSelector } from "@/hooks";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { db_languages } from '@/api/mock-data/db_languages'
+import i18n from "@/i18n/i18n";
 
 
 const ListFacilities = () => {
   const business_pf: business_pf[] = useAppSelector((state) => state.business.business_pf);
     
   const { t } = useTranslation();
-  const [lang, setLang] = useState('vi');
+  // const [lang, setLang] = useState('vi');
 
-  useEffect(() => {
-    const savedLanguage = localStorage.getItem('language') || db_languages.id;
-    setLang(savedLanguage);
-  }, []);
+  // useEffect(() => {
+  //   const savedLanguage = localStorage.getItem('language') || db_languages.id;
+  //   setLang(savedLanguage);
+  // }, []);
+  const lang=i18n.language
+
     const pathIcon = "/assets/icons";
 
     

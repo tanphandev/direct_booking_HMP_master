@@ -21,7 +21,7 @@ interface RoomAvailable {
   room_type_offers?: RoomTypeOffer[],
   room_type_benefits?: any,
   room_type_features: RoomTypeFeature[],
-  room_type_packages?: RoomTypePackage[] | [],
+  room_type_packages?: RoomTypePackage[],
   season_title?: string,
   price_room?: number,
   weekdays_price?: any,

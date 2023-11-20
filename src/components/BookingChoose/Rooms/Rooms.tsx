@@ -40,11 +40,11 @@ function Rooms() {
   const handleLoadRoomAvailable = () => {
     const isValid = checkInRef.current && checkInRef.current.isValid;
     const bid = basic_business_info.bid;
-    const check_in = checkInRef.current && checkInRef.current.startDate;
-    const check_out = checkInRef.current && checkInRef.current.endDate;
-    const adults = personQuantityRef.current?.adults && 2;
-    const child = personQuantityRef.current?.child && 0;
-    const datecreated = getDateNowTimestamp();
+    const check_in = checkInRef.current && getDateFormatTimestamp(checkInRef.current?.startDate);
+    const check_out = checkInRef.current && getDateFormatTimestamp(checkInRef.current?.endDate);
+    const adults = personQuantityRef.current?.adults&&2;
+    const child = personQuantityRef.current?.child&&0;
+    const datecreated = getDateNowTimestamp()
     isValid
       ? dispatch(getPublicRoomAvailable({ bid, check_in, check_out, adults, child, datecreated, hotel_slug, router }))
       : toast.error('Check-In Check-Out is invalid');
@@ -71,17 +71,9 @@ function Rooms() {
           </button>
         </div>
         <div className="flex justify-end">
-          {/* <Link href={Path.SEARCH(hotel_slug as string)}>
-            <button className="transition-colors w-[150px] h-[56px] text-base font-bold bg-blue-0a hover:bg-blue-09 rounded-md">
+          <button onClick={handleLoadRoomAvailable} className="transition-colors w-[150px] h-[56px] text-base font-bold bg-blue-0a hover:bg-blue-09 rounded-md">
               NEXT
             </button>
-          </Link> */}
-          <button
-            onClick={handleLoadRoomAvailable}
-            className="transition-colors w-[150px] h-[56px] text-base font-bold bg-blue-0a hover:bg-blue-09 rounded-md uppercase"
-          >
-            {t('HOMEPAGE.NEXT')}
-          </button>
         </div>
         {/* show loading when check coupon */}
         {loading && <SecondLoading />}
