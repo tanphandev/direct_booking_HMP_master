@@ -2,10 +2,11 @@
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useAppSelector } from '@/hooks';
-
+import { useTranslation } from 'react-i18next';
 import Path from '@/routes/Path';
 
 function NavFooter() {
+  const { i18n } = useTranslation();
   const { hotel_slug } = useParams();
   const { footer_navigation }: { footer_navigation: any[] } = useAppSelector((state) => state.business);
   return (
@@ -16,7 +17,7 @@ function NavFooter() {
           href={Path.GET_PAGE_BY_NAME(hotel_slug as string, item.page_slug)}
           className="my-2 mx-4 hover:underline"
         >
-          {item.page_title[0].value}
+          {item.page_title.find((valueItem: any) => valueItem?.lang === i18n.language)?.value}
         </Link>
       ))}
     </div>

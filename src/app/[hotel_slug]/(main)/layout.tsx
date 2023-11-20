@@ -10,6 +10,7 @@ import { getBusiness } from '@/store/business/businessAction';
 import { useLoading } from '@/hooks/useLoading';
 import { BUSINESS } from '@/store/common/constants';
 import PrimaryLoading from '@/components/Loading/PrimaryLoading';
+import '@/i18n/i18n';
 
 function Layout({ children }: { children: React.ReactNode }) {
   const { hotel_slug } = useParams();

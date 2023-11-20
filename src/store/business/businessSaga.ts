@@ -25,6 +25,8 @@ function* getBusiness({ payload }: any): Generator {
   try {
     const data: any = yield call(ApiCaller.get, API.get_business_by_slug, { slug: business_slug });
     const basic_business_info = pick(data, basic_business_info_field);
+    /* set default language */
+    localStorage.setItem('language', data?.direct_booking_setting?.db_languages?.id);
     yield put(getBasicBusinessInfoSuccess(basic_business_info));
     yield put(getBusinessPFSuccess(data.business_pf));
     yield put(getSettingSuccess(data.direct_booking_setting));

@@ -1,6 +1,7 @@
 import AddIcon from '@/assets/icons/AddIcon';
 import SubIcon from '@/assets/icons/SubIcon';
 import { PersonType } from './PersonQuantityPopper';
+import { useTranslation } from 'react-i18next';
 
 type PersonQuantityProps = {
   personType: PersonType;
@@ -9,6 +10,7 @@ type PersonQuantityProps = {
 };
 
 function PersonDetailQuantity({ personType, quantity = 0, setQuantity }: PersonQuantityProps) {
+  const { t } = useTranslation();
   /* increase 1 unit */
   const increase = () => {
     setQuantity((prev) => prev + 1);
@@ -22,7 +24,15 @@ function PersonDetailQuantity({ personType, quantity = 0, setQuantity }: PersonQ
   };
   return (
     <div className="h-[56px] w-full flex justify-between items-center bg-white px-4 py-2">
-      <span className="text-grey-21">{personType}</span>
+      <span className="text-grey-21">
+        {personType === PersonType.ADULT
+          ? quantity <= 1
+            ? t('HOMEPAGE.ADULT')
+            : t('HOMEPAGE.ADULTS')
+          : quantity <= 1
+          ? t('HOMEPAGE.CHILD')
+          : t('HOMEPAGE.CHILDREN')}
+      </span>
       <div className="flex">
         <button
           onClick={decrease}
