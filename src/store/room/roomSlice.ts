@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   error: {},
   public_room_available:[],
+  room_type_features:[]
 } as any;
 
 const roomSlice = createSlice({
@@ -15,11 +16,19 @@ const roomSlice = createSlice({
     getPublicRoomAvailableFailed: (state, action) => {
       state.error = action.payload;
     },
+    getRoomFeaturesSuccess: (state, action) => {
+      state.room_type_features = action.payload;
+    },
+    getRoomFeaturesFailed: (state, action) => {
+      state.error = action.payload;
+    },
   },
 });
 
 export const {
   getPublicRoomAvailableSuccess,
-  getPublicRoomAvailableFailed
+  getPublicRoomAvailableFailed,
+  getRoomFeaturesSuccess,
+  getRoomFeaturesFailed
 } = roomSlice.actions;
 export default roomSlice.reducer;

@@ -101,7 +101,7 @@ interface RoomTypeOffer {
 interface RoomTypeFeature {
   custom_id: number,
   custom_title: string,
-  custom_value?: string,
-  custom_icon?: string,
+  custom_value: string,
+  custom_icon: string,
   lang: string
 }

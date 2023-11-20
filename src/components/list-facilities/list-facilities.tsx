@@ -1,10 +1,12 @@
 'use client'
 import { business_pf } from "@/api/mock-data/facilities";
+import { useAppSelector } from "@/hooks";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
 
 const ListFacilities = () => {
+  const business_pf: business_pf[] = useAppSelector((state) => state.business.business_pf);
     
   const [lang, setLang] = useState('vi');
 
