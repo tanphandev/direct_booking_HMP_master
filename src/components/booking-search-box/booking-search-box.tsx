@@ -34,7 +34,6 @@ const BookingSearchBox = () => {
 
   let quantityNight: number = (rangeDate[0].endDate - rangeDate[0].startDate) / 86400000;
   const checkInRef = createRef<RangeDate>();
-
   useImperativeHandle(checkInRef, () => ({
     startDate: rangeDate[0].startDate,
     endDate: rangeDate[0].endDate,
@@ -78,7 +77,6 @@ const BookingSearchBox = () => {
             />
           </div>
           <div className={'pt-5 relative'}>
-            {/* <h4 className="text-white pb-2 text-md">Ngày trả phòng</h4> */}
             <h4 className="text-white pb-2 text-md">{t('SEARCH.BOX_SEARCH.CHECKOUT_DATE')}</h4>
 
             <div onClick={toggleCheckinCalendar} className={'flex items-center bg-white p-2 rounded-md'}>
@@ -86,12 +84,7 @@ const BookingSearchBox = () => {
               <h3 className={'pl-3'}>{rangeDate[0].endDate.toLocaleDateString()}</h3>
             </div>
           </div>
-          {/* <h4 className="text-md py-5 text-white">Ở lại {quantityNight} đêm</h4> */}
-          <h4 className="text-md py-5 text-white">{t('SEARCH.BOX_SEARCH.NIGHTS_STAY',{value:{quantityNight}})}</h4>
-
-          {/* <button className={`px-6 bg-blue-600 py-2 text-md rounded-md text-white uppercase bg-[#0A7CFF]`}>
-            Tìm kiếm
-          </button> */}
+          <h4 className="text-md py-5 text-white">{t('SEARCH.BOX_SEARCH.NIGHTS_STAY',{value:quantityNight})}</h4>
           <button className={`px-6 bg-blue-600 py-2 text-md rounded-md text-white uppercase bg-[#0A7CFF]`}>
           {t('SEARCH.BOX_SEARCH.SEARCH_BUTTON')}
           </button>

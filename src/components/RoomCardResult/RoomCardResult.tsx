@@ -223,8 +223,8 @@ const RoomCardResult: React.FC<RoomCardResultProps> = ({ room }) => {
 
       {packages[0] && (
         <div className='mt-4'>
-          <h2 className='uppercase mb-4 pb-2'>Ưu đãi đặc biệt</h2>
-          <div className='flex-col md:flex md:flex-wrap'>
+          <h2 className='uppercase mb-4 pb-2'>{t('SEARCH.ROOM_TYPE.SPECIAL_OFFERS')}</h2>
+          <div className='flex flex-col md:flex-row md:flex-wrap'>
             {packages?.map((roomPackage) => (
               <div key={roomPackage.id} className='md:m-w-1/3 md:w-1/3 w-full py-2'>
                 <div className='flex flex-col bg-[#edf5ef] py-6 px-4 mx-2 rounded-md'>
@@ -236,7 +236,7 @@ const RoomCardResult: React.FC<RoomCardResultProps> = ({ room }) => {
                   <div className='flex items-center justify-between flex-wrap'>
                     <div className='font-bold text-xl'>+ {roomPackage.total_price}đ</div>
                     <div>
-                      <a className='uppercase text-[#0a7cff] font-bold'>Thêm</a>
+                      <a className='uppercase text-[#0a7cff] font-bold'>{t('SEARCH.ROOM_TYPE.ADD')}</a>
                     </div>
                   </div>
                 </div>
