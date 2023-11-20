@@ -4,15 +4,26 @@ import GuestInformation from './GuestInformation';
 type Props = {
   guestFormRef: any;
   addtionalGuestFormRef?: any;
+  handleUseOrderData: Function;
 };
 
-function InformationOfGuests({ guestFormRef, addtionalGuestFormRef }: Props) {
+function InformationOfGuests({ guestFormRef, addtionalGuestFormRef, handleUseOrderData }: Props) {
   const [moreGuest, setMoreGuest] = useState<boolean>(false);
   return (
     <div>
-      <GuestInformation inputId="guest-info-1" guestFormRef={guestFormRef} isReuseOrderData={true} />
+      <GuestInformation
+        handleUseOrderData={handleUseOrderData}
+        inputId="guest-info-1"
+        guestFormRef={guestFormRef}
+        isReuseOrderData={true}
+      />
       {moreGuest ? (
-        <GuestInformation inputId="guset-info-2" guestFormRef={addtionalGuestFormRef} isReuseOrderData={true} />
+        <GuestInformation
+          handleUseOrderData={handleUseOrderData}
+          inputId="guset-info-2"
+          guestFormRef={addtionalGuestFormRef}
+          isReuseOrderData={true}
+        />
       ) : (
         <div className="text-end">
           <button

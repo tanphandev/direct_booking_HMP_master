@@ -9,7 +9,7 @@ const QuantityRoomOption:React.FC<QuantityRoomOptionProps>=({ maxQuantity })=>{
   const quantityRoomOptionRef = useRef<HTMLUListElement>(null);
   const [quantityRoom, setQuantityRoomValue] = useState(0);
   const generateQuantityArray = (maxQuantity: number) => {
-    return Array.from({ length: maxQuantity }, (_, index) => index + 1);
+    return Array.from({ length: maxQuantity }, (_, index) => index );
   };
 
   const quantity = generateQuantityArray(maxQuantity);

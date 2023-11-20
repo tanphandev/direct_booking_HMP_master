@@ -1,13 +1,16 @@
 import { useRef } from 'react';
 import { useModalContext } from '@/contexts/ModalProvider';
 import { useOnClickOutside } from '@/hooks/useClickOutSide';
+import { useAppSelector } from '@/hooks';
 
 import Schedule from '../BookingChoose/Schedule/Schedule';
 import XmarkIcon from '@/assets/icons/XmarkIcon';
 import { HANDLE_STATUS } from '@/types/handle';
+import { formatCurrency } from '@/utils/helper';
 
 function PackageDetailModal() {
   const modalRef = useRef<HTMLDivElement>(null);
+  const { business_currency } = useAppSelector((state) => state.business.basic_business_info);
   const { payload: packageDetail, setStatus, closeModalWithAnimation } = useModalContext();
   useOnClickOutside(modalRef, () => {
     closeModalWithAnimation(150);
@@ -36,9 +39,15 @@ function PackageDetailModal() {
               <p className="font-bold">Max Children: {packageDetail?.db_max_children}</p>
             </div>
             <div className="py-2 my-2 border-b-2 border-grey-21">
-              <p className="font-bold">Adult Price: {packageDetail?.packages_adult_rate}đ</p>
-              <p className="font-bold">Child Price: {packageDetail?.packages_child_rate}đ</p>
-              <p className="font-bold">Single Price: {packageDetail?.packages_single_rate}đ</p>
+              <p className="font-bold">
+                Adult Price: {formatCurrency(business_currency).format(packageDetail?.packages_adult_rate)}đ
+              </p>
+              <p className="font-bold">
+                Child Price: {formatCurrency(business_currency).format(packageDetail?.packages_child_rate)}đ
+              </p>
+              <p className="font-bold">
+                Single Price: {formatCurrency(business_currency).format(packageDetail?.packages_single_rate)}đ
+              </p>
             </div>
           </div>
           <p>{packageDetail.packages_note}</p>

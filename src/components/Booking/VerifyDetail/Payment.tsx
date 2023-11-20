@@ -4,14 +4,16 @@ import CreditCardIcon from '@/assets/icons/CreditCardIcon';
 import HotelIcon from '@/assets/icons/HotelIcon';
 import KhqrIcon from '@/assets/icons/KhqrIcon';
 
-function Payment() {
+function Payment({ handlePayAtHotel }: PaymentProps) {
   const { handleClick } = useStepContext();
   return (
     <div>
       <p className="font-bold pb-4 mt-[38px]">Payment Method</p>
       <div className="w-full border-t-[1px] border-b-[1px] border-grey-d9 py-5">
         <div
-          onClick={() => handleClick('next')}
+          onClick={() => {
+            handlePayAtHotel();
+          }}
           className="transition-colors w-[300px] flex items-center hover:bg-grey-f5 py-[7px] pr-[7px] rounded-md cursor-pointer"
         >
           <HotelIcon width="56px" height="38px" className="mx-2" />

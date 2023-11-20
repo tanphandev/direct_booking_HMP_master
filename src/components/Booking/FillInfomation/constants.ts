@@ -1,7 +1,7 @@
 export enum OrderChooseValue {
-  VALUE1 = 'my data',
-  VALUE2 = 'other data',
-  VALUE3 = 'other',
+  VALUE1 = 1,
+  VALUE2 = 2,
+  VALUE3 = 3,
 }
 
 /* time list */

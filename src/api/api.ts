@@ -6,6 +6,7 @@ const API = {
   package_create: 'public/packages_available/package_create',
   public_room_available: 'public/public_room_available',
   
+  // public_room_available: (business_lug: string, checkin: string,checkout: string, adults: number, children: number)=>``
 };
 
 export default API;

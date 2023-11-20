@@ -1,5 +1,6 @@
-import { forwardRef, memo, useEffect, useImperativeHandle, useState } from 'react';
+import { forwardRef, memo, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { useOnClickOutside } from '@/hooks/useClickOutSide';
+import { useTranslation } from 'react-i18next';
 
 import Calendar from '../Calendar/Calendar';
 import CalendarIcon from '@/assets/icons/Calendar';
@@ -11,6 +12,8 @@ type Props = {
 };
 
 const CheckIn = forwardRef<RangeDate, Props>(function Component({ quantityNight = 1, isValidate = false }, ref) {
+  const displayCheckInRef = useRef<HTMLDivElement>(null);
+  const { t } = useTranslation();
   const [isHideCalendar, setIsHideCalendar] = useState<boolean>(true);
   const [isValid, setIsValid] = useState<boolean>(true);
   let calendarRef = null;
@@ -35,6 +38,12 @@ const CheckIn = forwardRef<RangeDate, Props>(function Component({ quantityNight 
     range > quantityNight ? setIsValid(false) : setIsValid(true);
   }, [quantityNight, rangeDate]);
 
+  useEffect(() => {
+    if (rangeDate[0].startDate !== rangeDate[0].endDate) {
+      setIsHideCalendar(true);
+    }
+  }, [rangeDate]);
+
   useImperativeHandle(ref, () => ({
     startDate: rangeDate[0].startDate,
     endDate: rangeDate[0].endDate,
@@ -45,22 +54,27 @@ const CheckIn = forwardRef<RangeDate, Props>(function Component({ quantityNight 
     setIsHideCalendar(!isHideCalendar);
   };
 
-  useOnClickOutside(calendarRef, () => {
-    setIsHideCalendar(true);
+  useOnClickOutside(calendarRef, (event) => {
+    if (displayCheckInRef.current && !displayCheckInRef.current.contains(event.target as Node)) {
+      setIsHideCalendar(true);
+    }
   });
-
   return (
     <div className="relative">
-      <div onClick={toggleCalendar} className="h-[80px] grid grid-cols-2 bg-white text-grey-21 rounded-md mb-2">
+      <div
+        ref={displayCheckInRef}
+        onClick={toggleCalendar}
+        className="h-[80px] grid grid-cols-2 bg-white text-grey-21 rounded-md mb-2"
+      >
         <div className="flex items-center border-r-[1px] border-black-0.2 p-4">
           <CalendarIcon width="24px" height="24px" color="#212529" className="mr-4" />
           <div>
-            <p className="text-sm font-medium">CHECK-IN</p>
+            <p className="text-sm font-medium uppercase">{t('HOMEPAGE.CHECK-IN')}</p>
             <p className="text-base md:text-lg font-bold">{displayDateFormat(rangeDate[0].startDate)}</p>
           </div>
         </div>
         <div className="p-4">
-          <p className="text-sm font-medium">CHECK-OUT</p>
+          <p className="text-sm font-medium uppercase">{t('HOMEPAGE.CHECK-OUT')}</p>
           <p className="text-base md:text-lg font-bold">{displayDateFormat(rangeDate[0].endDate)}</p>
         </div>
       </div>
