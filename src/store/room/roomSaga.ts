@@ -10,10 +10,11 @@ import {
 } from './roomSlice';
 import { disableLoading, enableLoading } from '../common/commonSlice';
 import { PUBLIC_ROOM_AVAILABLE } from '../common/constants';
+import Path from '@/routes/Path';
 
 function* getPublicRoomAvailable( {payload} : any): Generator {
 
-  const  {bid,check_in,check_out, datecreated}  = payload;
+  const  {bid,check_in,check_out,adults,child, datecreated,hotel_slug, router}  = payload;
   console.log(payload)
   yield put(enableLoading(PUBLIC_ROOM_AVAILABLE));
   try {
@@ -21,14 +22,16 @@ function* getPublicRoomAvailable( {payload} : any): Generator {
       bid,
       parameters:{
         check_in: check_in,
-        check_out: check_out
+        check_out: check_out,
+        adults: adults,
+        child: child
       },
       datecreated,
     });
   
 
     yield put(getPublicRoomAvailableSuccess(data));
-
+    router.push(Path.SEARCH_RESULT(hotel_slug,check_in,check_out,1,1));
   } catch (error: any) {
     yield put(getPublicRoomAvailableFailed(error));
   } finally {

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { createRef, useRef, useState } from 'react';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { useAppDispatch, useAppSelector } from '@/hooks';
 
 import CheckIn from '../CheckIn/CheckIn';
@@ -16,6 +16,7 @@ import { toast } from 'react-toastify';
 
 function Rooms() {
   const { hotel_slug } = useParams();
+  const router = useRouter();
   const dispatch = useAppDispatch();
   const { loading } = useLoading([CHECK_COUPON_CODE]);
   const checkInRef = createRef<RangeDate>();
@@ -40,11 +41,11 @@ function Rooms() {
     const bid = basic_business_info.bid;
     const check_in = checkInRef.current && checkInRef.current.startDate;
     const check_out = checkInRef.current && checkInRef.current.endDate;
-    const adults = personQuantityRef.current?.adults&&0;
+    const adults = personQuantityRef.current?.adults&&2;
     const child = personQuantityRef.current?.child&&0;
     const datecreated = getDateNowTimestamp()
     isValid
-    ? dispatch(getPublicRoomAvailable({ bid, check_in, check_out,datecreated}))
+    ? dispatch(getPublicRoomAvailable({ bid, check_in, check_out,adults,child,datecreated,hotel_slug,router}))
     : toast.error('Check-In Check-Out is invalid');
 
 
