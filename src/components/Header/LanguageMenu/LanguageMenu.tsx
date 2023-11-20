@@ -26,6 +26,7 @@ function LanguageMenu() {
       const selectedLanguage = languages.find((item: languageProps) => item.id === savedLanguageId);
       if (selectedLanguage) {
         setLanguageValue(selectedLanguage);
+        i18n.changeLanguage(savedLanguageId);
       }
     }
   }, []);
