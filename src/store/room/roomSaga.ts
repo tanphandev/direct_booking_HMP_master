@@ -30,7 +30,7 @@ function* getPublicRoomAvailable( {payload} : any): Generator {
   
 
     yield put(getPublicRoomAvailableSuccess(data));
-    router.push(Path.SEARCH_RESULT(hotel_slug,check_in,check_out,1,1));
+    router.push(Path.SEARCH_RESULT(hotel_slug,check_in,check_out,2,0));
   } catch (error: any) {
     yield put(getPublicRoomAvailableFailed(error));
   } finally {

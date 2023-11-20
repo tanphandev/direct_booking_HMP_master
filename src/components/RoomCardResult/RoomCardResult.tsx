@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import QuantityRoomOption from '@/components/RoomCardResult/QuantityRoomOption/QuantityRoomOption';
 import { useTranslation } from 'next-i18next';
+import i18n from '@/i18n/i18n';
 interface RoomCardResultProps {
   room: RoomAvailable
 }
@@ -13,20 +14,20 @@ const RoomCardResult: React.FC<RoomCardResultProps> = ({ room }) => {
   const [showSlider, setShowSlider] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
   const photos = room.photos || [];
-  const packages =room.room_type_packages||[];
-  
+  const packages = room.room_type_packages || [];
+
   const pathIcon = "/assets/icons";
   const MAX_DISPLAYED_ITEMS = 27;
   const MAX_DISPLAYED_OFFERS = 15;
   const [displayedItems, setDisplayedItems] = useState(MAX_DISPLAYED_ITEMS);
   const [displayedItemOffers, setDisplayedItemOffers] = useState(MAX_DISPLAYED_OFFERS);
+  // const [lang, setLang] = useState('vi');
 
-  const [lang, setLang] = useState('vi');
-
-  useEffect(() => {
-    const savedLanguage = localStorage.getItem('language') || 'vi';
-    setLang(savedLanguage);
-  }, []);
+  // useEffect(() => {
+  //   const savedLanguage = localStorage.getItem('language') || 'vi';
+  //   setLang(savedLanguage);
+  // }, []);
+  const lang = i18n.language
   const handleImageClick = (index: number) => {
     setCurrentImage(index);
     setShowSlider(true);
@@ -64,25 +65,25 @@ const RoomCardResult: React.FC<RoomCardResultProps> = ({ room }) => {
   const displayedOffers = room.room_type_offers?.slice(0, displayedItemOffers);
 
 
- return (
+  return (
     <>
       <h2 className='font-bold text-2xl mt-12 mb-4 pb-2 border-b-2'>{room.title}</h2>
       <div className='flex flex-col md:flex-row '>
         {photos[0] ? (
-          <div className='md:w-1/3 md:h-[200px] pb-2 h-[180px] '>
+          <div className='md:w-1/3 md:h-[200px] pb-2 h-[180px] relative'>
             <Image
               src={photos[0]?.uri_full}
               alt={`Image ${currentImage + 1}`}
-              height={200}
-              width={100}
-              className='w-full h-full cursor-pointer'
+              className=' cursor-pointer'
               onClick={() => handleImageClick(0)}
+              quality={100}
+              fill
             />
             {showSlider && (
-              <div className='fixed top-0 left-0 w-screen h-screen flex  bg-[black]  z-50'>
+              <div className='fixed top-0 left-0 w-screen h-screen flex  bg-[black] z-30'>
                 <div className='relative   w-full h-full overflow-hidden'>
                   <button
-                    className='absolute top-2 right-6  text-white text-3xl cursor-pointer'
+                    className='absolute z-50 top-2 right-6  text-white text-3xl cursor-pointer'
                     onClick={handleCloseSlider}
                   >
                     x
@@ -90,9 +91,8 @@ const RoomCardResult: React.FC<RoomCardResultProps> = ({ room }) => {
                   <Image
                     src={photos[currentImage]?.uri_full}
                     alt={`Image ${currentImage + 1}`}
-                    height={200}
-                    width={100}
-                    className='w-screen h-screen object-fit'
+                    quality={100}
+                    fill
                   />
                   <button
                     className='absolute ml-3 top-1/2 -translate-y-1/2 left-4 text-white text-2xl cursor-pointer'
@@ -213,7 +213,7 @@ const RoomCardResult: React.FC<RoomCardResultProps> = ({ room }) => {
         </div>
         <div>
           <div className='bg-[#636363] p-2 border border-[#636363]'>
-            <span className='text-white'>{t('SEARCH.ROOM_TYPE.ROOM_PRICE_NIGHT',{value: 1})}</span>
+            <span className='text-white'>{t('SEARCH.ROOM_TYPE.ROOM_PRICE_NIGHT', { value: 1 })}</span>
           </div>
           <div className='border h-full border-[#e4e4e4] p-4 items-end'>
             <h2 className='text-[red]'>{room.price_room_total} Đ</h2>
@@ -223,8 +223,8 @@ const RoomCardResult: React.FC<RoomCardResultProps> = ({ room }) => {
 
       {packages[0] && (
         <div className='mt-4'>
-          <h2 className='uppercase mb-4 pb-2'>Ưu đãi đặc biệt</h2>
-          <div className='flex-col md:flex md:flex-wrap'>
+          <h2 className='uppercase mb-4 pb-2'>{t('SEARCH.ROOM_TYPE.SPECIAL_OFFERS')}</h2>
+          <div className='flex flex-col md:flex-row md:flex-wrap'>
             {packages?.map((roomPackage) => (
               <div key={roomPackage.id} className='md:m-w-1/3 md:w-1/3 w-full py-2'>
                 <div className='flex flex-col bg-[#edf5ef] py-6 px-4 mx-2 rounded-md'>
@@ -236,7 +236,7 @@ const RoomCardResult: React.FC<RoomCardResultProps> = ({ room }) => {
                   <div className='flex items-center justify-between flex-wrap'>
                     <div className='font-bold text-xl'>+ {roomPackage.total_price}đ</div>
                     <div>
-                      <a className='uppercase text-[#0a7cff] font-bold'>Thêm</a>
+                      <a className='uppercase text-[#0a7cff] font-bold'>{t('SEARCH.ROOM_TYPE.ADD')}</a>
                     </div>
                   </div>
                 </div>
