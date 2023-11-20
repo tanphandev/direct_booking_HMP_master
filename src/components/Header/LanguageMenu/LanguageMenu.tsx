@@ -20,14 +20,16 @@ function LanguageMenu() {
   /* get default language */
   useEffect(() => {
     const isBrowser = typeof window !== 'undefined';
-    const savedLanguageId = isBrowser ? localStorage.getItem('language') || defaultLanguage.id : defaultLanguage.id;
+    let savedLanguageId = isBrowser && localStorage.getItem('language');
+    if (!savedLanguageId) {
+      savedLanguageId = defaultLanguage?.id || 'en';
+      localStorage.setItem('language', defaultLanguage.id);
+    }
 
-    if (savedLanguageId) {
-      const selectedLanguage = languages.find((item: languageProps) => item.id === savedLanguageId);
-      if (selectedLanguage) {
-        setLanguageValue(selectedLanguage);
-        i18n.changeLanguage(savedLanguageId);
-      }
+    const selectedLanguage = languages.find((item: languageProps) => item.id === savedLanguageId);
+    if (selectedLanguage) {
+      setLanguageValue(selectedLanguage);
+      i18n.changeLanguage(savedLanguageId as string);
     }
   }, []);
 
