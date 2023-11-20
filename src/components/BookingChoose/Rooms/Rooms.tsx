@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { createRef, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { useAppDispatch, useAppSelector } from '@/hooks';
+import { useTranslation } from 'react-i18next';
 
 import CheckIn from '../CheckIn/CheckIn';
 import PersonQuanity from '../PersonQuanity/PersonQuanity';
@@ -15,16 +16,16 @@ import SecondLoading from '@/components/Loading/SecondLoading';
 function Rooms() {
   const { hotel_slug } = useParams();
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
   const { loading } = useLoading([CHECK_COUPON_CODE]);
   const checkInRef = createRef<RangeDate>();
   const { basic_business_info } = useAppSelector((state) => state.business);
   const [couponCode, setCouponCode] = useState<string>('');
 
-
   /* check coupon code */
 
   const handleCheckCouponCode = (code: string) => {
-  const checkIn = checkInRef.current?.startDate;
+    const checkIn = checkInRef.current?.startDate;
     const bodyData = {
       bid: basic_business_info?.bid,
       check_in: getDateFormatTimestamp(checkIn),
@@ -34,9 +35,6 @@ function Rooms() {
     dispatch(checkCouponCode({ bodyData }));
   };
 
-  const handleSearch = (checkin: string, checkout: string)=>{
-    
-  }
   return (
     <div>
       <div>
@@ -47,27 +45,32 @@ function Rooms() {
             value={couponCode}
             onChange={(e) => setCouponCode(e.target.value)}
             className="flex-1 h-full text-grey-21 text-lg rounded-l-md outline-none px-4"
-            placeholder="I have a code"
+            placeholder={t('HOMEPAGE.I_HAVE_CODE')}
           />
           <button
             onClick={() => {
               couponCode && handleCheckCouponCode(couponCode);
             }}
-            className="transition-colors w-[120px] text-white bg-blue-0a hover:bg-blue-09 font-semibold rounded-r-md"
+            className="transition-colors w-[120px] text-white bg-blue-0a hover:bg-blue-09 font-semibold rounded-r-md uppercase"
           >
-            APPLY
+            {t('BOOKING_FORM.SIDEBAR.PROMO_CODE_APPLY')}
           </button>
         </div>
         <div className="flex justify-end">
-
-          <Link href={Path.SEARCH(hotel_slug as string,checkInRef.current?.startDate as string , checkInRef.current?.endDate as string)}>
-            <button className="transition-colors w-[150px] h-[56px] text-base font-bold bg-blue-0a hover:bg-blue-09 rounded-md">
-              NEXT
+          <Link
+            href={Path.SEARCH(
+              hotel_slug as string,
+              checkInRef.current?.startDate as string,
+              checkInRef.current?.endDate as string,
+            )}
+          >
+            <button className="transition-colors w-[150px] h-[56px] text-base font-bold bg-blue-0a hover:bg-blue-09 rounded-md uppercase">
+              {t('HOMEPAGE.NEXT')}
             </button>
           </Link>
         </div>
         {/* show loading when check coupon */}
-        {loading && <SecondLoading  />}
+        {loading && <SecondLoading />}
       </div>
     </div>
   );
