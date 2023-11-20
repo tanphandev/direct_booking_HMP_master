@@ -1,29 +1,29 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import { useOnClickOutside } from '@/hooks/useClickOutSide';
-
-import {  language, languageProps } from '@/types/Language';
+import { useAppSelector } from '@/hooks';
+import i18n from '@/i18n/i18n';
 
 import ArrowDown from '@/assets/icons/ArrowDown';
-import i18n from "@/i18n/i18n";
-
-import { db_languages } from '@/api/mock-data/db_languages'
+import { languageProps } from '@/types/Language';
 
 function LanguageMenu() {
+  const { db_languages: defaultLanguage, db_enable_languages: languages } = useAppSelector(
+    (state) => state.business?.setting,
+  );
   const languageMenuRef = useRef<HTMLUListElement>(null);
-  
   const [languageValue, setLanguageValue] = useState<languageProps>({
-    label: db_languages.title,
-    code: db_languages.id,
+    title: defaultLanguage.title,
+    id: defaultLanguage.id,
   });
-  // localStorage.getItem('language')??localStorage.setItem('language', db_languages.id);
+
+  /* get default language */
   useEffect(() => {
     const isBrowser = typeof window !== 'undefined';
-    const savedLanguage = isBrowser ? localStorage.getItem('language') || db_languages.id : db_languages.id;
-    // const savedLanguage = localStorage.getItem('language') || db_languages.id;
+    const savedLanguageId = isBrowser ? localStorage.getItem('language') || defaultLanguage.id : defaultLanguage.id;
 
-    if (savedLanguage) {
-      const selectedLanguage = language.find(item => item.code === savedLanguage);
+    if (savedLanguageId) {
+      const selectedLanguage = languages.find((item: languageProps) => item.id === savedLanguageId);
       if (selectedLanguage) {
         setLanguageValue(selectedLanguage);
       }
@@ -39,9 +39,8 @@ function LanguageMenu() {
   const handleChangeLanguage = (item: languageProps) => {
     setLanguageValue(item);
     toggleMenu();
-      localStorage.setItem('language', item.code);
-     i18n.changeLanguage(item.code)
-    
+    localStorage.setItem('language', item.id);
+    i18n.changeLanguage(item.id);
   };
   /* Toggle menu */
   const toggleMenu = () => {
@@ -51,14 +50,14 @@ function LanguageMenu() {
   return (
     <div className="relative">
       <div onClick={toggleMenu} className="flex justify-center items-center cursor-pointer">
-        <p className="text-base text-grey-21 font-bold mr-1 uppercase">{languageValue.code}</p>
+        <p className="text-base text-grey-21 font-bold mr-1 uppercase">{languageValue.id}</p>
         <ArrowDown width="24px" height="24px" />
       </div>
       <ul
         ref={languageMenuRef}
         className="hidden absolute top-8 right-0 lg:left-0 w-[112px] bg-white rounded-md shadow-custom_1 py-2"
       >
-        {language.map((item, index) => (
+        {languages.map((item: languageProps, index: number) => (
           <li
             className="transition-colors h-[48px] text-sm px-4 leading-[48px] hover:bg-black-0.1"
             key={index}
@@ -66,7 +65,7 @@ function LanguageMenu() {
               handleChangeLanguage(item);
             }}
           >
-            {item.label}
+            {item?.title}
           </li>
         ))}
       </ul>
@@ -75,13 +74,3 @@ function LanguageMenu() {
 }
 
 export default LanguageMenu;
-
-
-// export const getStaticProps: GetStaticProps<Props> = async ({
-//   locale,
-// }) => ({
-//   props: {
-//     ...(await serverSideTranslations(locale ?? 'en', [
-//     ])),
-//   },
-// })
