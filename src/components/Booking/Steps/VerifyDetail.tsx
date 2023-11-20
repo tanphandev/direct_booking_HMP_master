@@ -1,6 +1,7 @@
 import { useStepContext } from '@/contexts/StepProvider';
 import { useAppDispatch, useAppSelector } from '@/hooks';
 import classNames from 'classnames';
+import { useTranslation } from 'react-i18next';
 import { isEmpty } from 'lodash';
 
 import BookingLayout from '@/layouts/BookingLayout/BookingLayout';
@@ -12,6 +13,7 @@ import { packageCreate } from '@/store/booking/bookingAction';
 import { getDateFormatTimestamp, getDateNowTimestamp } from '@/utils/helper';
 
 export default function VerifyDetail({ currentStep, step }: VerifyDetailProps) {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { bid } = useAppSelector((state) => state.business?.basic_business_info);
   const booking_info = useAppSelector((state) => state.booking?.booking_info);
@@ -72,7 +74,7 @@ export default function VerifyDetail({ currentStep, step }: VerifyDetailProps) {
           <HotelDetail />
           {/* Order Info */}
           <div>
-            <h3 className="font-bold mb-2 mt-6">Your Contact Information:</h3>
+            <h3 className="font-bold mb-2 mt-6">{t('BOOKING_FORM.STEP2.YOUR_CONTACT_INFORMATION')}:</h3>
             <ContactInfo
               name={orderData?.full_name}
               email={orderData?.mail}
@@ -82,7 +84,7 @@ export default function VerifyDetail({ currentStep, step }: VerifyDetailProps) {
           </div>
           {/* Guest info */}
           <div>
-            <h3 className="font-bold mb-2 mt-6">Guest Information:</h3>
+            <h3 className="font-bold mb-2 mt-6">{t('BOOKING_FORM.STEP2.GUEST_INFO')}:</h3>
             {guestData?.map((item: any, index: number) => (
               <ContactInfo
                 key={index}
@@ -96,30 +98,30 @@ export default function VerifyDetail({ currentStep, step }: VerifyDetailProps) {
           {/* Special requirements */}
           {!isEmpty(specialRequire) && (
             <div>
-              <h3 className="font-bold mb-2 mt-6">Special requirements:</h3>
+              <h3 className="font-bold mb-2 mt-6">{t('BOOKING_FORM.ROOMTYPE.SPECIAL_REQUIREMENTS')}:</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 bg-grey-f5 p-4 rounded-sm mb-4">{specialRequire}</div>
             </div>
           )}
           {/* Arrival Plan */}
           {(!isEmpty(arrivalTime?.arrivalAt) || !isEmpty(arrivalTime?.departingFrom) || !isEmpty(arrivalTime?.via)) && (
             <div>
-              <h3 className="font-bold mb-2 mt-6">Arrival Plan:</h3>
+              <h3 className="font-bold mb-2 mt-6">{t('BOOKING_FORM.STEP2.ARRIVAL_PLAN')}:</h3>
               <div className="flex flex-col gap-y-4 bg-grey-f5 p-4 rounded-sm mb-4">
                 {!isEmpty(arrivalTime?.arrivalAt) && (
                   <div>
-                    <p>Arrival at</p>
+                    <p>{t('BOOKING_FORM.STEP2.ARRIVAL_AT')}</p>
                     <p className="text-base font-bold">{arrivalTime?.arrivalAt}</p>
                   </div>
                 )}
                 {!isEmpty(arrivalTime?.departingFrom) && (
                   <div>
-                    <p>Departing from</p>
+                    <p>{t('BOOKING_FORM.STEP2.DEPARTING_FROM')}</p>
                     <p className="text-base font-bold">{arrivalTime?.departingFrom}</p>
                   </div>
                 )}
                 {!isEmpty(arrivalTime?.via) && (
                   <div>
-                    <p>Via</p>
+                    <p>{t('BOOKING_FORM.STEP2.VIA')}</p>
                     <p className="text-base font-bold">{arrivalTime?.via}</p>
                   </div>
                 )}

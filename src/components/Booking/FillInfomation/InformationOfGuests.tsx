@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import GuestInformation from './GuestInformation';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   guestFormRef: any;
@@ -8,6 +9,7 @@ type Props = {
 };
 
 function InformationOfGuests({ guestFormRef, addtionalGuestFormRef, handleUseOrderData }: Props) {
+  const { t } = useTranslation();
   const [moreGuest, setMoreGuest] = useState<boolean>(false);
   return (
     <div>
@@ -32,7 +34,7 @@ function InformationOfGuests({ guestFormRef, addtionalGuestFormRef, handleUseOrd
             }}
             className="primary-button h-9 text-sm"
           >
-            + Add more
+            + {t('BOOKING_FORM.STEP1.ADD_MORE')}
           </button>
         </div>
       )}

@@ -79,7 +79,7 @@ const AdditionalInformation = forwardRef<BookForRef, Props>(function Component({
             className="cursor-pointer"
           />
           <label htmlFor="choose-2">
-            <p>I am booking this stay for someone else</p>
+            <p>{t('BOOKING_FORM.STEP1.BOOK_FOR_OTHER')}</p>
           </label>
         </div>
         <div className="flex gap-x-2">
@@ -94,7 +94,7 @@ const AdditionalInformation = forwardRef<BookForRef, Props>(function Component({
             className="cursor-pointer"
           />
           <label htmlFor="choose-3">
-            <p>Other</p>
+            <p>{t('BOOKING_FORM.STEP1.BOOK_OTHER')}</p>
           </label>
         </div>
       </div>

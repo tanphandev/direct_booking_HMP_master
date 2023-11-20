@@ -1,11 +1,13 @@
 import { ChangeEvent, forwardRef, useImperativeHandle, useRef, useState } from 'react';
 import { auto_grow } from '@/utils/helper';
+import { useTranslation } from 'react-i18next';
 
 export type SpecialRequireRefType = {
   value: string | undefined;
 };
 
 const SpecialRequire = forwardRef<SpecialRequireRefType, {}>(function Component({}, ref) {
+  const { t } = useTranslation();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [textareaInput, setTextareaInput] = useState<string>('');
   const [addRequest, setAddRequest] = useState<boolean>(false);
@@ -14,7 +16,7 @@ const SpecialRequire = forwardRef<SpecialRequireRefType, {}>(function Component(
   }));
   return (
     <div className="mt-4">
-      <p className="text-base text-grey-21 font-bold mb-2">Special requirements</p>
+      <p className="text-base text-grey-21 font-bold mb-2">{t('BOOKING_FORM.ROOMTYPE.SPECIAL_REQUIREMENTS')}</p>
       {addRequest ? (
         <div className="transition-all border-[1px] border-grey-21 focus-within:border-2 rounded-md pt-4 pb-3 mb-7 mt-4">
           <textarea
@@ -30,7 +32,7 @@ const SpecialRequire = forwardRef<SpecialRequireRefType, {}>(function Component(
         </div>
       ) : (
         <button onClick={() => setAddRequest(true)} className="text-sm primary-button h-9">
-          + Add request
+          + {t('BOOKING_FORM.ROOMTYPE.ADD_REQUEST')}
         </button>
       )}
     </div>

@@ -120,7 +120,7 @@ function OrderInfomation() {
           }}
           className="primary-button h-9 rounded-md"
         >
-          Next
+          {t('BOOKING_FORM.STEP1.NEXT_STEP')}
         </button>
       </div>
     </div>

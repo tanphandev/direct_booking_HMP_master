@@ -1,5 +1,6 @@
 'use client';
 import Image from 'next/image';
+import { useTranslation } from 'react-i18next';
 
 import NavFooter from './NavFooter/NavFooter';
 import AbaPay from '@/../public/assets/image/aba-pay.svg';
@@ -11,6 +12,7 @@ import JcbPay from '@/../public/assets/image/JCB_logo.png';
 import { useAppSelector } from '@/hooks';
 
 function Footer() {
+  const { t } = useTranslation();
   const { setting } = useAppSelector((state) => state.business);
   return (
     <div>
@@ -25,7 +27,7 @@ function Footer() {
         <NavFooter />
       </div>
       <div className="flex justify-end items-center bg-grey-2a py-5 px-8">
-        <p className="text-white text-sm mr-2">We accept:</p>
+        <p className="text-white text-sm mr-2">{t('FOOTER.WE_ACCEPT')}:</p>
         <Image className="mx-1" src={AbaPay} width={40} height={24} alt="aba_pay" />
         <Image className="mx-1" src={Khqr} width={40} height={24} alt="khqr_pay" />
         <Image className="mx-1" src={Visa} width={40} height={24} alt="visa_pay" />

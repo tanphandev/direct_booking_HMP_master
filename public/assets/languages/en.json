@@ -17,6 +17,7 @@
     "ROOMS": "Rooms",
     "SEARCH": "Search",
     "NEXT": "Next",
+    "BACK": "Back",
     "CANCEL": "Cancel",
     "I_HAVE_CODE": "I have a code",
     "PACKAGE": "Package",
@@ -113,6 +114,7 @@
       "PLEASE_ENTER_GUEST_INFORMATION_TO_CONTINUES": "Please enter the Guest Information to continue!",
       "PLEASE_ENTER_OTHER_CONTENT_TO_CONTINUES": "Please enter the \"{{value}}\" field content to continue!",
       "CONFIRMATION": "CONFIRMATION",
+      "ADD_MORE": "Add more",
       "CANCEL": "Cancel",
       "TEXT_CONFIRM_LEAVE": "You have an unfinished booking. Are you sure you want to cancel?"
     },

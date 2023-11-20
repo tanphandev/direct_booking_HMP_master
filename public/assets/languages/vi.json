@@ -17,6 +17,7 @@
     "ROOMS": "Phòng",
     "SEARCH": "Tìm kiếm",
     "NEXT": "kế tiếp",
+    "BACK": "Quay lại",
     "CANCEL": "Huỷ bỏ",
     "I_HAVE_CODE": "Tôi có mã giảm giá",
     "PACKAGE": "Gói hàng",
@@ -113,6 +114,7 @@
       "PLEASE_ENTER_GUEST_INFORMATION_TO_CONTINUES": "Vui lòng nhập thông tin hành khách!",
       "PLEASE_ENTER_OTHER_CONTENT_TO_CONTINUES": "Vui lòng nhập nội dung của \"{{value}}\"!",
       "CONFIRMATION": "XÁC NHẬN",
+      "ADD_MORE": "Thêm",
       "CANCEL": "Hủy",
       "TEXT_CONFIRM_LEAVE": "Bạn có một đặt chỗ chưa hoàn thành. Bạn có chắc chắn muốn hủy không?"
     },
