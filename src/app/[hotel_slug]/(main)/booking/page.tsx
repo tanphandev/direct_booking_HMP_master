@@ -1,6 +1,11 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useAppSelector } from '@/hooks';
+import { useParams, useRouter } from 'next/navigation';
 import { StepProvider } from '@/contexts/StepProvider';
+import Path from '@/routes/Path';
+import { isEmpty } from 'lodash';
+import { toast } from 'react-toastify';
 
 import Stepper from '@/components/Booking/Stepper/Stepper';
 import FillInfo from '@/components/Booking/Steps/FillInfo';
@@ -14,6 +19,9 @@ export type CurrentStepType = {
 };
 
 function BookingPage() {
+  const router = useRouter();
+  const { hotel_slug } = useParams();
+  const { booking_info, your_booking_price } = useAppSelector((state) => state.booking);
   const [currentStep, setCurrentStep] = useState<CurrentStepType>({
     stepNumber: 1,
     type: null,
@@ -21,6 +29,12 @@ function BookingPage() {
 
   const steps: string[] = ['Fill out your information', 'Verify details', 'Confirm reservation'];
 
+  useEffect(() => {
+    if (isEmpty(booking_info) || isEmpty(your_booking_price)) {
+      router.push(Path.HOME(hotel_slug as string));
+      toast.info('Your session has expired. Redirecting to the Home page...');
+    }
+  }, [router]);
   // const displayStep = (step: number) => {
   //   switch (step) {
   //     case 1:

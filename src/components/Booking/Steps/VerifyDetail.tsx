@@ -14,18 +14,18 @@ import { getDateFormatTimestamp, getDateNowTimestamp } from '@/utils/helper';
 export default function VerifyDetail({ currentStep, step }: VerifyDetailProps) {
   const dispatch = useAppDispatch();
   const { bid } = useAppSelector((state) => state.business?.basic_business_info);
-  const { check_in, check_out, adults, child, packageChose } = useAppSelector((state) => state.booking?.booking_info);
+  const booking_info = useAppSelector((state) => state.booking?.booking_info);
   const { orderData, guestData, forSomeOne, forOther, viaTravelX, bookFor, specialRequire, arrivalTime, handleClick } =
     useStepContext();
   const handlePayAtHotel = () => {
     /* body data base */
     const bodyData: PackageCreate = {
       bid,
-      pid: packageChose?.pid,
-      check_in: getDateFormatTimestamp(check_in),
-      check_out: getDateFormatTimestamp(check_out),
-      adults: adults,
-      child: child,
+      pid: booking_info?.packageChose?.pid,
+      check_in: getDateFormatTimestamp(booking_info?.check_in),
+      check_out: getDateFormatTimestamp(booking_info?.check_out),
+      adults: booking_info?.adults,
+      child: booking_info?.child,
       client_info: {
         ...orderData,
         book_for: bookFor,
