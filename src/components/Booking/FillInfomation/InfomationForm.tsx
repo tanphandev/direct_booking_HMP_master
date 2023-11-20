@@ -1,5 +1,6 @@
 import { useFormik } from 'formik';
 import { forwardRef, useImperativeHandle } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import InputField from '@/components/common/InputField/InputField';
 import CountriesAutocomplete from '@/components/common/AutoComplete/CountriesAutocomplete';
@@ -12,6 +13,7 @@ type Props = {
 };
 
 const InformationForm = forwardRef<any, Props>(function Component({ type }, ref) {
+  const { t } = useTranslation();
   const formik = useFormik({
     initialValues: {
       full_name: '',
@@ -36,8 +38,8 @@ const InformationForm = forwardRef<any, Props>(function Component({ type }, ref)
           isRequire={true}
           id="order-fullname"
           name="full_name"
-          label="Full Name"
-          placeHolder="John Doe"
+          label={t('BOOKING_FORM.USER_INPUT_FORM.NAME_TITLE')}
+          placeHolder={t('BOOKING_FORM.USER_INPUT_FORM.NAME_PLACEHOLDER')}
           value={formik.values.full_name}
           formik={formik}
         />
@@ -47,18 +49,18 @@ const InformationForm = forwardRef<any, Props>(function Component({ type }, ref)
           isRequire={type === 'order' ? true : false}
           id="order-email"
           name="mail"
-          label="Email"
-          placeHolder="johndoe@example.com"
+          label={t('BOOKING_FORM.USER_INPUT_FORM.EMAIL_TITLE')}
+          placeHolder={t('BOOKING_FORM.USER_INPUT_FORM.EMAIL_PLACEHOLDER')}
           value={formik.values.mail}
           formik={formik}
         />
         <div className="flex flex-col">
           <label className="mb-2">
-            Phone Number
+            {t('BOOKING_FORM.USER_INPUT_FORM.PHONE_TITLE')}
             {type === 'order' ? (
               <span className="text-red ml-1">*</span>
             ) : (
-              <span className="text-grey-99 ml-1">(optional)</span>
+              <span className="text-grey-99 ml-1">{`(${t('BOOKING_FORM.USER_INPUT_FORM.OPTIONAL')})`}</span>
             )}
           </label>
           <div>

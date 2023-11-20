@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { countries as Countries } from 'countries-list';
 import { TCountryCode } from 'countries-list';
+import { useTranslation } from 'react-i18next';
 
 import Autocomplete from './Autocomplete';
 
@@ -12,6 +13,7 @@ type Props = {
 };
 
 const CountriesAutocomplete = ({ isRequire, name, value, formik }: Props) => {
+  const { t } = useTranslation();
   /* get country names  */
   const countryNames = useMemo(() => {
     const countryCodes = Object.keys(Countries) as TCountryCode[];
@@ -36,7 +38,7 @@ const CountriesAutocomplete = ({ isRequire, name, value, formik }: Props) => {
   return (
     <div className="flex flex-col">
       <label className={'text-base text-grey-21 mb-2'} htmlFor="countries-input">
-        Country/region of residence
+        {t('BOOKING_FORM.USER_INPUT_FORM.COUNTRY_TITLE')}
         {isRequire && <span className="text-red ml-1">*</span>}
       </label>
       <Autocomplete

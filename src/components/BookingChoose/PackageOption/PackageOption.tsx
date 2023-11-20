@@ -1,6 +1,7 @@
 import { useCallback, useRef, useState } from 'react';
 import { ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu';
 import { useAppSelector } from '@/hooks';
+import { useTranslation } from 'react-i18next';
 
 import PackageItemDetail from './PackageItemDetail';
 import { LeftArrow, RightArrow } from './Arrow';
@@ -8,6 +9,7 @@ import 'react-horizontal-scrolling-menu/dist/styles.css';
 
 type scrollVisibilityApiType = React.ContextType<typeof VisibilityContext>;
 function PackageOption({ packageChose, setIsChoosePackage, setPackageChose }: PackageProps) {
+  const { t } = useTranslation();
   const booking_packages: PackageDetail[] = useAppSelector((state) => state.booking.booking_packages);
   const [position, setPosition] = useState(0);
   const [selected, setSelected] = useState<number[]>([]);
@@ -72,11 +74,11 @@ function PackageOption({ packageChose, setIsChoosePackage, setPackageChose }: Pa
           onClick={() => {
             packageChose && GotoReviewPackage();
           }}
-          className={`transition-all w-[150px] h-[56px] text-white bg-grey-6c font-bold rounded-md opacity-60 ${
+          className={`transition-all w-[150px] h-[56px] text-white bg-grey-6c font-bold rounded-md opacity-60 uppercase ${
             packageChose ? '!bg-blue-0a !opacity-100 hover:!bg-blue-09' : 'cursor-not-allowed'
           }`}
         >
-          Next
+          {t('HOMEPAGE.NEXT')}
         </button>
       </div>
     </div>

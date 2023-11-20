@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useAppSelector } from '@/hooks';
 import { useParams, useRouter } from 'next/navigation';
+import { useTranslation } from 'react-i18next';
 import { StepProvider } from '@/contexts/StepProvider';
 import Path from '@/routes/Path';
 import { isEmpty } from 'lodash';
@@ -19,6 +20,7 @@ export type CurrentStepType = {
 };
 
 function BookingPage() {
+  const { t } = useTranslation();
   const router = useRouter();
   const { hotel_slug } = useParams();
   const { booking_info, your_booking_price } = useAppSelector((state) => state.booking);
@@ -27,7 +29,11 @@ function BookingPage() {
     type: null,
   });
 
-  const steps: string[] = ['Fill out your information', 'Verify details', 'Confirm reservation'];
+  const steps: string[] = [
+    t('BOOKING_FORM.STEP1.STEPPER_TITLE'),
+    t('BOOKING_FORM.STEP2.STEPPER_TITLE'),
+    t('BOOKING_FORM.STEP3.STEPPER_TITLE'),
+  ];
 
   useEffect(() => {
     if (isEmpty(booking_info) || isEmpty(your_booking_price)) {
