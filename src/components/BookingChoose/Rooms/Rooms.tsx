@@ -1,24 +1,28 @@
 import Link from 'next/link';
-import { createRef, useState } from 'react';
-import { useParams } from 'next/navigation';
+import { createRef, useRef, useState } from 'react';
+import { useParams, useRouter } from 'next/navigation';
 import { useAppDispatch, useAppSelector } from '@/hooks';
 import { useTranslation } from 'react-i18next';
 
 import CheckIn from '../CheckIn/CheckIn';
-import PersonQuanity from '../PersonQuanity/PersonQuanity';
+import PersonQuanity, { PersonQuanityRefProps } from '../PersonQuanity/PersonQuanity';
 import Path from '@/routes/Path';
 import { getDateFormatTimestamp, getDateNowTimestamp } from '@/utils/helper';
 import { checkCouponCode } from '@/store/business/businessAction';
 import { useLoading } from '@/hooks/useLoading';
 import { CHECK_COUPON_CODE } from '@/store/common/constants';
 import SecondLoading from '@/components/Loading/SecondLoading';
+import { getPublicRoomAvailable } from '@/store/room/roomAction';
+import { toast } from 'react-toastify';
 
 function Rooms() {
   const { hotel_slug } = useParams();
+  const router = useRouter();
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const { loading } = useLoading([CHECK_COUPON_CODE]);
   const checkInRef = createRef<RangeDate>();
+  const personQuantityRef = useRef<PersonQuanityRefProps>(null);
   const { basic_business_info } = useAppSelector((state) => state.business);
   const [couponCode, setCouponCode] = useState<string>('');
 
@@ -35,6 +39,20 @@ function Rooms() {
     dispatch(checkCouponCode({ bodyData }));
   };
 
+  const handleLoadRoomAvailable = ()=>{
+    const isValid = checkInRef.current && checkInRef.current.isValid;
+    const bid = basic_business_info.bid;
+    const check_in = checkInRef.current && checkInRef.current.startDate;
+    const check_out = checkInRef.current && checkInRef.current.endDate;
+    const adults = personQuantityRef.current?.adults&&2;
+    const child = personQuantityRef.current?.child&&0;
+    const datecreated = getDateNowTimestamp()
+    isValid
+    ? dispatch(getPublicRoomAvailable({ bid, check_in, check_out,adults,child,datecreated,hotel_slug,router}))
+    : toast.error('Check-In Check-Out is invalid');
+
+
+  }
   return (
     <div>
       <div>
@@ -57,17 +75,14 @@ function Rooms() {
           </button>
         </div>
         <div className="flex justify-end">
-          <Link
-            href={Path.SEARCH(
-              hotel_slug as string,
-              checkInRef.current?.startDate as string,
-              checkInRef.current?.endDate as string,
-            )}
-          >
-            <button className="transition-colors w-[150px] h-[56px] text-base font-bold bg-blue-0a hover:bg-blue-09 rounded-md uppercase">
-              {t('HOMEPAGE.NEXT')}
+          {/* <Link href={Path.SEARCH(hotel_slug as string)}>
+            <button className="transition-colors w-[150px] h-[56px] text-base font-bold bg-blue-0a hover:bg-blue-09 rounded-md">
+              NEXT
             </button>
-          </Link>
+          </Link> */}
+          <button onClick={handleLoadRoomAvailable} className="transition-colors w-[150px] h-[56px] text-base font-bold bg-blue-0a hover:bg-blue-09 rounded-md">
+              NEXT
+            </button>
         </div>
         {/* show loading when check coupon */}
         {loading && <SecondLoading />}

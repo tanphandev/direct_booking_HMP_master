@@ -1,12 +1,15 @@
 'use client'
 import { business_pf } from "@/api/mock-data/facilities";
 import { useTranslation } from "next-i18next";
+import { useAppSelector } from "@/hooks";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { db_languages } from '@/api/mock-data/db_languages'
 
 
 const ListFacilities = () => {
+  const business_pf: business_pf[] = useAppSelector((state) => state.business.business_pf);
+    
   const { t } = useTranslation();
   const [lang, setLang] = useState('vi');
 
