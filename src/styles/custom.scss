@@ -17,3 +17,11 @@
 .react-horizontal-scrolling-menu--arrow-right {
   @apply hidden md:flex md:items-center #{!important};
 }
+
+.back-step-type {
+  @apply animate-slipRightToLeft;
+}
+
+.next-step-type {
+  // @apply animate-slipLeftToRight;
+}

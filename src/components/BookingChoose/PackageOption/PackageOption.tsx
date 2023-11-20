@@ -1,5 +1,7 @@
 import { useCallback, useRef, useState } from 'react';
 import { ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu';
+import { useAppSelector } from '@/hooks';
+import { useTranslation } from 'react-i18next';
 
 import PackageItemDetail from './PackageItemDetail';
 import { LeftArrow, RightArrow } from './Arrow';
@@ -7,129 +9,8 @@ import 'react-horizontal-scrolling-menu/dist/styles.css';
 
 type scrollVisibilityApiType = React.ContextType<typeof VisibilityContext>;
 function PackageOption({ packageChose, setIsChoosePackage, setPackageChose }: PackageProps) {
-  //mock data
-  const packages: PackageDetail[] = [
-    {
-      name: 'Package 1',
-      detail: {
-        duration: '3 days, 2 nights',
-        max_adult: 3,
-        max_children: 3,
-        adult_price: '1,000.00',
-        child_price: '800.00',
-        signle_price: '1,300.00',
-        description: 'description',
-      },
-    },
-    {
-      name: 'Package 2',
-      detail: {
-        duration: '3 days, 2 nights',
-        max_adult: 3,
-        max_children: 3,
-        adult_price: '1,000.00',
-        child_price: '800.00',
-        signle_price: '1,300.00',
-        description: 'description',
-      },
-    },
-    {
-      name: 'Package 3',
-      detail: {
-        duration: '3 days, 2 nights',
-        max_adult: 3,
-        max_children: 3,
-        adult_price: '1,000.00',
-        child_price: '800.00',
-        signle_price: '1,300.00',
-        description: 'description',
-      },
-    },
-    {
-      name: 'Package 4',
-      detail: {
-        duration: '3 days, 2 nights',
-        max_adult: 3,
-        max_children: 3,
-        adult_price: '1,000.00',
-        child_price: '800.00',
-        signle_price: '1,300.00',
-        description: 'description',
-      },
-    },
-    {
-      name: 'Package 5',
-      detail: {
-        duration: '3 days, 2 nights',
-        max_adult: 3,
-        max_children: 3,
-        adult_price: '1,000.00',
-        child_price: '800.00',
-        signle_price: '1,300.00',
-        description: 'description',
-      },
-    },
-    {
-      name: 'Package 6',
-      detail: {
-        duration: '3 days, 2 nights',
-        max_adult: 3,
-        max_children: 3,
-        adult_price: '1,000.00',
-        child_price: '800.00',
-        signle_price: '1,300.00',
-        description: 'description',
-      },
-    },
-    {
-      name: 'Package 7',
-      detail: {
-        duration: '3 days, 2 nights',
-        max_adult: 3,
-        max_children: 3,
-        adult_price: '1,000.00',
-        child_price: '800.00',
-        signle_price: '1,300.00',
-        description: 'description',
-      },
-    },
-    {
-      name: 'Package 8',
-      detail: {
-        duration: '3 days, 2 nights',
-        max_adult: 3,
-        max_children: 3,
-        adult_price: '1,000.00',
-        child_price: '800.00',
-        signle_price: '1,300.00',
-        description: 'description',
-      },
-    },
-    {
-      name: 'Package 9',
-      detail: {
-        duration: '3 days, 2 nights',
-        max_adult: 3,
-        max_children: 3,
-        adult_price: '1,000.00',
-        child_price: '800.00',
-        signle_price: '1,300.00',
-        description: 'description',
-      },
-    },
-    {
-      name: 'Package 10',
-      detail: {
-        duration: '3 days, 2 nights',
-        max_adult: 3,
-        max_children: 3,
-        adult_price: '1,000.00',
-        child_price: '800.00',
-        signle_price: '1,300.00',
-        description: 'description',
-      },
-    },
-  ];
+  const { t } = useTranslation();
+  const booking_packages: PackageDetail[] = useAppSelector((state) => state.booking.booking_packages);
   const [position, setPosition] = useState(0);
   const [selected, setSelected] = useState<number[]>([]);
   const isItemSelected = (id: number) => !!selected.find((el) => el === id);
@@ -171,17 +52,16 @@ function PackageOption({ packageChose, setIsChoosePackage, setPackageChose }: Pa
     setIsChoosePackage && setIsChoosePackage(true);
   };
   const wapperRef = useRef<HTMLDivElement>(null);
-  console.log('wapperRef', wapperRef.current?.clientWidth);
   return (
     <div>
       <div ref={wapperRef} className="rounded-md md:mx-[-56px] text-grey-21 mb-2">
         <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow} onInit={restorePosition} onScroll={savePosition}>
-          {packages.map((packageItem, index) => (
+          {booking_packages.map((packageItem, index) => (
             <PackageItemDetail
               key={index}
               margin="0 8px"
-              className="w-[382px]"
-              isActive={packageItem.name === packageChose?.name}
+              className="w-[382px] h-full"
+              isActive={packageItem.pid === packageChose?.pid}
               packageDetail={packageItem}
               handleChoosePackage={handleChoosePackage}
               handleClickItem={handleClickItem}
@@ -194,11 +74,11 @@ function PackageOption({ packageChose, setIsChoosePackage, setPackageChose }: Pa
           onClick={() => {
             packageChose && GotoReviewPackage();
           }}
-          className={`transition-all w-[150px] h-[56px] text-white bg-grey-6c font-bold rounded-md opacity-60 ${
+          className={`transition-all w-[150px] h-[56px] text-white bg-grey-6c font-bold rounded-md opacity-60 uppercase ${
             packageChose ? '!bg-blue-0a !opacity-100 hover:!bg-blue-09' : 'cursor-not-allowed'
           }`}
         >
-          Next
+          {t('HOMEPAGE.NEXT')}
         </button>
       </div>
     </div>

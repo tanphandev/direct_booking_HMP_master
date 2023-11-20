@@ -8,16 +8,27 @@ interface PackageProps {
 }
 
 interface PackageDetail {
-  name: string;
-  detail: {
-    duration: string;
-    max_adult: number;
-    max_children: number;
-    adult_price: string;
-    child_price: string;
-    signle_price: string;
-    description: string;
-  };
+  pid: string;
+  uid: string;
+  title: string;
+  type: string;
+  packages_night_stay: number;
+  db_max_adult: number;
+  db_max_children: number;
+  packages_adult_rate: number;
+  packages_child_rate: number;
+  packages_single_rate: number;
+  packages_note: string;
+  packages_room_type: Array<{
+    entity_id: number;
+    title: string;
+  }>;
+  packages_days: Array<{
+    activities: Array<{
+      type: string;
+      title: string;
+    }>;
+  }>;
 }
 
 // =========================== PERSON QUANTITY TYPE =========================== //
@@ -38,18 +49,27 @@ interface PersonQuantityPopperProps extends AdultProps, ChildProps {}
 
 interface SchelduleProps {
   day: string;
-  transfer?: string;
-  excursion?: string;
-  FAndB?: string;
+  activities: any[];
 }
 
 interface DateProps {
   title: string;
-  date: any;
+  date: Date;
   time: string;
   mb?: string;
   bgColor?: string;
 }
+
+// =================================== STEP =================================== //
+
+interface Step {
+  currentStep: any;
+  step: number;
+}
+
+interface FillInfoProp extends Step {}
+interface VerifyDetailProps extends Step {}
+interface ConfirmReservationProps extends Step {}
 
 // ============================== FILL INFOMATION ============================= //
 
@@ -57,4 +77,22 @@ interface GuestInformationProps {
   inputId: string;
   isReuseOrderData?: boolean;
   guestFormRef?: any;
+  handleUseOrderData?: Function;
+}
+interface ArrivalTimeType {
+  arrivalAt: string;
+  departingFrom: string;
+  via: string;
+}
+
+interface PersonInformation {
+  full_name: string;
+  mail: string;
+  phone_number: string;
+  country: string;
+}
+
+// ================================= PAYMENTS ================================= //
+interface PaymentProps {
+  handlePayAtHotel: Function;
 }

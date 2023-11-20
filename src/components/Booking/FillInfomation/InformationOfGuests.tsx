@@ -1,18 +1,31 @@
 import { useState } from 'react';
 import GuestInformation from './GuestInformation';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   guestFormRef: any;
   addtionalGuestFormRef?: any;
+  handleUseOrderData: Function;
 };
 
-function InformationOfGuests({ guestFormRef, addtionalGuestFormRef }: Props) {
+function InformationOfGuests({ guestFormRef, addtionalGuestFormRef, handleUseOrderData }: Props) {
+  const { t } = useTranslation();
   const [moreGuest, setMoreGuest] = useState<boolean>(false);
   return (
     <div>
-      <GuestInformation inputId="guest-info-1" guestFormRef={guestFormRef} isReuseOrderData={true} />
+      <GuestInformation
+        handleUseOrderData={handleUseOrderData}
+        inputId="guest-info-1"
+        guestFormRef={guestFormRef}
+        isReuseOrderData={true}
+      />
       {moreGuest ? (
-        <GuestInformation inputId="guset-info-2" guestFormRef={addtionalGuestFormRef} isReuseOrderData={true} />
+        <GuestInformation
+          handleUseOrderData={handleUseOrderData}
+          inputId="guset-info-2"
+          guestFormRef={addtionalGuestFormRef}
+          isReuseOrderData={true}
+        />
       ) : (
         <div className="text-end">
           <button
@@ -21,7 +34,7 @@ function InformationOfGuests({ guestFormRef, addtionalGuestFormRef }: Props) {
             }}
             className="primary-button h-9 text-sm"
           >
-            + Add more
+            + {t('BOOKING_FORM.STEP1.ADD_MORE')}
           </button>
         </div>
       )}

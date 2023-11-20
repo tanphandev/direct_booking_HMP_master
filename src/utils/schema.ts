@@ -10,14 +10,14 @@ export const ERROR = {
 
 export const ORDER_INFO_SCHEMA = () =>
   yup.object().shape({
-    fullName: yup.string().required(ERROR.required),
-    email: yup.string().required(ERROR.required).email(ERROR.isEmail),
-    phone: yup.string().required(ERROR.required),
+    full_name: yup.string().required(ERROR.required),
+    mail: yup.string().required(ERROR.required).email(ERROR.isEmail),
+    phone_number: yup.string().required(ERROR.required),
     country: yup.string().required(ERROR.required),
   });
 
 export const GUEST_INFO_SCHEMA = () =>
   yup.object().shape({
-    fullName: yup.string().required(ERROR.required),
+    full_name: yup.string().required(ERROR.required),
     country: yup.string().required(ERROR.required),
   });

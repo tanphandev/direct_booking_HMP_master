@@ -1,8 +1,12 @@
 import { useContext } from 'react';
 import { useModalContext } from '@/contexts/ModalProvider';
+import { useAppSelector } from '@/hooks';
 
 import { VisibilityContext } from 'react-horizontal-scrolling-menu';
 import { MODAL_NAME } from '@/types/modal';
+import { HANDLE_STATUS } from '@/types/handle';
+import { useTranslation } from 'next-i18next';
+import { formatCurrency } from '@/utils/helper';
 
 type PackageItemDetail = {
   width?: string;
@@ -16,8 +20,6 @@ type PackageItemDetail = {
   handleClickItem?: Function;
 };
 function PackageItemDetail({
-  width,
-  height,
   className,
   padding,
   margin,
@@ -26,12 +28,17 @@ function PackageItemDetail({
   handleClickItem,
   handleChoosePackage,
 }: PackageItemDetail) {
-  const { openModal, closeModalWithAnimation } = useModalContext();
+  const { t } = useTranslation();
+  const { business_currency } = useAppSelector((state) => state.business.basic_business_info);
+  const { openModal, setStatus, setPayload } = useModalContext();
   const visibility = useContext(VisibilityContext);
 
   const showPackageDetail = () => {
+    setStatus(HANDLE_STATUS.IN_PROGRESS);
+    setPayload(packageDetail);
     openModal(MODAL_NAME.PACKAGE_DETAIL);
   };
+
   return (
     <div
       style={{
@@ -47,18 +54,35 @@ function PackageItemDetail({
       } p-4`}
     >
       <div>
-        <h3 className="font-bold text-center">{packageDetail.name}</h3>
-        <p className="font-bold">Duration: {packageDetail.detail.duration}</p>
-        <p className="font-bold">Max Adult: {packageDetail.detail.max_adult}</p>
-        <p className="font-bold">Max Children: {packageDetail.detail.max_children}</p>
-        <p className="font-bold">Adult Price: {packageDetail.detail.adult_price}</p>
-        <p className="font-bold">Child Price: {packageDetail.detail.child_price}</p>
-        <p className="font-bold">Signle Price: {packageDetail.detail.signle_price}</p>
-        <p>{packageDetail.detail.description}</p>
+        <h3 className="font-bold text-center line-clamp-2">{packageDetail.title}</h3>
+        <p className="font-bold">
+          {t('HOMEPAGE.DURATION')}: {packageDetail.packages_night_stay + 1}{' '}
+          {packageDetail.packages_night_stay + 1 <= 1 ? t('BOOKING_FORM.SIDEBAR.DAY') : t('BOOKING_FORM.SIDEBAR.DAYS')},{' '}
+          {packageDetail.packages_night_stay}{' '}
+          {packageDetail.packages_night_stay <= 1 ? t('BOOKING_FORM.SIDEBAR.NIGHT') : t('BOOKING_FORM.SIDEBAR.NIGHTS')}
+        </p>
+        <p className="font-bold">
+          {t('HOMEPAGE.MAX_ADULT')}: {packageDetail.db_max_adult}
+        </p>
+        <p className="font-bold">
+          {t('HOMEPAGE.MAX_CHILDREN')}: {packageDetail.db_max_children}
+        </p>
+        <p className="font-bold">
+          {t('HOMEPAGE.ADULT')} {t('HOMEPAGE.PRICE')}:{' '}
+          {formatCurrency(business_currency).format(packageDetail.packages_adult_rate)}
+        </p>
+        <p className="font-bold">
+          {t('HOMEPAGE.CHILD')} {t('HOMEPAGE.PRICE')}:{' '}
+          {formatCurrency(business_currency).format(packageDetail.packages_child_rate)}
+        </p>
+        <p className="font-bold">
+          {t('HOMEPAGE.SINGLE_PRICE')}: {formatCurrency(business_currency).format(packageDetail.packages_single_rate)}
+        </p>
+        <p className="line-clamp-2">{packageDetail.packages_note}</p>
       </div>
       <div className="w-full text-end">
         <button onClick={showPackageDetail} className=" hover:text-grey-21 underline">
-          More details
+          {t('HOMEPAGE.MORE_DETAILS')}
         </button>
       </div>
     </div>

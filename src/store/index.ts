@@ -12,11 +12,11 @@ const store = configureStore({
   middleware: (getDefaultMiddleware) => [
     ...getDefaultMiddleware({
       thunk: false,
-      serializableCheck: false
+      serializableCheck: false,
     }),
-    sagaMiddleware
+    sagaMiddleware,
   ],
-  devTools: config.ENV !== 'production' // Enable Redux DevTools in development
+  devTools: config.ENV !== 'prod', // Enable Redux DevTools in development
 });
 
 // then run the saga

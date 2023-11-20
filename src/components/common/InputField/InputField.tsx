@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 function InputField({
   label,
   id,
@@ -9,11 +11,16 @@ function InputField({
   labelClassName,
   inputClassName,
 }: InputFieldProps) {
+  const { t } = useTranslation();
   return (
     <div className="flex flex-col">
       <label className={`${labelClassName}`} htmlFor={id}>
         {label}
-        {isRequire ? <span className="text-red ml-1">*</span> : <span className="text-grey-99 ml-1">(optional)</span>}
+        {isRequire ? (
+          <span className="text-red ml-1">*</span>
+        ) : (
+          <span className="text-grey-99 ml-1">{`(${t('BOOKING_FORM.USER_INPUT_FORM.OPTIONAL')})`}</span>
+        )}
       </label>
       <input
         name={name}

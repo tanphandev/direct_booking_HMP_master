@@ -1,4 +1,5 @@
 interface TabProps {
-  label: string;
-  component: React.ReactElement;
+  id: string;
+  title: string;
+  component?: React.ReactElement;
 }

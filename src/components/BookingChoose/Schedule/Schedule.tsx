@@ -1,32 +1,28 @@
 import ScheduleItem from './ScheduleItem';
 
 export type scheduleItemProps = {
-  title: string;
+  type: string;
   content: string;
+  pickUpTime?: string;
 };
 
-// mockdata
-const schedules: scheduleItemProps[] = [
-  {
-    title: 'Transder',
-    content: 'Suratthani Town/Aiport/Train Station/Bus Station Pick up time 09:00',
-  },
-  {
-    title: 'Excursion',
-    content: 'Elephant Experience (2-5 Pax) - Bathing & Feeding',
-  },
-  {
-    title: 'F&B',
-    content: 'Have lunch',
-  },
-];
+export const activityType: Record<string, string> = {
+  transfer: 'Transfer',
+  excursion: 'Excursion',
+  fb_order: 'F&B',
+};
 
-function Schedule({ day }: SchelduleProps) {
+function Schedule({ day, activities }: SchelduleProps) {
   return (
     <div>
       <h3 className="font-bold mb-2 pb-2 border-b-[1px] border-grey-21">{day}</h3>
-      {schedules.map((item, index) => (
-        <ScheduleItem key={index} title={item.title} content={item.content} />
+      {activities.map((activity, index) => (
+        <ScheduleItem
+          key={index}
+          type={activityType[activity?.type]}
+          content={activity?.title}
+          pickUpTime={activity?.time_start}
+        />
       ))}
     </div>
   );

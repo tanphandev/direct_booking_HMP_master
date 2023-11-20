@@ -1,4 +1,39 @@
 import colors from '@/themes/color';
+import { displayDateFormat } from '@/utils/format';
+import { useTranslation } from 'react-i18next';
+type ReviewCheckInProps = {
+  checkIn: Date;
+  checkOut: Date;
+  night: number;
+};
+
+function ReviewCheckIn({ checkIn, checkOut, night }: ReviewCheckInProps) {
+  const { t } = useTranslation();
+  return (
+    <div className="border-[1px] border-grey-d9 p-4 mb-6 rounded-sm">
+      <Date
+        mb="16px"
+        bgColor={colors['blue-0a']}
+        title={`${t('BOOKING_FORM.SIDEBAR.CHECK_IN')}:`}
+        date={checkIn}
+        time="09:00 am"
+      />
+      <Date
+        mb="16px"
+        bgColor={colors['red-ee']}
+        title={`${t('BOOKING_FORM.SIDEBAR.CHECK_OUT')}:`}
+        date={checkOut}
+        time="12:00 am"
+      />
+      <div>
+        <h3 className="text-base font-bold mb-2">{t('BOOKING_FORM.SIDEBAR.TOTAL_NIGHT_STAY')}:</h3>
+        <p className="text-[17px] font-bold px-4 py-2 mr-[1px] bg-grey-f5 border-[1px] border-grey-d9">
+          {night}-{night <= 1 ? t('BOOKING_FORM.SIDEBAR.NIGHT') : t('BOOKING_FORM.SIDEBAR.NIGHTS')}
+        </p>
+      </div>
+    </div>
+  );
+}
 
 function Date({ title, date, time, bgColor, mb }: DateProps) {
   return (
@@ -15,7 +50,7 @@ function Date({ title, date, time, bgColor, mb }: DateProps) {
           }}
           className={`col-span-3 text-[17px] font-bold px-4 py-2 mr-[1px]`}
         >
-          {date}
+          {displayDateFormat(date)}
         </span>
         <span
           style={{
@@ -25,19 +60,6 @@ function Date({ title, date, time, bgColor, mb }: DateProps) {
         >
           {time}
         </span>
-      </div>
-    </div>
-  );
-}
-
-function ReviewCheckIn() {
-  return (
-    <div className="border-[1px] border-grey-d9 p-4 mb-6 rounded-sm">
-      <Date mb="16px" bgColor={colors['blue-0a']} title="Check-in:" date="Nov 10, 2023" time="09:00 am" />
-      <Date mb="16px" bgColor={colors['red-ee']} title="Check-out:" date="Nov 11, 2023" time="12:00 am" />
-      <div>
-        <h3 className="text-base font-bold mb-2">Total length of stay:</h3>
-        <p className="text-[17px] font-bold px-4 py-2 mr-[1px] bg-grey-f5 border-[1px] border-grey-d9">1-night</p>
       </div>
     </div>
   );
