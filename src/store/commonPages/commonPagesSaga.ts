@@ -8,11 +8,11 @@ import { getCommonPageFailed, getCommonPageSuccess } from './commonPagesSlice';
 import * as commonPagesAction from './commonPagesAction';
 
 function* getCommonPages( {payload} : any): Generator {
-  const  {hotel_slug, pages_slug, datecreated,router}  = payload;
+  const  {business_slug, pages_slug, datecreated}  = payload;
   yield put(enableLoading(COMMON_PAGES));
   try {
     const data: any = yield call(ApiCaller.get, API.get_common_pages_by_slug, {
-      hotel_slug,
+      business_slug,
       pages_slug,
       datecreated,
     });

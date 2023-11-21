@@ -11,9 +11,11 @@ import dynamic from 'next/dynamic'
 const BookingSearchBoxNoSSR = dynamic(() => import('../booking-search-box/booking-search-box'), { ssr: false })
 import { useTranslation } from "next-i18next";
 import i18n from "@/i18n/i18n";
-import { useAppSelector } from '@/hooks';
+import { useAppDispatch, useAppSelector } from '@/hooks';
 import { useParams, useRouter } from 'next/navigation';
 import Path from '@/routes/Path';
+import { getCommonPages } from '@/store/commonPages/commonPagesAction';
+import { getDateNowTimestamp } from '@/utils/helper';
 
 
 
@@ -30,9 +32,13 @@ const SidebarSearch = () => {
   console.log(page_title)
   const router = useRouter()
   const { hotel_slug } = useParams()
+  const dispatch = useAppDispatch();
   const GotoFaqsPage = () => {
     router.push(Path.FAQS(hotel_slug as string));
-
+    const business_slug=hotel_slug
+    const datecreated=getDateNowTimestamp()
+    const pages_slug = 'faqs'
+    dispatch(getCommonPages({business_slug,datecreated, pages_slug}));
   };
   return (
     <>

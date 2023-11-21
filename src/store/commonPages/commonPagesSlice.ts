@@ -6,7 +6,7 @@ const initialState = {
 } as any;
 
 const commonPagesSlice = createSlice({
-  name: 'common_pages',
+  name: 'commonPages',
   initialState: initialState,
   reducers: {
     getCommonPageSuccess: (state, action) => {
