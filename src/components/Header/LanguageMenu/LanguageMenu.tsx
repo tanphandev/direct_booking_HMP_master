@@ -13,8 +13,8 @@ function LanguageMenu() {
   );
   const languageMenuRef = useRef<HTMLUListElement>(null);
   const [languageValue, setLanguageValue] = useState<languageProps>({
-    title: defaultLanguage.title,
-    id: defaultLanguage.id,
+    title: defaultLanguage?.title,
+    id: defaultLanguage?.id,
   });
 
   /* get default language */
@@ -26,7 +26,7 @@ function LanguageMenu() {
       localStorage.setItem('language', defaultLanguage.id);
     }
 
-    const selectedLanguage = languages.find((item: languageProps) => item.id === savedLanguageId);
+    const selectedLanguage = languages?.find((item: languageProps) => item.id === savedLanguageId);
     if (selectedLanguage) {
       setLanguageValue(selectedLanguage);
       i18n.changeLanguage(savedLanguageId as string);
@@ -60,7 +60,7 @@ function LanguageMenu() {
         ref={languageMenuRef}
         className="hidden absolute top-8 right-0 lg:left-0 w-[112px] bg-white rounded-md shadow-custom_1 py-2"
       >
-        {languages.map((item: languageProps, index: number) => (
+        {languages?.map((item: languageProps, index: number) => (
           <li
             className="transition-colors h-[48px] text-sm px-4 leading-[48px] hover:bg-black-0.1"
             key={index}
