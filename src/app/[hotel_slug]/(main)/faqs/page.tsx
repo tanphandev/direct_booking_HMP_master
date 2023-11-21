@@ -12,8 +12,8 @@ import { useAppSelector } from '@/hooks';
 function FAQSPage() {
   const { t } = useTranslation();
 
-  const pageData:CommonPages = useAppSelector((state) => state.commonPages.common_pages);
-  console.log("page data",pageData)
+  const pageData: CommonPages = useAppSelector((state) => state.commonPages.common_pages);
+  console.log('page data', pageData);
 
   const collapseWrapperRef = useRef<HTMLDivElement>(null);
   const [collapseOpenIndex, setCollapseOpenIndex] = useState<number | null>(null);
@@ -21,15 +21,15 @@ function FAQSPage() {
   useOnClickOutside(collapseWrapperRef, () => {
     setCollapseOpenIndex(null);
   });
-  const lang = i18n.language
-  const cp_body_value= pageData.cp_body?.find((cp) => cp.lang === lang)?.value;
-  const cp_title_value=pageData.cp_title?.find((cp)=>cp.lang===lang)?.value
-  const questions:cp_paragraph[]= pageData.cp_paragraphs
+  const lang = i18n.language;
+  const cp_body_value = pageData.cp_body?.find((cp) => cp.lang === lang)?.value;
+  const cp_title_value = pageData.cp_title?.find((cp) => cp.lang === lang)?.value;
+  const questions: cp_paragraph[] = pageData.cp_paragraphs;
 
   return (
     <div className="main-container py-8 px-4">
       <h1 className="text-[32px] font-bold mb-2">{cp_title_value}</h1>
-      <div dangerouslySetInnerHTML={{ __html: cp_body_value||"" }} />
+      <div dangerouslySetInnerHTML={{ __html: cp_body_value || '' }} />
       <div className="text-end mb-4">
         <button
           onClick={() => {
@@ -41,30 +41,32 @@ function FAQSPage() {
         </button>
       </div>
       <div ref={collapseWrapperRef} className="mb-8">
-        {questions?.map((question, index) => (
-          question.lang === lang && (
-          <div
-            key={index}
-            className={classNames('collapse collapse-arrow bg-white shadow-custom_3 rounded-md', {
-              'my-4': collapseOpenIndex === index,
-            })}
-          >
-            <input
-              checked={collapseOpenIndex === index ? true : false}
-              onClick={(e) => {
-                collapseOpenIndex === index ? setCollapseOpenIndex(null) : setCollapseOpenIndex(index);
-              }}
-              type="checkbox"
-            />
-            <div className="flex items-center collapse-title text-xl font-medium pl-6">
-              <QuestionIcon width="24px" height="24px" className="mr-4" />
-              <span className="text-[15px] font-bold">{question.title}</span>
-            </div>
-            <div className="collapse-content pl-6">
-              <p>{question.value}</p>
-            </div>
-          </div>
-        )))}
+        {questions?.map(
+          (question, index) =>
+            question.lang === lang && (
+              <div
+                key={index}
+                className={classNames('collapse collapse-arrow bg-white shadow-custom_3 rounded-md', {
+                  'my-4': collapseOpenIndex === index,
+                })}
+              >
+                <input
+                  checked={collapseOpenIndex === index ? true : false}
+                  onChange={(e) => {
+                    collapseOpenIndex === index ? setCollapseOpenIndex(null) : setCollapseOpenIndex(index);
+                  }}
+                  type="checkbox"
+                />
+                <div className="flex items-center collapse-title text-xl font-medium pl-6">
+                  <QuestionIcon width="24px" height="24px" className="mr-4" />
+                  <span className="text-[15px] font-bold">{question.title}</span>
+                </div>
+                <div className="collapse-content pl-6">
+                  <p>{question.value}</p>
+                </div>
+              </div>
+            ),
+        )}
       </div>
     </div>
   );
