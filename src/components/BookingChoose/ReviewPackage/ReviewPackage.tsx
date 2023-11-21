@@ -63,14 +63,14 @@ function ReviewPackage({ packageChose, setIsChoosePackage }: PackageProps) {
             onClick={() => {
               setIsChoosePackage && setIsChoosePackage(false);
             }}
-            className="transition-colors w-[150px] h-[56px] text-base font-bold text-grey-21 bg-white hover:bg-grey-d9 rounded-md"
+            className="transition-colors w-[150px] h-[56px] text-base font-bold text-grey-21 bg-white hover:bg-grey-d9 rounded-md uppercase"
           >
             {t('HOMEPAGE.BACK')}
           </button>
           <SecondLoading isLoading={loading}>
             <button
               onClick={handleCalculatePrice}
-              className="transition-colors w-[150px] h-[56px] text-base font-bold text-white bg-blue-0a hover:bg-blue-09 rounded-md ml-2"
+              className="transition-colors w-[150px] h-[56px] text-base font-bold text-white bg-blue-0a hover:bg-blue-09 rounded-md ml-2 uppercase"
             >
               {t('HOMEPAGE.NEXT')}
             </button>
