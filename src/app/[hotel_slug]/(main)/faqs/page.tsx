@@ -65,7 +65,7 @@ function FAQSPage() {
           >
             <input
               checked={collapseOpenIndex === index ? true : false}
-              onClick={(e) => {
+              onChange={(e) => {
                 collapseOpenIndex === index ? setCollapseOpenIndex(null) : setCollapseOpenIndex(index);
               }}
               type="checkbox"

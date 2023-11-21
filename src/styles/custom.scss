@@ -18,6 +18,10 @@
   @apply hidden md:flex md:items-center #{!important};
 }
 
+.react-horizontal-scrolling-menu--item {
+  @apply min-w-full sm:min-w-[50%];
+}
+
 .back-step-type {
   @apply animate-slipRightToLeft;
 }
