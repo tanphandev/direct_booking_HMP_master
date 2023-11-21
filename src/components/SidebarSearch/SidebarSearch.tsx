@@ -8,7 +8,7 @@ import Amenities from "@/assets/icons/Amenities";
 import { useModalContext } from '@/contexts/ModalProvider';
 import { MODAL_NAME } from '@/types/modal';
 import dynamic from 'next/dynamic'
-const BookingSearchBoxNoSSR = dynamic(() => import('../booking-search-box/booking-search-box'), { ssr: false })
+const BookingSearchBoxNoSSR = dynamic(() => import('../BookingSearchBox/BookingSearchBox'), { ssr: false })
 import { useTranslation } from "next-i18next";
 import i18n from "@/i18n/i18n";
 import { useAppDispatch, useAppSelector } from '@/hooks';
@@ -23,22 +23,21 @@ const SidebarSearch = () => {
   const { openModal } = useModalContext();
   const { t } = useTranslation();
   const lang = i18n.language
-  const business_navigation = useAppSelector((state) => state.business.basic_business_info.business_navigation);
-  const business_nav = business_navigation.find((item: business_navigation) => item.cp_slug === "faqs");
-  const cp_title: cp_title[] = business_nav.cp_title
-  const cp_paragraphs: cp_paragraph[] = business_nav.cp_paragraphs
+  const business_navigation = useAppSelector((state) => state.business.basic_business_info.business_navigation) || [];
+  const business_nav = business_navigation?.find((item: business_navigation) => item.cp_slug === "faqs");
+  const cp_title: cp_title[] = business_nav?.cp_title
+  const cp_paragraphs: cp_paragraph[] = business_nav?.cp_paragraphs
   const footer_navigation = (useAppSelector((state) => state.business.footer_navigation))
   const page_title: cp_title[] = footer_navigation.find((page: footer_navigation) => page.page_slug === "english_test").page_title;
-  console.log(page_title)
   const router = useRouter()
   const { hotel_slug } = useParams()
   const dispatch = useAppDispatch();
   const GotoFaqsPage = () => {
     router.push(Path.FAQS(hotel_slug as string));
-    const business_slug=hotel_slug
-    const datecreated=getDateNowTimestamp()
+    const business_slug = hotel_slug
+    const datecreated = getDateNowTimestamp()
     const pages_slug = 'faqs'
-    dispatch(getCommonPages({business_slug,datecreated, pages_slug}));
+    dispatch(getCommonPages({ business_slug, datecreated, pages_slug }));
   };
   return (
     <>
@@ -71,7 +70,8 @@ const SidebarSearch = () => {
         </div>
       </div>
       <div>
-        <div className="rounded-t-md px-6 py-2 text-white bg-[#636363]">
+        {business_navigation &&(
+          <div className="rounded-t-md px-6 py-2 text-white bg-[#636363]">
           {cp_title?.map(
             (title) =>
               title.lang === lang && (
@@ -81,6 +81,7 @@ const SidebarSearch = () => {
               ),
           )}
         </div>
+        )}
         <div className="pt-5">
           {cp_paragraphs?.map((cp_paragraph) => (
             cp_paragraph.lang === lang && cp_paragraph.id <= 3 && (
@@ -93,15 +94,14 @@ const SidebarSearch = () => {
               </div>
             )
           ))}
-          <button onClick={GotoFaqsPage} className="uppercase border-2 border-[#e4e4e4] bg-[#e4e4e4] w-full mb-4 py-1 rounded-sm hover:opacity-90 hover:shadow-sm" >
+          <button onClick={GotoFaqsPage} className="uppercase border-2 border-[#e4e4e4] w-full mb-4 py-1 rounded-sm hover:opacity-90 hover:shadow-sm" >
             <span> {t('SEARCH.SEARCH_RESULT_PAGE.ASK_A_QUESTION_ALL')}</span>
-
           </button>
           <button
-          onClick={() => {
-            openModal(MODAL_NAME.ASK_QUESTION);
-          }}
-            className=" border-2 border-[#0a7cff]  w-full mb-4 py-1 rounded-sm hover:opacity-90 hover:shadow-sm" 
+            onClick={() => {
+              openModal(MODAL_NAME.ASK_QUESTION);
+            }}
+            className=" border-2 border-[#0a7cff]  w-full mb-4 py-1 rounded-sm hover:opacity-90 hover:shadow-sm"
           >
             <span className="text-[#0a7cff]">{t('SEARCH.SEARCH_RESULT_PAGE.ASK_A_QUESTION_TITLE')}</span>
 

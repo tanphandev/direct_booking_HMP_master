@@ -1,8 +1,8 @@
 import BookingCart from '@/components/BookingCart/BookingCart';
 import RoomFeatures from '@/components/RoomFeatures/RoomFeatures';
 import SearchResult from '@/components/SearchResult/SearchResult';
-import ListFacilities from '@/components/list-facilities/list-facilities';
-import SidebarSearch from '@/components/sidebar-search/sidebar-search';
+import ListFacilities from '@/components/ListFacilities/ListFacilities';
+import SidebarSearch from '@/components/SidebarSearch/SidebarSearch';
 import dynamic from 'next/dynamic';
 // const SidebarSearchNoSSR = dynamic(() => import('@/components/sidebar-search/sidebar-search'), { ssr: false });
 // const RoomFeaturesNoSSR = dynamic(() => import('@/components/RoomFeatures/RoomFeatures'), { ssr: false });
