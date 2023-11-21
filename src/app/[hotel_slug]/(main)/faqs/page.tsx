@@ -6,8 +6,10 @@ import { useOnClickOutside } from '@/hooks/useClickOutSide';
 
 import QuestionIcon from '@/assets/icons/QuestionIcon';
 import { MODAL_NAME } from '@/types/modal';
-
+import i18n from '@/i18n/i18n';
+import { useTranslation } from 'next-i18next';
 function FAQSPage() {
+  const { t } = useTranslation();
   //mock data
   const questions = [
     {
@@ -52,7 +54,7 @@ function FAQSPage() {
           }}
           className="text-sm h-[36px] px-4 primary-button rounded-[4px]"
         >
-          Ask a Question
+          {t('SEARCH.SEARCH_RESULT_PAGE.ASK_A_QUESTION_TITLE')}
         </button>
       </div>
       <div ref={collapseWrapperRef} className="mb-8">
