@@ -5,8 +5,7 @@ const API = {
   package_cal_price: 'public/packages_available/package_cal_price',
   package_create: 'public/packages_available/package_create',
   public_room_available: 'public/public_room_available',
-  
-  // public_room_available: (business_lug: string, checkin: string,checkout: string, adults: number, children: number)=>``
+  get_common_pages_by_slug: 'common_pages/get_common_pages_by_slug'
 };
 
 export default API;

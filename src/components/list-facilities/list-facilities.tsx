@@ -12,12 +12,6 @@ const ListFacilities = () => {
   const business_pf: business_pf[] = useAppSelector((state) => state.business.business_pf);
     
   const { t } = useTranslation();
-  // const [lang, setLang] = useState('vi');
-
-  // useEffect(() => {
-  //   const savedLanguage = localStorage.getItem('language') || db_languages.id;
-  //   setLang(savedLanguage);
-  // }, []);
   const lang=i18n.language
 
     const pathIcon = "/assets/icons";

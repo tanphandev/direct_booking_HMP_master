@@ -4,34 +4,42 @@ import GG_MAP from "@/../public/assets/image/gmap.jpg"
 
 
 import QUESTION from "@/assets/icons/question.svg"
-import { cp_paragraphs, cp_title } from "@/api/mock-data/faq";
 import Amenities from "@/assets/icons/Amenities";
-import { useEffect, useState } from "react";
 import { useModalContext } from '@/contexts/ModalProvider';
-// import BookingSearchBox from '../booking-search-box/booking-search-box';
 import { MODAL_NAME } from '@/types/modal';
 import dynamic from 'next/dynamic'
 const BookingSearchBoxNoSSR = dynamic(() => import('../booking-search-box/booking-search-box'), { ssr: false })
 import { useTranslation } from "next-i18next";
 import i18n from "@/i18n/i18n";
-import { useAppSelector } from '@/hooks';
-// import { cp_title } from '@/types/Faq';
+import { useAppDispatch, useAppSelector } from '@/hooks';
+import { useParams, useRouter } from 'next/navigation';
+import Path from '@/routes/Path';
+import { getCommonPages } from '@/store/commonPages/commonPagesAction';
+import { getDateNowTimestamp } from '@/utils/helper';
+
 
 
 const SidebarSearch = () => {
-  const { openModal } = useModalContext();  
+  const { openModal } = useModalContext();
   const { t } = useTranslation();
-  const lang=i18n.language
-
-  
+  const lang = i18n.language
   const business_navigation = useAppSelector((state) => state.business.basic_business_info.business_navigation);
   const business_nav = business_navigation.find((item: business_navigation) => item.cp_slug === "faqs");
-  const cp_title:cp_title[] = business_nav.cp_title
-  const cp_paragraphs:cp_paragraph[] = business_nav.cp_paragraphs
+  const cp_title: cp_title[] = business_nav.cp_title
+  const cp_paragraphs: cp_paragraph[] = business_nav.cp_paragraphs
   const footer_navigation = (useAppSelector((state) => state.business.footer_navigation))
-  const page_title:cp_title[] = footer_navigation.find((page: footer_navigation) => page.page_slug === "english_test").page_title;
-console.log(page_title)
-  
+  const page_title: cp_title[] = footer_navigation.find((page: footer_navigation) => page.page_slug === "english_test").page_title;
+  console.log(page_title)
+  const router = useRouter()
+  const { hotel_slug } = useParams()
+  const dispatch = useAppDispatch();
+  const GotoFaqsPage = () => {
+    router.push(Path.FAQS(hotel_slug as string));
+    const business_slug=hotel_slug
+    const datecreated=getDateNowTimestamp()
+    const pages_slug = 'faqs'
+    dispatch(getCommonPages({business_slug,datecreated, pages_slug}));
+  };
   return (
     <>
       <div className="rounded-t-md bg-[#636363]">
@@ -47,10 +55,10 @@ console.log(page_title)
       <div>
         <div className="relative">
           <Image src={GG_MAP} alt="GG_MAP" className="w-full" />
-          <button 
-           onClick={() => {
-            openModal(MODAL_NAME.HMP_MAP);
-          }}
+          <button
+            onClick={() => {
+              openModal(MODAL_NAME.HMP_MAP);
+            }}
             className="absolute p-2 rounded-sm top-[50%] left-[50%] bg-[#EE3840] translate-y-[-50%] translate-x-[-50%] hover:opacity-90 hover:shadow-lg"
           >
             <span className="text-white"> {t('SEARCH.SEARCH_RESULT_PAGE.SEE_MAP')}</span>
@@ -58,7 +66,7 @@ console.log(page_title)
           </button>
         </div>
         <div className=" p-5 ">
-        <span className="uppercase font-semibold">{t('SEARCH.SEARCH_RESULT_PAGE.POINTS_OF_INTEREST')}</span>
+          <span className="uppercase font-semibold">{t('SEARCH.SEARCH_RESULT_PAGE.POINTS_OF_INTEREST')}</span>
 
         </div>
       </div>
@@ -85,26 +93,31 @@ console.log(page_title)
               </div>
             )
           ))}
-          <button className="uppercase border-2 border-[#e4e4e4] bg-[#e4e4e4] w-full mb-4 py-1 rounded-sm hover:opacity-90 hover:shadow-sm" >
+          <button onClick={GotoFaqsPage} className="uppercase border-2 border-[#e4e4e4] bg-[#e4e4e4] w-full mb-4 py-1 rounded-sm hover:opacity-90 hover:shadow-sm" >
             <span> {t('SEARCH.SEARCH_RESULT_PAGE.ASK_A_QUESTION_ALL')}</span>
 
           </button>
-          <button className=" border-2 border-[#0a7cff]  w-full mb-4 py-1 rounded-sm hover:opacity-90 hover:shadow-sm" >
+          <button
+          onClick={() => {
+            openModal(MODAL_NAME.ASK_QUESTION);
+          }}
+            className=" border-2 border-[#0a7cff]  w-full mb-4 py-1 rounded-sm hover:opacity-90 hover:shadow-sm" 
+          >
             <span className="text-[#0a7cff]">{t('SEARCH.SEARCH_RESULT_PAGE.ASK_A_QUESTION_TITLE')}</span>
-              
+
           </button>
         </div>
       </div>
       <div className="border-[#e5e5e5] border-2 rounded-md">
         <div className="rounded-t-md px-6 py-2 text-white bg-[#636363]">
-            <span>{t('SEARCH.SEARCH_RESULT_PAGE.GUEST_POLICIES')}</span>
+          <span>{t('SEARCH.SEARCH_RESULT_PAGE.GUEST_POLICIES')}</span>
 
         </div>
         <div className="p-4">
-          {page_title?.map ((title)=>(
-            title.lang ===lang &&(
+          {page_title?.map((title) => (
+            title.lang === lang && (
               <div key={title.lang}>
-                  <p className='mb-2'>{title.value}</p>
+                <p className='mb-2'>{title.value}</p>
               </div>
             )
           ))}

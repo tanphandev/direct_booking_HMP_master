@@ -1,4 +1,4 @@
-export type cp_paragraphs = {
+interface cp_paragraphs  {
     id: number,
     lang: string,
     title: string,
