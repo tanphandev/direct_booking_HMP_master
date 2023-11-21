@@ -60,7 +60,7 @@ function PackageOption({ packageChose, setIsChoosePackage, setPackageChose }: Pa
             <PackageItemDetail
               key={index}
               margin="0 8px"
-              className="w-[382px] h-full"
+              className="h-full"
               isActive={packageItem.pid === packageChose?.pid}
               packageDetail={packageItem}
               handleChoosePackage={handleChoosePackage}

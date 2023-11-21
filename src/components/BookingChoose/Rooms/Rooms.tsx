@@ -11,7 +11,6 @@ import { useLoading } from '@/hooks/useLoading';
 import { CHECK_COUPON_CODE } from '@/store/common/constants';
 import SecondLoading from '@/components/Loading/SecondLoading';
 import { getPublicRoomAvailable } from '@/store/room/roomAction';
-import { toast } from 'react-toastify';
 
 function Rooms() {
   const { hotel_slug } = useParams();
@@ -38,16 +37,13 @@ function Rooms() {
   };
 
   const handleLoadRoomAvailable = () => {
-    const isValid = checkInRef.current && checkInRef.current.isValid;
     const bid = basic_business_info.bid;
     const check_in = checkInRef.current && getDateFormatTimestamp(checkInRef.current?.startDate);
     const check_out = checkInRef.current && getDateFormatTimestamp(checkInRef.current?.endDate);
-    const adults = personQuantityRef.current?.adults&&2;
-    const child = personQuantityRef.current?.child&&0;
-    const datecreated = getDateNowTimestamp()
-    isValid
-      ? dispatch(getPublicRoomAvailable({ bid, check_in, check_out, adults, child, datecreated, hotel_slug, router }))
-      : toast.error('Check-In Check-Out is invalid');
+    const adults = personQuantityRef.current?.adults && 2;
+    const child = personQuantityRef.current?.child && 0;
+    const datecreated = getDateNowTimestamp();
+    dispatch(getPublicRoomAvailable({ bid, check_in, check_out, adults, child, datecreated, hotel_slug, router }));
   };
   return (
     <div>
@@ -71,9 +67,12 @@ function Rooms() {
           </button>
         </div>
         <div className="flex justify-end">
-          <button onClick={handleLoadRoomAvailable} className="transition-colors w-[150px] h-[56px] text-base font-bold bg-blue-0a hover:bg-blue-09 rounded-md">
-              NEXT
-            </button>
+          <button
+            onClick={handleLoadRoomAvailable}
+            className="transition-colors w-[150px] h-[56px] text-base font-bold bg-blue-0a hover:bg-blue-09 rounded-md uppercase"
+          >
+            {t('HOMEPAGE.NEXT')}
+          </button>
         </div>
         {/* show loading when check coupon */}
         {loading && <SecondLoading />}
