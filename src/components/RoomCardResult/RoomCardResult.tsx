@@ -21,12 +21,6 @@ const RoomCardResult: React.FC<RoomCardResultProps> = ({ room }) => {
   const MAX_DISPLAYED_OFFERS = 15;
   const [displayedItems, setDisplayedItems] = useState(MAX_DISPLAYED_ITEMS);
   const [displayedItemOffers, setDisplayedItemOffers] = useState(MAX_DISPLAYED_OFFERS);
-  // const [lang, setLang] = useState('vi');
-
-  // useEffect(() => {
-  //   const savedLanguage = localStorage.getItem('language') || 'vi';
-  //   setLang(savedLanguage);
-  // }, []);
   const lang = i18n.language
   const handleImageClick = (index: number) => {
     setCurrentImage(index);

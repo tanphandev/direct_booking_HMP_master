@@ -4,3 +4,5 @@ export const BOOKING_PACKAGES = 'booking_packages';
 export const PACKAGE_CAL_PRICE = 'package_cal_price';
 export const PUBLIC_ROOM_AVAILABLE ='public_room_available'
 export const PACKAGE_CREATE = 'package_create';
+export const COMMON_PAGES = 'common_pages';
+

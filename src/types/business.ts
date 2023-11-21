@@ -13,8 +13,8 @@ interface business_navigation{
     cp_display: boolean,
     cp_page_type: any,
     cp_body: any,
-    cp_title: cp_title[],
-    cp_paragraphs?: cp_paragraph[],
+    cp_title?: cp_title[],
+    cp_paragraphs?: cp_paragraph[]|[],
   }
   interface cp_paragraph {
     id: number,
