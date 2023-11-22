@@ -1,10 +1,16 @@
 'use client';
 import { useRoomContext } from '@/contexts/RoomProvider';
+import { useAppSelector } from '@/hooks';
 import { useTranslation } from 'next-i18next';
+import { formatCurrency } from '@/utils/helper';
+import { isEmpty } from 'lodash';
 import React, { Fragment } from 'react';
 
 const BookingCart = () => {
+  const { i18n } = useTranslation();
   const { roomChoseValue } = useRoomContext();
+  const { business_currency } = useAppSelector((state) => state.business.basic_business_info);
+  console.log('roomChoseValue', roomChoseValue);
   const sumPrice = Object.values(roomChoseValue)?.reduce((accumulator: number, currentValue: any) => {
     const packageTotalPrice = currentValue?.packages?.reduce(
       (accumulator: number, currentValue: any) =>
@@ -28,16 +34,20 @@ const BookingCart = () => {
               </div>
               {Object.values(roomChoseValue)?.map((item: any, index: number) => (
                 <Fragment key={index}>
-                  <div className="col-span-1 ">
-                    <span className="text-blue-0a font-bold">
+                  <ul className="list-disc col-span-1 pl-3">
+                    <li className="text-blue-0a font-bold">
                       {item?.room?.title}
                       {item?.quantity > 1 && ` x ${item?.quantity}`}
-                    </span>
-                  </div>
+                    </li>
+                  </ul>
                   <div className="col-span-2 justify-center">
                     {item?.packages?.map((packageItem: any, index: number) => (
                       <span key={index} className="bg-blue-0a text-white rounded-xl px-2 py-1 mr-1">
-                        {packageItem?.quantity > 1 && `${packageItem?.quantity} x `} pac acb
+                        {packageItem?.quantity > 1 && `${packageItem?.quantity} x `}{' '}
+                        {
+                          packageItem?.package?.dbp_title.find((valueItem: any) => valueItem?.lang === i18n.language)
+                            ?.value
+                        }
                       </span>
                     ))}
                   </div>
@@ -48,10 +58,15 @@ const BookingCart = () => {
             <div className="p-4 flex flex-col w-2/12 items-center">
               <div className="flex flex-col items-end">
                 <span className="text-[#9c9c9c] mb-2 font-bold">{t('SEARCH.ROOM_TYPE.PRICE_SUMMARY')}</span>
-                <span className="font-bold text-2xl mb-2">{sumPrice} đ</span>
+                <span className="font-bold text-2xl mb-2">{formatCurrency(business_currency).format(sumPrice)}</span>
               </div>
-              <button disabled className=" uppercase bg-grey-d9 px-4 py-2 border border-grey-d9 rounded-md ">
-                <span className="text-sm text-grey-6c">{t('SEARCH.ROOM_TYPE.BOOKNOW_PAYLATER')}</span>
+              <button
+                disabled
+                className={`uppercase ${
+                  isEmpty(roomChoseValue) ? 'bg-grey-d9 text-grey-6c ' : 'bg-blue-0a text-white'
+                } px-4 py-2 border font-bold border-grey-d9 rounded-md`}
+              >
+                <span className="text-sm ">{t('SEARCH.ROOM_TYPE.BOOKNOW_PAYLATER')}</span>
               </button>
             </div>
           </div>
