@@ -2,7 +2,7 @@
 import React, { Fragment } from 'react';
 import { useRoomContext } from '@/contexts/RoomProvider';
 import { useAppDispatch, useAppSelector } from '@/hooks';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'react-i18next';
 import { formatCurrency, getDateNowTimestamp } from '@/utils/helper';
 import { roomCalculatePrice } from '@/store/booking/bookingAction';
 import { useParams, useSearchParams } from 'next/navigation';

@@ -19,7 +19,7 @@ function Rooms() {
   const { t } = useTranslation();
   const { loading } = useLoading([CHECK_COUPON_CODE]);
   const checkInRef = createRef<RangeDate>();
-  const personQuantityRef = useRef<PersonQuanityRefProps>();
+  const personQuantityRef = useRef<PersonQuanityRefProps>(null);
   const { basic_business_info } = useAppSelector((state) => state.business);
   const [couponCode, setCouponCode] = useState<string>('');
 
@@ -50,7 +50,7 @@ function Rooms() {
     <div>
       <div>
         <CheckIn ref={checkInRef} />
-        <PersonQuanity/>
+        <PersonQuanity ref={personQuantityRef}/>
         <div className="h-[80px] flex bg-white rounded-md mb-2">
           <input
             value={couponCode}
