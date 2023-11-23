@@ -1,13 +1,17 @@
 'use client';
+import React, { Fragment } from 'react';
 import { useRoomContext } from '@/contexts/RoomProvider';
 import { useAppDispatch, useAppSelector } from '@/hooks';
 import { useTranslation } from 'next-i18next';
 import { formatCurrency, getDateNowTimestamp } from '@/utils/helper';
-import { isEmpty, pick } from 'lodash';
-import React, { Fragment } from 'react';
 import { roomCalculatePrice } from '@/store/booking/bookingAction';
 import { useParams, useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
+import { useLoading } from '@/hooks/useLoading';
+import { isEmpty, pick } from 'lodash';
+import { ROOM_CAL_PRICE } from '@/store/common/constants';
+import SecondLoading from '../Loading/SecondLoading';
+import { getBookingInfo } from '@/store/booking/bookingSlice';
 
 const packageFieldPicker = [
   'dbp_activities',
@@ -27,12 +31,13 @@ const packageFieldPicker = [
 
 const BookingCart = () => {
   const { t, i18n } = useTranslation();
-  const searchParams = useSearchParams();
+  const dispatch = useAppDispatch();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { hotel_slug } = useParams();
   const { roomChoseValue } = useRoomContext();
+  const { loading } = useLoading([ROOM_CAL_PRICE]);
   const { business_currency, bid } = useAppSelector((state) => state.business.basic_business_info);
-  const dispatch = useAppDispatch();
   const sumPrice = Object.values(roomChoseValue)?.reduce((accumulator: number, currentValue: any) => {
     const packageTotalPrice = currentValue?.packages?.reduce(
       (accumulator: number, currentValue: any) =>
@@ -45,6 +50,7 @@ const BookingCart = () => {
   const handleCalculatePrice = () => {
     const checkin = parseInt(searchParams.get('checkin') ?? '0');
     const checkout = parseInt(searchParams.get('checkout') ?? '0');
+    const night = (checkout - checkin) / (3600 * 24);
     const reservations_adults = parseInt(searchParams.get('adults') ?? '2');
     const reservations_children = parseInt(searchParams.get('children') ?? '0');
     const reservations_infants = 0; // default is 0
@@ -77,6 +83,7 @@ const BookingCart = () => {
       reservations_business_id,
       room_types,
     };
+    dispatch(getBookingInfo({ ...bodyData, night }));
     dispatch(roomCalculatePrice({ bodyData, router, hotel_slug }));
   };
   return (
@@ -121,15 +128,17 @@ const BookingCart = () => {
                   {formatCurrency(business_currency).format(sumPrice)}
                 </span>
               </div>
-              <button
-                disabled={isEmpty(roomChoseValue)}
-                onClick={() => handleCalculatePrice()}
-                className={`uppercase ${
-                  isEmpty(roomChoseValue) ? 'bg-grey-d9 text-grey-6c cursor-not-allowed' : 'bg-blue-0a text-white'
-                } px-4 py-2 border font-bold border-grey-d9 rounded-md`}
-              >
-                <span className="text-sm ">{t('SEARCH.ROOM_TYPE.BOOKNOW_PAYLATER')}</span>
-              </button>
+              <SecondLoading isLoading={loading}>
+                <button
+                  disabled={isEmpty(roomChoseValue)}
+                  onClick={() => handleCalculatePrice()}
+                  className={`uppercase ${
+                    isEmpty(roomChoseValue) ? 'bg-grey-d9 text-grey-6c cursor-not-allowed' : 'bg-blue-0a text-white'
+                  } px-4 py-2 border font-bold border-grey-d9 rounded-md`}
+                >
+                  <span className="text-sm ">{t('SEARCH.ROOM_TYPE.BOOKNOW_PAYLATER')}</span>
+                </button>
+              </SecondLoading>
             </div>
           </div>
         </div>

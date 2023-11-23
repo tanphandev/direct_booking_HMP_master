@@ -8,6 +8,8 @@ import { disableLoading, enableLoading } from '../common/commonSlice';
 import {
   getBookingPackageFailed,
   getBookingPackageSuccess,
+  getBookingRoomPriceFailed,
+  getBookingRoomPriceSuccess,
   getReservationFailed,
   getReservationSuccess,
   getYourBookingPriceFailed,
@@ -71,16 +73,13 @@ function* packageCreate({ payload }: any): Generator {
 
 function* roomCalculatePrice({ payload }: any): Generator {
   const { bodyData, hotel_slug, router } = payload;
-  console.log('bodyData', bodyData);
-  console.log('hotel_slug', hotel_slug);
   yield put(enableLoading(ROOM_CAL_PRICE));
   try {
     const data: any = yield call(ApiCaller.post, API.room_cal_price, bodyData);
-    console.log('data API', data);
-    yield put(getYourBookingPriceSuccess(data));
+    yield put(getBookingRoomPriceSuccess(data));
     router.push(Path.BOOKING(hotel_slug));
   } catch (error: any) {
-    yield put(getYourBookingPriceFailed(error));
+    yield put(getBookingRoomPriceFailed(error));
     toast.error(error?.response?.data[0]);
   } finally {
     yield put(disableLoading(ROOM_CAL_PRICE));
