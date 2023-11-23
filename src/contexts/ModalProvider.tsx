@@ -8,6 +8,7 @@ import { sleep } from '@/utils/helper';
 import AskQuestionModal from '@/components/Modal/AskQuestionModal';
 import HMPMap from '@/components/Modal/HMPMapModal';
 import AskQuestionThankYouModal from '@/components/Modal/AskQuestionThankYouModal';
+import AmenitiesSelectModal from '@/components/Modal/AmenitiesSelectModal';
 
 type ModalContextType = {
   modal: MODAL_NAME;
@@ -29,6 +30,8 @@ const Modal: any = {
   [MODAL_NAME.ASK_QUESTION]: <AskQuestionModal />,
   [MODAL_NAME.HMP_MAP]: <HMPMap />,
   [MODAL_NAME.ASK_A_QUESTION_THANK_YOU]: <AskQuestionThankYouModal />,
+  [MODAL_NAME.AMENITIES_SELECT_MODAL]: <AmenitiesSelectModal />,
+
   
 };
 

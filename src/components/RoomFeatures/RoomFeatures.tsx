@@ -2,18 +2,13 @@
 import { useAppSelector } from "@/hooks";
 import i18n from "@/i18n/i18n";
 import { useTranslation } from "react-i18next";
-// import { roomFeatures } from "@/api/mock-data/room-features";
 import Image from "next/image";
-import { useEffect, useState } from "react";
 
 const RoomFeatures = () => {
   const roomFeatures: RoomTypeFeature[] = useAppSelector((state) => state.room.public_room_available[0]?.room_type_features);
   const lang=i18n.language
   const { t } = useTranslation();
-
-
     const pathIcon = "/assets/icons";
-    
     return (
         <div className="mt-4">
             <h2 className="font-bold mb-4 pb-2 border-b-2">{t('SEARCH.SEARCH_RESULT_PAGE.ROOM_FEATURES')}</h2>

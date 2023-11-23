@@ -16,9 +16,6 @@ import { useParams, useRouter } from 'next/navigation';
 import Path from '@/routes/Path';
 import { getCommonPages } from '@/store/commonPages/commonPagesAction';
 import { getDateNowTimestamp } from '@/utils/helper';
-
-
-
 const SidebarSearch = () => {
   const { openModal } = useModalContext();
   const { t } = useTranslation();
@@ -44,11 +41,15 @@ const SidebarSearch = () => {
       <div className="rounded-t-md bg-[#636363]">
         <BookingSearchBoxNoSSR />
       </div>
-      <button className="rounded-md flex my-4 py-2 px-6 w-full items-center justify-between bg-[#0A7CFF] hover:opacity-90 hover:shadow-lg">
+      <button 
+        className="rounded-md flex my-4 py-2 px-6 w-full items-center justify-between bg-[#0A7CFF] hover:opacity-90 hover:shadow-lg"
+        onClick={() => {
+          openModal(MODAL_NAME.AMENITIES_SELECT_MODAL);
+        }}
+      >
         <span className="flex-none ">
           <Amenities />
         </span>
-
         <span className="text-white flex-auto uppercase  align-middle px-3  " >{t('SEARCH.SEARCH_RESULT_PAGE.AMENITIES')}</span>
       </button>
       <div>
