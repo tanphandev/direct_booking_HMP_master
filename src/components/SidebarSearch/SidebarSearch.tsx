@@ -9,7 +9,7 @@ import { useModalContext } from '@/contexts/ModalProvider';
 import { MODAL_NAME } from '@/types/modal';
 import dynamic from 'next/dynamic'
 const BookingSearchBoxNoSSR = dynamic(() => import('../BookingSearchBox/BookingSearchBox'), { ssr: false })
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "react-i18next";
 import i18n from "@/i18n/i18n";
 import { useAppDispatch, useAppSelector } from '@/hooks';
 import { useParams, useRouter } from 'next/navigation';

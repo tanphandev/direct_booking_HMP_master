@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { useModalContext } from '@/contexts/ModalProvider';
 import { useOnClickOutside } from '@/hooks/useClickOutSide';
 import i18n from '@/i18n/i18n';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'react-i18next';
 function AskQuestionModal() {
   const { t } = useTranslation();
   const lang = i18n.language

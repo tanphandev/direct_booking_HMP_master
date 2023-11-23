@@ -1,6 +1,6 @@
 'use client'
 import { business_pf } from "@/api/mock-data/facilities";
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "react-i18next";
 import { useAppSelector } from "@/hooks";
 import Image from "next/image";
 import { useEffect, useState } from "react";

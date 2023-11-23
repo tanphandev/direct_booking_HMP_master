@@ -19,7 +19,7 @@ function Rooms() {
   const { t } = useTranslation();
   const { loading } = useLoading([CHECK_COUPON_CODE]);
   const checkInRef = createRef<RangeDate>();
-  const personQuantityRef = useRef<PersonQuanityRefProps>(null);
+  const personQuantityRef = useRef<PersonQuanityRefProps>();
   const { basic_business_info } = useAppSelector((state) => state.business);
   const [couponCode, setCouponCode] = useState<string>('');
 
@@ -40,8 +40,9 @@ function Rooms() {
     const bid = basic_business_info.bid;
     const check_in = checkInRef.current && getDateFormatTimestamp(checkInRef.current?.startDate);
     const check_out = checkInRef.current && getDateFormatTimestamp(checkInRef.current?.endDate);
-    const adults = personQuantityRef.current?.adults && 2;
-    const child = personQuantityRef.current?.child && 0;
+    const adults = personQuantityRef.current?.adults;
+    const child = personQuantityRef.current?.child;
+    console.log("child",child)
     const datecreated = getDateNowTimestamp();
     dispatch(getPublicRoomAvailable({ bid, check_in, check_out, adults, child, datecreated, hotel_slug, router }));
   };
@@ -49,7 +50,7 @@ function Rooms() {
     <div>
       <div>
         <CheckIn ref={checkInRef} />
-        <PersonQuanity />
+        <PersonQuanity/>
         <div className="h-[80px] flex bg-white rounded-md mb-2">
           <input
             value={couponCode}

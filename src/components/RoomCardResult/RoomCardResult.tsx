@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import QuantityRoomOption from '@/components/RoomCardResult/QuantityRoomOption/QuantityRoomOption';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'react-i18next';
 import i18n from '@/i18n/i18n';
 interface RoomCardResultProps {
   room: RoomAvailable

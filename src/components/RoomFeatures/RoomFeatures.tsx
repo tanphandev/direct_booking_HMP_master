@@ -1,7 +1,7 @@
 'use client'
 import { useAppSelector } from "@/hooks";
 import i18n from "@/i18n/i18n";
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "react-i18next";
 // import { roomFeatures } from "@/api/mock-data/room-features";
 import Image from "next/image";
 import { useEffect, useState } from "react";

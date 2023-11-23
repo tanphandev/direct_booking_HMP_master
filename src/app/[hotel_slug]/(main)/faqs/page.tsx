@@ -7,7 +7,7 @@ import { useOnClickOutside } from '@/hooks/useClickOutSide';
 import QuestionIcon from '@/assets/icons/QuestionIcon';
 import { MODAL_NAME } from '@/types/modal';
 import i18n from '@/i18n/i18n';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'react-i18next';
 import { useAppSelector } from '@/hooks';
 function FAQSPage() {
   const { t } = useTranslation();

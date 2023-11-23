@@ -5,7 +5,7 @@ import { useAppSelector } from '@/hooks';
 import { VisibilityContext } from 'react-horizontal-scrolling-menu';
 import { MODAL_NAME } from '@/types/modal';
 import { HANDLE_STATUS } from '@/types/handle';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'react-i18next';
 import { formatCurrency } from '@/utils/helper';
 
 type PackageItemDetail = {

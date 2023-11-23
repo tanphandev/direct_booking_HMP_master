@@ -15,6 +15,7 @@ import Path from '@/routes/Path';
 function* getPublicRoomAvailable( {payload} : any): Generator {
 
   const  {bid,check_in,check_out,adults,child, datecreated,hotel_slug, router}  = payload;
+  console.log(payload)
   yield put(enableLoading(PUBLIC_ROOM_AVAILABLE));
   try {
     const data: any = yield call(ApiCaller.get, API.public_room_available, {
@@ -29,8 +30,8 @@ function* getPublicRoomAvailable( {payload} : any): Generator {
     });
   
 
+    router.push(Path.SEARCH_RESULT(hotel_slug,check_in,check_out,adults,child));
     yield put(getPublicRoomAvailableSuccess(data));
-    router.push(Path.SEARCH_RESULT(hotel_slug,check_in,check_out,2,0));
   } catch (error: any) {
     yield put(getPublicRoomAvailableFailed(error));
   } finally {

@@ -6,7 +6,7 @@ import { createRef, useImperativeHandle, useState } from 'react';
 import { useOnClickOutside } from '@/hooks/useClickOutSide';
 import Calendar from '@/components/BookingChoose/Calendar/Calendar';
 import '@/i18n/i18n';
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "react-i18next";
 import { useParams, useRouter } from 'next/navigation';
 import { useAppDispatch, useAppSelector } from '@/hooks';
 import { getDateFormatTimestamp } from '@/utils/helper';
