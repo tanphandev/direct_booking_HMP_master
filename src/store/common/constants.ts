@@ -6,3 +6,5 @@ export const ROOM_CAL_PRICE = 'room_cal_price';
 export const PUBLIC_ROOM_AVAILABLE = 'public_room_available';
 export const PACKAGE_CREATE = 'package_create';
 export const COMMON_PAGES = 'common_pages';
+export const SEND_QUESTIONS = 'send_questions';
+
