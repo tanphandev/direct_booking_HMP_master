@@ -36,7 +36,7 @@ function BookingPage() {
   ];
 
   useEffect(() => {
-    if (isEmpty(booking_info) || isEmpty(your_booking_price)) {
+    if (isEmpty(booking_info) && isEmpty(your_booking_price)) {
       router.push(Path.HOME(hotel_slug as string));
       toast.info('Your session has expired. Redirecting to the Home page...');
     }
@@ -63,8 +63,6 @@ function BookingPage() {
       newStep.stepNumber--;
       newStep.type = 'back';
     }
-    console.log('newStep', newStep);
-    console.log('step.length', steps.length);
     // check if steps are within bounds
     newStep.stepNumber > 0 && newStep.stepNumber <= steps.length && setCurrentStep(newStep);
     /* scroll on top page */

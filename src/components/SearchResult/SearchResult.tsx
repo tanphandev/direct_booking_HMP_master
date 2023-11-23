@@ -1,10 +1,8 @@
-'use client'
-import React from 'react'
-import RoomCardResult from '../RoomCardResult/RoomCardResult'
-import { useAppDispatch, useAppSelector } from '@/hooks'
-import { useParams, useRouter } from 'next/navigation'
-import { getPublicRoomAvailable } from '@/store/room/roomAction'
-import { getDateNowTimestamp } from '@/utils/helper'
+'use client';
+import React from 'react';
+import { useAppSelector } from '@/hooks';
+import RoomCardResult from '../RoomCardResult/RoomCardResult';
+
 const SearchResult = () => {
   const {hotel_slug}=useParams();
   // const { hotel_slug,check_in,check_out,adults, child} = useParams();
@@ -16,17 +14,15 @@ const SearchResult = () => {
   // dispatch(getPublicRoomAvailable({ bid, check_in, check_out, adults, child, datecreated, hotel_slug, router }));
 
   const ListRoomAvailable: RoomAvailable[] = useAppSelector((state) => state.room.public_room_available);
-  console.log("room available: ",ListRoomAvailable)
   return (
-    <div className='mt-3'>
-        {ListRoomAvailable?.map((roomAvailable, index) => (
-            <div key={index}>
-            <RoomCardResult room={roomAvailable} />
+    <div className="mt-3">
+      {ListRoomAvailable?.map((roomAvailable, index) => (
+        <div key={index}>
+          <RoomCardResult room={roomAvailable} index={index} />
         </div>
-        ))}
-        
+      ))}
     </div>
-  )
-}
+  );
+};
 
-export default SearchResult 
+export default SearchResult;

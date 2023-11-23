@@ -13,7 +13,6 @@ function FAQSPage() {
   const { t } = useTranslation();
 
   const pageData: CommonPages = useAppSelector((state) => state.commonPages.common_pages);
-  console.log('page data', pageData);
 
   const collapseWrapperRef = useRef<HTMLDivElement>(null);
   const [collapseOpenIndex, setCollapseOpenIndex] = useState<number | null>(null);
