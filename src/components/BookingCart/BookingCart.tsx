@@ -11,7 +11,7 @@ import { useLoading } from '@/hooks/useLoading';
 import { isEmpty, pick } from 'lodash';
 import { ROOM_CAL_PRICE } from '@/store/common/constants';
 import SecondLoading from '../Loading/SecondLoading';
-import { getBookingInfo } from '@/store/booking/bookingSlice';
+import { getBookingRoomInfo } from '@/store/booking/bookingSlice';
 
 const packageFieldPicker = [
   'dbp_activities',
@@ -83,7 +83,7 @@ const BookingCart = () => {
       reservations_business_id,
       room_types,
     };
-    dispatch(getBookingInfo({ ...bodyData, night }));
+    dispatch(getBookingRoomInfo({ ...bodyData, night }));
     dispatch(roomCalculatePrice({ bodyData, router, hotel_slug }));
   };
   return (

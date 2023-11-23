@@ -23,7 +23,9 @@ function BookingPage() {
   const { t } = useTranslation();
   const router = useRouter();
   const { hotel_slug } = useParams();
-  const { booking_info, your_booking_price } = useAppSelector((state) => state.booking);
+  const { booking_info, your_booking_price, booking_room_info, booking_room_price } = useAppSelector(
+    (state) => state.booking,
+  );
   const [currentStep, setCurrentStep] = useState<CurrentStepType>({
     stepNumber: 1,
     type: null,
@@ -36,10 +38,14 @@ function BookingPage() {
   ];
 
   useEffect(() => {
-    if (isEmpty(booking_info) && isEmpty(your_booking_price)) {
-      router.push(Path.HOME(hotel_slug as string));
-      toast.info('Your session has expired. Redirecting to the Home page...');
+    if (
+      (!isEmpty(booking_info) && !isEmpty(your_booking_price)) ||
+      (!isEmpty(booking_room_info) && !isEmpty(booking_room_price))
+    ) {
+      return;
     }
+    router.push(Path.HOME(hotel_slug as string));
+    toast.info('Your session has expired. Redirecting to the Home page...');
   }, [router]);
   // const displayStep = (step: number) => {
   //   switch (step) {

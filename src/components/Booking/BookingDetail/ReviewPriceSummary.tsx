@@ -1,6 +1,7 @@
 import { useAppSelector } from '@/hooks';
 import { formatCurrency } from '@/utils/helper';
 import { useTranslation } from 'react-i18next';
+import { isEmpty } from 'lodash';
 
 function ReviewPriceSummary() {
   const { t } = useTranslation();
@@ -9,7 +10,7 @@ function ReviewPriceSummary() {
   return (
     <div className="border-[1px] border-grey-d9">
       <div className="font-bold bg-grey-f5 px-4 py-2">{t('BOOKING_FORM.SIDEBAR.YOUR_PRICE_SUMMARY')}</div>
-      {your_booking_price && (
+      {!isEmpty(your_booking_price) && (
         <div className="text-sm leading-[1.5] pt-4 pb-6 px-4">
           <div className="flex justify-between mb-2">
             <div className="">
@@ -45,28 +46,52 @@ function ReviewPriceSummary() {
           </div>
         </div>
       )}
-      {booking_room_price && (
+      {!isEmpty(booking_room_price) && (
         <div className="text-sm leading-[1.5] pt-4 pb-6 px-4">
           <div className="flex justify-between mb-2">
             <div className="">
-              <span>{booking_room_price?.adults}</span> x <span>{t('BOOKING_FORM.SIDEBAR.ADULT_PACKAGE')}</span>
+              <span>{booking_room_price?.reservations_rooms?.length}</span> x{' '}
+              <span>{t('SEARCH.BOX_SEARCH.ROOMS')}</span>
             </div>
-            <div>{formatCurrency(business_currency).format(booking_room_price?.adult_price)}</div>
+            <div>{formatCurrency(business_currency).format(booking_room_price?.price_total_room_nom_tax)}</div>
           </div>
           <div className="flex justify-between mb-2">
             <div className="">
-              <span>{booking_room_price?.child}</span> x <span>{t('BOOKING_FORM.SIDEBAR.CHILD_PACKAGE')}</span>
+              <span>{t('BOOKING_FORM.SIDEBAR.EXTRA_SERVICES')}</span>
             </div>
-            <div>{formatCurrency(business_currency).format(booking_room_price?.child_price)}</div>
+            <div>{formatCurrency(business_currency).format(booking_room_price?.price_total_activities_nom_tax)}</div>
+          </div>
+          <div className="flex justify-between mb-2">
+            <div className="">
+              <span>{t('BOOKING_FORM.SIDEBAR.DISCOUNT')}</span>
+            </div>
+            <div>
+              {formatCurrency(business_currency).format(
+                booking_room_price?.discount_offer_price?.total_discount_reservation,
+              )}
+            </div>
+          </div>
+          <div className="flex justify-between mb-2">
+            <div className="">
+              <span>{t('BOOKING_FORM.SIDEBAR.SERVICES_CHARGES')}</span>
+            </div>
+            <div>{formatCurrency(business_currency).format(booking_room_price?.services_charges)}</div>
           </div>
           <div className="font-bold flex justify-between mb-6">
-            <p>{t('BOOKING_FORM.SIDEBAR.YOUR_PRICE_TOTAL')}</p>
-            <p>{formatCurrency(business_currency).format(booking_room_price?.reservations_amount_price)}</p>
+            <p>{t('BOOKING_FORM.SIDEBAR.GRAND_TOTAL')}</p>
+            <p>
+              {formatCurrency(business_currency).format(
+                booking_room_price?.price_total_room_nom_tax +
+                  booking_room_price?.price_total_activities_nom_tax +
+                  booking_room_price?.discount_offer_price?.total_discount_reservation +
+                  booking_room_price?.services_charges,
+              )}
+            </p>
           </div>
           <div>
             <div className="flex justify-between">
               <p>{t('BOOKING_FORM.SIDEBAR.AMOUNT_EX_TAX')}</p>
-              <p>{formatCurrency(business_currency).format(booking_room_price?.reservations_amount_sub)}</p>
+              <p>{formatCurrency(business_currency).format(booking_room_price?.price_total_room_nom_tax)}</p>
             </div>
             {booking_room_price?.taxes_breakdown?.map((tax_item: any, index: number) => (
               <div key={index} className="flex justify-between">
