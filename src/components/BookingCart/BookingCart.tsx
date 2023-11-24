@@ -11,7 +11,7 @@ import { useLoading } from '@/hooks/useLoading';
 import { isEmpty, pick } from 'lodash';
 import { ROOM_CAL_PRICE } from '@/store/common/constants';
 import SecondLoading from '../Loading/SecondLoading';
-import { getBookingInfo } from '@/store/booking/bookingSlice';
+import { getBookingInfo, getBookingRoomInfo, getYourBookingPriceSuccess } from '@/store/booking/bookingSlice';
 
 const packageFieldPicker = [
   'dbp_activities',
@@ -68,7 +68,7 @@ const BookingCart = () => {
         };
       });
       return Array.from({ length: quantity }, (_, index) => {
-        return { activities: index === 0 ? activities : [], adult: 1, room_type_id: room?.rid };
+        return { activities: index === 0 ? activities : [], adult: 1, room_type_id: room?.rid, title: room?.title };
       });
     });
     const bodyData = {
@@ -83,7 +83,13 @@ const BookingCart = () => {
       reservations_business_id,
       room_types,
     };
-    dispatch(getBookingInfo({ ...bodyData, night }));
+
+    /* reset booking_packages_info and booking_packages_price*/
+    dispatch(getBookingInfo(null));
+    dispatch(getYourBookingPriceSuccess(null));
+
+    /* store booking_room_info and booking_room_price */
+    dispatch(getBookingRoomInfo({ ...bodyData, night }));
     dispatch(roomCalculatePrice({ bodyData, router, hotel_slug }));
   };
   return (
