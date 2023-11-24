@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useRoomContext } from '@/contexts/RoomProvider';
 import { isEmpty } from 'lodash';
-
 import QuantityRoomOption from '@/components/RoomCardResult/QuantityRoomOption/QuantityRoomOption';
 import PackageDetail from './QuantityRoomOption/PackageDetail';
 import i18n from '@/i18n/i18n';

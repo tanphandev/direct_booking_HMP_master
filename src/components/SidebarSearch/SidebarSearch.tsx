@@ -1,14 +1,10 @@
 'use client';
 import Image from 'next/image';
 import GG_MAP from "@/../public/assets/image/gmap.jpg"
-
-
 import QUESTION from "@/assets/icons/question.svg"
 import Amenities from "@/assets/icons/Amenities";
 import { useModalContext } from '@/contexts/ModalProvider';
 import { MODAL_NAME } from '@/types/modal';
-import dynamic from 'next/dynamic'
-const BookingSearchBoxNoSSR = dynamic(() => import('../BookingSearchBox/BookingSearchBox'), { ssr: false })
 import { useTranslation } from "react-i18next";
 import i18n from "@/i18n/i18n";
 import { useAppDispatch, useAppSelector } from '@/hooks';
@@ -16,6 +12,7 @@ import { useParams, useRouter } from 'next/navigation';
 import Path from '@/routes/Path';
 import { getCommonPages } from '@/store/commonPages/commonPagesAction';
 import { getDateNowTimestamp } from '@/utils/helper';
+import BookingSearchBox from '@/components/BookingSearchBox/BookingSearchBox';
 const SidebarSearch = () => {
   const { openModal } = useModalContext();
   const { t } = useTranslation();
@@ -40,7 +37,8 @@ const SidebarSearch = () => {
   return (
     <>
       <div className="rounded-t-md bg-[#636363]">
-        <BookingSearchBoxNoSSR />
+        <BookingSearchBox />
+
       </div>
       <button 
         className="rounded-md flex my-4 py-2 px-6 w-full items-center justify-between bg-[#0A7CFF] hover:opacity-90 hover:shadow-lg"
