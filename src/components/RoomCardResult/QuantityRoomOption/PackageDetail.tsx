@@ -4,6 +4,9 @@ import { useTranslation } from 'react-i18next';
 import AddOutlineIcon from '@/assets/icons/AddOulineIcon';
 import SubOutlineIcon from '@/assets/icons/SubOutlineIcon';
 import WarningIcon from '@/assets/icons/WarningIcon';
+import { useModalContext } from '@/contexts/ModalProvider';
+import { MODAL_NAME } from '@/types/modal';
+import DescriptionPackageOfferModal from '@/components/Modal/DescriptionPackageOfferModal';
 
 type Props = {
   roomPackage: any;
@@ -11,9 +14,15 @@ type Props = {
   quantityRoom: number;
   setQuantityRoomValue: Function;
 };
-
+type dbp_descriptions = {
+  lang: string,
+  value: string
+}
 function PackageDetail({ roomPackage, setPackageChose, quantityRoom, setQuantityRoomValue }: Props) {
+  const { openModal,setPayload } = useModalContext();
   const { i18n, t } = useTranslation();
+  const lang = i18n.language
+  const package_des = roomPackage?.dbp_descriptions.find((des: dbp_descriptions) => des.lang === lang).value
   const [choseResult, setChoseResult] = useState<any>();
   const [quantity, setQuantity] = useState<number>(0);
   useEffect(() => {
@@ -34,14 +43,20 @@ function PackageDetail({ roomPackage, setPackageChose, quantityRoom, setQuantity
       return temp;
     });
   }, [choseResult]);
+  const handleOpenDescription = (package_des: string) => {
+      setPayload(package_des)
+      openModal(MODAL_NAME.DECRIPTION_PACKAGE_OFFER_MODAL);
+  };
   return (
     <div key={roomPackage?.id} className="md:m-w-1/3 md:w-1/3 w-full py-2">
       <div
         className={`relative flex flex-col py-6 px-4 mx-2 rounded-md ${quantity === 0 ? 'bg-[#edf5ef]' : 'bg-blue-0a'}`}
       >
-        {quantity === 0 && (
-          <WarningIcon className="absolute top-2 right-2 text-grey-2a cursor-pointer" width="18px" height="18px" />
-        )}
+        {quantity === 0 && package_des !== "" && (
+          <div onClick={()=>{handleOpenDescription(package_des)}}>
+            <WarningIcon className="absolute top-2 right-2 text-grey-2a cursor-pointer" width="18px" height="18px" />
+
+          </div>)}
         {quantity === 0 ? (
           roomPackage?.dbp_short_des.map(
             (des: any, index: number) =>

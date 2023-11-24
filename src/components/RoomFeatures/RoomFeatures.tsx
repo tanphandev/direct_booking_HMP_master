@@ -38,7 +38,6 @@ const RoomFeatures = () => {
       setIsUseEffect(true)
     }
   }, []);
-  console.log("room", roomFeatures)
     return (
     <div className="mt-4">
       <h2 className="font-bold mb-4 pb-2 border-b-2">{t('SEARCH.SEARCH_RESULT_PAGE.ROOM_FEATURES')}</h2>
