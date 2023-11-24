@@ -1,5 +1,6 @@
 import { useAppSelector } from '@/hooks';
 import { useTranslation } from 'react-i18next';
+import { isEmpty } from 'lodash';
 
 import ReviewCheckIn from './ReviewCheckIn';
 import ReviewPriceSummary from './ReviewPriceSummary';
@@ -19,7 +20,7 @@ function BookingDetail() {
           checkOut={booking_info?.check_out || new Date(booking_room_info?.checkout * 1000)}
           night={booking_info?.night || booking_room_info?.night}
         />
-        {roomChoseValue && <RoomSelected />}
+        {!isEmpty(roomChoseValue) && <RoomSelected />}
         <ReviewPriceSummary />
       </div>
     </div>

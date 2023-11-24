@@ -1,25 +1,27 @@
-import { createRef, useEffect } from 'react';
+import { createRef, useEffect, useRef } from 'react';
 import { useStepContext } from '@/contexts/StepProvider';
 import { useTranslation } from 'react-i18next';
+import { useAppSelector } from '@/hooks';
+import { isEmpty } from 'lodash';
 
 import AdditionalInformation, { BookForRef } from './AdditionalInformation';
 import ArrivalTime from './ArrivalTime';
 import InformationForm from './InfomationForm';
-import InformationOfGuests from './InformationOfGuests';
-import SpecialRequire, { SpecialRequireRefType } from './SpecialRequire';
+import { SpecialRequireRefType } from './SpecialRequire';
 import StayManagementCheckbox from './StayManagementCheckbox';
 import { scrollOnTop, trimObjectValues } from '@/utils/helper';
 import { toast } from 'react-toastify';
+import GuestOfRoom from './GuestOfRoom';
 
 function RoomBookingInformation() {
   const { t } = useTranslation();
+  const { booking_room_info } = useAppSelector((state) => state.booking);
   const orderFormRef = createRef<any>();
+  const guestRoomsRef = useRef<any[]>([]);
+  const specialRequiresRef = useRef<SpecialRequireRefType[]>([]);
   const forSomeOneRef = createRef<any>();
   const bookForRef = createRef<BookForRef>();
   const viaTravelXRef = createRef<HTMLInputElement>();
-  const guestFormRef = createRef<any>();
-  const additionalGuestFormRef = createRef<any>();
-  const specialRequireRef = createRef<SpecialRequireRefType>();
   const arrivalTImeRef = createRef<BaseRefProps<ArrivalTimeType>>();
   const {
     handleClick,
@@ -32,6 +34,7 @@ function RoomBookingInformation() {
     setViaTravelX,
     setSpecialRequire,
     setArrivalTime,
+    setRoomTypes,
   } = useStepContext();
 
   /* set data form*/
@@ -43,32 +46,48 @@ function RoomBookingInformation() {
   const handleSubmit = () => {
     orderFormRef.current.formik.submitForm();
     forSomeOneRef?.current?.formik?.submitForm();
-    guestFormRef.current.formik.submitForm();
-    additionalGuestFormRef?.current?.formik?.submitForm();
+    guestRoomsRef?.current?.map((guestOfRoom) => {
+      guestOfRoom?.formik?.submitForm();
+    });
     checkNextStep();
   };
 
   /* check form is valid or not */
   const checkNextStep = () => {
+    const checkGuestOfRoomisValidOrNot = () => {
+      for (let guestRoom of guestRoomsRef?.current) {
+        if (!guestRoom?.formik?.dirty || !guestRoom?.formik?.isValid) return false;
+      }
+      return true;
+    };
     /* check form valid or not */
     const isOrderFormValid = orderFormRef.current?.formik?.dirty && orderFormRef.current?.formik?.isValid;
     const isOrderAdditionalInfoFormValid =
       (forSomeOneRef.current?.formik?.dirty && forSomeOneRef.current?.formik?.isValid) ?? true;
-    const isGuestFormValid = guestFormRef.current?.formik?.dirty && guestFormRef.current?.formik?.isValid;
-    const isAdditionalGuestFormValid =
-      (additionalGuestFormRef.current?.formik?.dirty && additionalGuestFormRef.current?.formik?.isValid) ?? true;
+    const isGuestRoomsValid = checkGuestOfRoomisValidOrNot();
 
-    if (isOrderFormValid && isOrderAdditionalInfoFormValid && isGuestFormValid && isAdditionalGuestFormValid) {
+    if (isOrderFormValid && isOrderAdditionalInfoFormValid && isGuestRoomsValid) {
       /* store Order info */
       setOrderData(trimObjectValues(orderFormRef.current?.formik?.values));
-      /* store guest info */
+      /* store roomtype */
+      const roomTypeTemp = [...booking_room_info?.room_types];
+      roomTypeTemp?.forEach((room, index) => {
+        roomTypeTemp[index] = {
+          ...room,
+          guest_stay: [guestRoomsRef?.current[index]?.formik?.values],
+        };
+        if (!isEmpty(specialRequiresRef?.current[index]?.value)) {
+          roomTypeTemp[index].special_requirements = [specialRequiresRef?.current[index]?.value?.trim()];
+        }
+      });
+      setRoomTypes(roomTypeTemp);
+
+      /* set guest data */
+      //reset guest Data
       setGuestData([]);
-      setGuestData((preValue: any) => [...preValue, trimObjectValues(guestFormRef.current?.formik?.values)]);
-      additionalGuestFormRef.current &&
-        setGuestData((preValue: any) => [
-          ...preValue,
-          trimObjectValues(additionalGuestFormRef.current?.formik?.values),
-        ]);
+      guestRoomsRef?.current?.forEach((guestRoom) => {
+        setGuestData((preValue: any) => [...preValue, trimObjectValues(guestRoom?.formik?.values)]);
+      });
       /* store for someone info*/
       setForSomeOne(trimObjectValues(forSomeOneRef.current?.formik?.values));
       /* store for orther */
@@ -77,8 +96,6 @@ function RoomBookingInformation() {
       setViaTravelX(viaTravelXRef.current?.checked);
       /* store book for */
       setBookFor(bookForRef.current?.value);
-      /* store special require */
-      setSpecialRequire(specialRequireRef.current?.value?.trim());
       /* store arrival time */
       setArrivalTime(arrivalTImeRef.current?.value);
       /* handle next event*/
@@ -90,7 +107,8 @@ function RoomBookingInformation() {
   };
 
   /* handle use order data */
-  const handleUseOrderData = (formRef: any) => {
+  const handleUseOrderData = (guestFormIndex: number) => {
+    console.log('guestFormIndex', guestFormIndex);
     const isOrderFormValid = orderFormRef.current?.formik?.dirty && orderFormRef.current?.formik?.isValid;
     /* validate order form if it is invalid */
     if (!isOrderFormValid) {
@@ -98,7 +116,7 @@ function RoomBookingInformation() {
       return;
     }
     /* set data from order data */
-    formRef?.current?.formik.setValues(orderFormRef.current.formik.values);
+    guestRoomsRef.current[guestFormIndex]?.formik?.setValues(orderFormRef.current.formik.values);
   };
   return (
     <div className="flex-1">
@@ -106,12 +124,26 @@ function RoomBookingInformation() {
       <InformationForm ref={orderFormRef} type="order" />
       <AdditionalInformation ref={bookForRef} forSomeOneRef={forSomeOneRef} />
       <StayManagementCheckbox ref={viaTravelXRef} />
-      <InformationOfGuests
-        guestFormRef={guestFormRef}
-        addtionalGuestFormRef={additionalGuestFormRef}
-        handleUseOrderData={handleUseOrderData}
-      />
-      <SpecialRequire ref={specialRequireRef} />
+      {booking_room_info?.room_types?.map((roomItem: any, index: number) => (
+        <GuestOfRoom
+          key={index}
+          title={roomItem?.title}
+          guestId={`guest-room-${index}`}
+          guestFormRef={(el: any) => {
+            if (el) {
+              guestRoomsRef.current[index] = el;
+            }
+          }}
+          guestFormIndex={index}
+          handleUseOrderData={handleUseOrderData}
+          roomTypeId={roomItem?.room_type_id as number}
+          specialRequireRef={(el: any) => {
+            if (el) {
+              specialRequiresRef.current[index] = el;
+            }
+          }}
+        />
+      ))}
       <ArrivalTime ref={arrivalTImeRef} />
       <div className="text-end mt-8">
         <button
