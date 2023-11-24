@@ -75,8 +75,10 @@ interface ConfirmReservationProps extends Step {}
 
 interface GuestInformationProps {
   inputId: string;
+  title?: string;
   isReuseOrderData?: boolean;
   guestFormRef?: any;
+  guestFormIndex?: number;
   handleUseOrderData?: Function;
 }
 interface ArrivalTimeType {

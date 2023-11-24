@@ -12,6 +12,7 @@ export function StepProvider({ children, handleClick }: { children: React.ReactN
   const [bookFor, setBookFor] = useState<OrderChooseValue>(OrderChooseValue.VALUE1);
   const [specialRequire, setSpecialRequire] = useState(null);
   const [arrivalTime, setArrivalTime] = useState<ArrivalTimeType>();
+  const [roomTypes, setRoomTypes] = useState<any[]>();
   return (
     <StepperContext.Provider
       value={{
@@ -31,6 +32,8 @@ export function StepProvider({ children, handleClick }: { children: React.ReactN
         setSpecialRequire,
         arrivalTime,
         setArrivalTime,
+        roomTypes,
+        setRoomTypes,
         handleClick,
       }}
     >
@@ -57,6 +60,8 @@ export function useStepContext() {
     setSpecialRequire,
     arrivalTime,
     setArrivalTime,
+    roomTypes,
+    setRoomTypes,
     handleClick,
   } = useContext(StepperContext);
 
@@ -77,6 +82,8 @@ export function useStepContext() {
     setSpecialRequire,
     arrivalTime,
     setArrivalTime,
+    roomTypes,
+    setRoomTypes,
     handleClick,
   };
 }

@@ -1,11 +1,14 @@
 import Image from 'next/image';
 import { useAppSelector } from '@/hooks';
 import classNames from 'classnames';
+import { isEmpty } from 'lodash';
 import BookingLayout from '@/layouts/BookingLayout/BookingLayout';
 import OrderInfomation from '../FillInfomation/OrderInfomartion';
+import RoomBookingInformation from '../FillInfomation/RoomBookingInformation';
 
 export default function FillInfo({ currentStep, step }: FillInfoProp) {
   const { setting } = useAppSelector((state) => state.business);
+  const { booking_info, booking_room_info } = useAppSelector((state) => state.booking);
   return (
     <div
       className={classNames({
@@ -25,7 +28,8 @@ export default function FillInfo({ currentStep, step }: FillInfoProp) {
         />
       )}
       <BookingLayout>
-        <OrderInfomation />
+        {!isEmpty(booking_info) && <OrderInfomation />}
+        {!isEmpty(booking_room_info) && <RoomBookingInformation />}
       </BookingLayout>
     </div>
   );

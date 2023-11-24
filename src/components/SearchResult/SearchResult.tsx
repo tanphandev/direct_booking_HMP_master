@@ -1,20 +1,19 @@
-'use client'
-import React from 'react'
-import RoomCardResult from '../RoomCardResult/RoomCardResult'
-import { useAppSelector } from '@/hooks'
+'use client';
+import React from 'react';
+import { useAppSelector } from '@/hooks';
+import RoomCardResult from '../RoomCardResult/RoomCardResult';
+
 const SearchResult = () => {
   const ListRoomAvailable: RoomAvailable[] = useAppSelector((state) => state.room.public_room_available);
-  console.log("room available: ",ListRoomAvailable)
   return (
-    <div className='mt-3'>
-        {ListRoomAvailable?.map((roomAvailable, index) => (
-            <div key={index}>
-            <RoomCardResult room={roomAvailable} />
+    <div className="mt-3">
+      {ListRoomAvailable?.map((roomAvailable, index) => (
+        <div key={index}>
+          <RoomCardResult room={roomAvailable} index={index} />
         </div>
-        ))}
-        
+      ))}
     </div>
-  )
-}
+  );
+};
 
-export default SearchResult 
+export default SearchResult;

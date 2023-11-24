@@ -4,11 +4,14 @@ import { Provider } from 'react-redux';
 
 import store from '@/store';
 import { ModalProvider } from '@/contexts/ModalProvider';
+import { RoomProvider } from '@/contexts/RoomProvider';
 
 function ProviderWrapper({ children }: { children: React.ReactNode }) {
   return (
     <Provider store={store}>
-      <ModalProvider>{children}</ModalProvider>
+      <ModalProvider>
+        <RoomProvider>{children}</RoomProvider>
+      </ModalProvider>
     </Provider>
   );
 }

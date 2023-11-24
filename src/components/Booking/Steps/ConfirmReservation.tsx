@@ -6,13 +6,13 @@ import { useTranslation } from 'react-i18next';
 import classNames from 'classnames';
 
 import Path from '@/routes/Path';
-import { PACKAGE_CREATE } from '@/store/common/constants';
+import { PACKAGE_CREATE, ROOM_CREATE } from '@/store/common/constants';
 import SecondLoading from '@/components/Loading/SecondLoading';
 
 export default function ConfirmReservation({ currentStep, step }: ConfirmReservationProps) {
   const { t } = useTranslation();
   const { hotel_slug } = useParams();
-  const { loading } = useLoading([PACKAGE_CREATE]);
+  const { loading } = useLoading([PACKAGE_CREATE, ROOM_CREATE]);
   return (
     <div
       className={classNames('flex justify-center my-4', {

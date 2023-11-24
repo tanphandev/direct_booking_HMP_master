@@ -1,19 +1,21 @@
-import { ChangeEvent } from 'react';
-import classNames from 'classnames';
-import InformationForm from './InfomationForm';
 import { useTranslation } from 'react-i18next';
+import classNames from 'classnames';
+import { ChangeEvent } from 'react';
+import InformationForm from './InfomationForm';
 
 function GuestInformation({
   inputId,
+  title,
   isReuseOrderData = false,
   guestFormRef,
+  guestFormIndex,
   handleUseOrderData = () => {},
 }: GuestInformationProps) {
   const { t } = useTranslation();
   const handleChecked = (e: ChangeEvent<HTMLInputElement>) => {
     const isChecked = e.target.checked;
     if (isChecked) {
-      handleUseOrderData(guestFormRef);
+      handleUseOrderData(typeof guestFormIndex === 'number' ? guestFormIndex : guestFormRef);
     }
   };
   return (
@@ -24,7 +26,7 @@ function GuestInformation({
             'border-b-2 border-grey-21 py-2 mb-4': isReuseOrderData,
           })}
         >
-          <h3 className="font-bold ">{t('BOOKING_FORM.STEP1.GUEST_INFORMATION_TITLE')}</h3>
+          <h3 className="font-bold ">{title ? title : t('BOOKING_FORM.STEP1.GUEST_INFORMATION_TITLE')}</h3>
           <div
             className={classNames('flex items-center gap-x-2 cursor-pointer', {
               hidden: !isReuseOrderData,
