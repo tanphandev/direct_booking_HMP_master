@@ -16,8 +16,6 @@ function* getCommonPages( {payload} : any): Generator {
       pages_slug,
       datecreated,
     });
-  
-
     yield put(getCommonPageSuccess(data));
   } catch (error: any) {
     yield put(getCommonPageFailed(error));

@@ -8,10 +8,6 @@ import { getDateNowTimestamp } from "@/utils/helper";
 import { getPublicRoomAvailable } from "@/store/room/roomAction";
 import { getBusiness } from "@/store/business/businessAction";
 import { useEffect, useState } from "react";
-// import { useLoading } from '@/hooks/useLoading';
-// import { BUSINESS } from '@/store/common/constants';
-// import PrimaryLoading from '@/components/Loading/PrimaryLoading';
-
 
 const RoomFeatures = () => {
   const roomFeatures: RoomTypeFeature[] = useAppSelector((state) => state.room.public_room_available[0]?.room_type_features);
@@ -30,17 +26,19 @@ const RoomFeatures = () => {
   const child = searchParams.get('children')
   const datecreated = getDateNowTimestamp();
   const router = useRouter()
-  // const { loading } = useLoading([BUSINESS]);
   const [isUseEffect,setIsUseEffect]=useState(false)
+  useEffect (()=>{
+    if(!basic_business_info){
+      dispatch(getBusiness({ business_slug: hotel_slug, router }));
+    }
+  },[])
   useEffect(() => {
     if (!roomFeatures&&!isUseEffect) {
-      dispatch(getBusiness({ business_slug: hotel_slug, router }));
       dispatch(getPublicRoomAvailable({ bid, check_in, check_out, adults, child, datecreated, hotel_slug, router}))
       setIsUseEffect(true)
     }
   }, []);
   console.log("room", roomFeatures)
-  // if (loading) return <PrimaryLoading />;
     return (
     <div className="mt-4">
       <h2 className="font-bold mb-4 pb-2 border-b-2">{t('SEARCH.SEARCH_RESULT_PAGE.ROOM_FEATURES')}</h2>

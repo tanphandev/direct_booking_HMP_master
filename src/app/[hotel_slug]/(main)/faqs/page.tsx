@@ -1,5 +1,5 @@
 'use client';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
 import { useModalContext } from '@/contexts/ModalProvider';
 import { useOnClickOutside } from '@/hooks/useClickOutSide';
@@ -8,12 +8,26 @@ import QuestionIcon from '@/assets/icons/QuestionIcon';
 import { MODAL_NAME } from '@/types/modal';
 import i18n from '@/i18n/i18n';
 import { useTranslation } from 'react-i18next';
-import { useAppSelector } from '@/hooks';
+import { useAppDispatch, useAppSelector } from '@/hooks';
+import { useParams } from 'next/navigation';
+import { getDateNowTimestamp } from '@/utils/helper';
+import { getCommonPages } from '@/store/commonPages/commonPagesAction';
 function FAQSPage() {
   const { t } = useTranslation();
 
   const pageData: CommonPages = useAppSelector((state) => state.commonPages.common_pages);
-
+  const dispatch = useAppDispatch();
+  const [isUseEffect,setIsUseEffect]=useState(false)
+  const hotel_slug  = useParams().hotel_slug
+  useEffect(() => {
+    if (pageData&&!isUseEffect) {
+      const business_slug = hotel_slug
+      const datecreated = getDateNowTimestamp()
+      const pages_slug = 'faqs'
+      dispatch(getCommonPages({ business_slug, datecreated, pages_slug }));
+      setIsUseEffect(true)
+    }
+  },[]);
   const collapseWrapperRef = useRef<HTMLDivElement>(null);
   const [collapseOpenIndex, setCollapseOpenIndex] = useState<number | null>(null);
   const { openModal } = useModalContext();
