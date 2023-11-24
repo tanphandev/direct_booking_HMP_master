@@ -36,6 +36,7 @@ const SidebarSearch = () => {
     const pages_slug = 'faqs'
     dispatch(getCommonPages({ business_slug, datecreated, pages_slug }));
   };
+  
   return (
     <>
       <div className="rounded-t-md bg-[#636363]">

@@ -7,13 +7,19 @@ import { useOnClickOutside } from '@/hooks/useClickOutSide';
 import Calendar from '@/components/BookingChoose/Calendar/Calendar';
 import '@/i18n/i18n';
 import { useTranslation } from "react-i18next";
-import { useParams, useRouter } from 'next/navigation';
+import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import { useAppDispatch, useAppSelector } from '@/hooks';
-import { getDateFormatTimestamp } from '@/utils/helper';
+import { getDateFormatTimestamp, getDateNowTimestamp } from '@/utils/helper';
 import { getPublicRoomAvailable } from '@/store/room/roomAction';
-import { toast } from 'react-toastify';
+
 const BookingSearchBox = () => {
-  const { hotel_slug,adults,child,datecreated} = useParams();
+  const  hotel_slug = useParams().hotel_slug;
+  const searchParams = useSearchParams()
+  const check_in = searchParams.get('checkin')
+  const check_out = searchParams.get('checkout')
+  const adults = searchParams.get('adults')
+  const child = searchParams.get('children')
+  const datecreated = getDateNowTimestamp();
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { basic_business_info } = useAppSelector((state) => state.business);
@@ -23,15 +29,10 @@ const BookingSearchBox = () => {
   if (typeof document !== 'undefined') {
     calendarRef = document.querySelector('.rdrDateRangePickerWrapper') as Element;
   }
-  const currentDay = new Date();
-  const nextDay = new Date(currentDay);
-  // const {check_in, check_out}= useParams()
   const [rangeDate, setRangeDate] = useState<CalendarRangeProps[]>([
     {
-      startDate: currentDay,
-      endDate: nextDay,
-      // startDate: check_in,
-      // endDate: check_out,
+      startDate: new Date(parseInt(check_in||"")*1000),
+      endDate: new Date(parseInt(check_out||"")*1000),
       key: 'selection',
     },
   ]);

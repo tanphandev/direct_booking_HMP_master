@@ -11,6 +11,7 @@ import { useLoading } from '@/hooks/useLoading';
 import { CHECK_COUPON_CODE } from '@/store/common/constants';
 import SecondLoading from '@/components/Loading/SecondLoading';
 import { getPublicRoomAvailable } from '@/store/room/roomAction';
+import Path from '@/routes/Path';
 
 function Rooms() {
   const { hotel_slug } = useParams();
@@ -42,7 +43,6 @@ function Rooms() {
     const check_out = checkInRef.current && getDateFormatTimestamp(checkInRef.current?.endDate);
     const adults = personQuantityRef.current?.adults;
     const child = personQuantityRef.current?.child;
-    console.log("child",child)
     const datecreated = getDateNowTimestamp();
     dispatch(getPublicRoomAvailable({ bid, check_in, check_out, adults, child, datecreated, hotel_slug, router }));
   };
