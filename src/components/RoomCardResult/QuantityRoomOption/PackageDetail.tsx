@@ -6,7 +6,6 @@ import SubOutlineIcon from '@/assets/icons/SubOutlineIcon';
 import WarningIcon from '@/assets/icons/WarningIcon';
 import { useModalContext } from '@/contexts/ModalProvider';
 import { MODAL_NAME } from '@/types/modal';
-import DescriptionPackageOfferModal from '@/components/Modal/DescriptionPackageOfferModal';
 
 type Props = {
   roomPackage: any;
@@ -48,7 +47,7 @@ function PackageDetail({ roomPackage, setPackageChose, quantityRoom, setQuantity
       openModal(MODAL_NAME.DECRIPTION_PACKAGE_OFFER_MODAL);
   };
   return (
-    <div key={roomPackage?.id} className="md:m-w-1/3 md:w-1/3 w-full py-2">
+    <div key={roomPackage?.id} className="md:m-w-1/3 md:w-1/3 w-full py-2 h-full">
       <div
         className={`relative flex flex-col py-6 px-4 mx-2 rounded-md ${quantity === 0 ? 'bg-[#edf5ef]' : 'bg-blue-0a'}`}
       >
@@ -61,13 +60,13 @@ function PackageDetail({ roomPackage, setPackageChose, quantityRoom, setQuantity
           roomPackage?.dbp_short_des.map(
             (des: any, index: number) =>
               des.lang === i18n.language && (
-                <div key={index} className="mb-4 h-[28px]">
+                <div key={index} className="mb-4 ">
                   {des.value}
                 </div>
               ),
           )
         ) : (
-          <div className="flex items-center gap-1 mb-4">
+          <div className="flex items-center gap-1 mb-4 ">
             <button
               onClick={() => {
                 setQuantity(quantity + 1);

@@ -11,7 +11,7 @@ interface RoomCardResultProps {
   room: RoomAvailable;
   index: number;
 }
-const RoomCardResult: React.FC<RoomCardResultProps> = ({ room, index }) => {
+const RoomCardResult: React.FC<RoomCardResultProps> = ({ room }) => {
   const { t } = useTranslation();
   const [showSlider, setShowSlider] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);

@@ -40,8 +40,8 @@ function AskQuestionModal() {
   }
   return (
     <div className="z-20 flex justify-center items-center fixed top-0 left-0 right-0 bottom-0 bg-black-0.3">
-      <div id="modal" ref={modalRef} className="transition-all animate-fadeIn ask-question-modal relative ">
-        <div className=" max-w-3xl w-full h-full md:max-h-[80vh] sm:h-auto bg-white rounded-[4px]">
+    <div id="modal" ref={modalRef} className="transition-all animate-fadeIn ask-question-modal relative">
+      <div className="w-[100vw] h-[100vh] sm:w-[80vw] sm:h-auto bg-white rounded-[4px]">
           <h2 className="text-grey-21 font-semibold px-8 py-4">{t('SEARCH.SEARCH_RESULT_PAGE.ASK_A_QUESTION_TITLE')}</h2>
           <div className="lg:h-[424px] lg:overflow-y-auto px-8">
             <InputField

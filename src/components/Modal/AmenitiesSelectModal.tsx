@@ -11,11 +11,12 @@ function AmenitiesSelectModal() {
     const lang = i18n.language
     const pathIcon = "/assets/icons";
     const modalRef = useRef<HTMLDivElement>(null);
-    const { closeModalWithAnimation } = useModalContext();
+    const { setPayload,closeModalWithAnimation ,payload} = useModalContext();
     useOnClickOutside(modalRef, () => {
         closeModalWithAnimation(150);
     });
-    const [selectedAmenities, setSelectedAmenities] = useState<RoomTypeFeature[]>([])
+    const [selectedAmenities, setSelectedAmenities] = useState<RoomTypeFeature[]>(payload||[])
+    console.log("selec",selectedAmenities)
     const amenities: RoomTypeFeature[] = useAppSelector((state) => state.room.public_room_available[0]?.room_type_amenities);
     const handleCheckedAmenity = (e: ChangeEvent<HTMLInputElement>, amenityChecked: RoomTypeFeature) => {
         const checked = selectedAmenities.find((amenity) => amenity.custom_id === amenityChecked.custom_id);
@@ -25,6 +26,7 @@ function AmenitiesSelectModal() {
             :[...selectedAmenities, amenityChecked]
             )
     };
+    setPayload(selectedAmenities)
     return (
         <div className="z-20 flex justify-center items-center fixed top-0 left-0 right-0 bottom-0 bg-black-0.3">
             <div id="modal" ref={modalRef} className="transition-all animate-fadeIn  relative">
@@ -40,6 +42,7 @@ function AmenitiesSelectModal() {
                                                 type="checkbox"
                                                 className="mr-2 w-4 h-4 "
                                                 onChange={(e) => handleCheckedAmenity(e, amenity)}
+                                                checked={selectedAmenities.find((a) => a.custom_id === amenity.custom_id) !== undefined}
                                             />
                                             <Image
                                                 src={`${pathIcon}/${amenity.custom_icon.replace('pro:', '')}`}
