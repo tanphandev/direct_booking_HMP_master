@@ -12,14 +12,15 @@ import { disableLoading, enableLoading } from '../common/commonSlice';
 import { PUBLIC_ROOM_AVAILABLE } from '../common/constants';
 import Path from '@/routes/Path';
 
-function* getPublicRoomAvailable( {payload} : any): Generator {
+function* getPublicRoomAvailable({ payload }: any): Generator {
 
-  const  {bid,check_in,check_out,adults,child, datecreated,hotel_slug, router}  = payload;
+  const { bid, check_in, check_out, adults, child, datecreated, hotel_slug, router } = payload;
+  console.log(payload)
   yield put(enableLoading(PUBLIC_ROOM_AVAILABLE));
   try {
     const data: any = yield call(ApiCaller.get, API.public_room_available, {
       bid,
-      parameters:{
+      parameters: {
         check_in: check_in,
         check_out: check_out,
         adults: adults,
@@ -27,10 +28,9 @@ function* getPublicRoomAvailable( {payload} : any): Generator {
       },
       datecreated,
     });
-  
+    router.push(Path.SEARCH_RESULT(hotel_slug, check_in, check_out, adults, child));
 
     yield put(getPublicRoomAvailableSuccess(data));
-    router.push(Path.SEARCH_RESULT(hotel_slug,check_in,check_out,2,0));
   } catch (error: any) {
     yield put(getPublicRoomAvailableFailed(error));
   } finally {

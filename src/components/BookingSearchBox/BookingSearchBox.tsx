@@ -2,18 +2,30 @@
 import ArrowDown from '@/assets/icons/ArrowDown';
 import CheckinNew from '@/assets/icons/CheckinNew';
 import CheckoutNew from '@/assets/icons/CheckoutNew';
-import { createRef, useImperativeHandle, useState } from 'react';
+import { createRef, useImperativeHandle, useRef, useState } from 'react';
 import { useOnClickOutside } from '@/hooks/useClickOutSide';
 import Calendar from '@/components/BookingChoose/Calendar/Calendar';
 import '@/i18n/i18n';
-import { useTranslation } from "next-i18next";
-import { useParams, useRouter } from 'next/navigation';
+import { useTranslation } from 'react-i18next';
+import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import { useAppDispatch, useAppSelector } from '@/hooks';
-import { getDateFormatTimestamp } from '@/utils/helper';
+import { getDateFormatTimestamp, getDateNowTimestamp } from '@/utils/helper';
 import { getPublicRoomAvailable } from '@/store/room/roomAction';
-import { toast } from 'react-toastify';
+import SecondLoading from '../Loading/SecondLoading';
+import { useLoading } from '@/hooks/useLoading';
+import { PUBLIC_ROOM_AVAILABLE } from '@/store/common/constants';
+
 const BookingSearchBox = () => {
-  const { hotel_slug,adults,child,datecreated} = useParams();
+  const displayCheckInRef = useRef<HTMLDivElement>(null);
+  const displayCheckOutRef = useRef<HTMLDivElement>(null);
+  const { loading } = useLoading([PUBLIC_ROOM_AVAILABLE]);
+  const hotel_slug = useParams().hotel_slug;
+  const searchParams = useSearchParams();
+  const check_in = searchParams.get('checkin');
+  const check_out = searchParams.get('checkout');
+  const adults = searchParams.get('adults');
+  const child = searchParams.get('children');
+  const datecreated = getDateNowTimestamp();
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { basic_business_info } = useAppSelector((state) => state.business);
@@ -23,15 +35,10 @@ const BookingSearchBox = () => {
   if (typeof document !== 'undefined') {
     calendarRef = document.querySelector('.rdrDateRangePickerWrapper') as Element;
   }
-  const currentDay = new Date();
-  const nextDay = new Date(currentDay);
-  // const {check_in, check_out}= useParams()
   const [rangeDate, setRangeDate] = useState<CalendarRangeProps[]>([
     {
-      startDate: currentDay,
-      endDate: nextDay,
-      // startDate: check_in,
-      // endDate: check_out,
+      startDate: new Date(parseInt(check_in || '') * 1000),
+      endDate: new Date(parseInt(check_out || '') * 1000),
       key: 'selection',
     },
   ]);
@@ -50,19 +57,20 @@ const BookingSearchBox = () => {
     setIsHideCheckinCalendar(!isHideCheckinCalendar);
   };
 
-  useOnClickOutside(calendarRef, () => {
-    setIsHideCheckinCalendar(true);
+  useOnClickOutside(calendarRef, (event) => {
+    if (displayCheckInRef.current && !displayCheckInRef.current.contains(event.target as Node)) {
+      setIsHideCheckinCalendar(true);
+    }
   });
   const handleLoadRoomAvailable = () => {
     const bid = basic_business_info.bid;
     const check_in = checkInRef.current && getDateFormatTimestamp(checkInRef.current?.startDate);
     const check_out = checkInRef.current && getDateFormatTimestamp(checkInRef.current?.endDate);
-    dispatch(getPublicRoomAvailable({ bid, check_in, check_out, adults, child, datecreated, hotel_slug, router }))
+    dispatch(getPublicRoomAvailable({ bid, check_in, check_out, adults, child, datecreated, hotel_slug, router }));
   };
   return (
     <div className={'flex flex-col w-full px-2 py-2 md:px-4 lg:px-6 lg:py-3'}>
       <div className={'flex items-center justify-between'}>
-
         <span className={' text-xl lg:text-2xl text-white font-light '}>{t('SEARCH.BOX_SEARCH.SEARCH')}</span>
 
         <button className="" onClick={toggleSearchBox}>
@@ -72,10 +80,13 @@ const BookingSearchBox = () => {
       {isSearchBoxVisible && (
         <div className={' flex flex-col border-1 pb-2'}>
           <div className={'pt-5 relative'}>
-
             <h4 className="text-white pb-2 text-md">{t('SEARCH.BOX_SEARCH.CHECKIN_DATE')}</h4>
 
-            <div onClick={toggleCheckinCalendar} className={'flex items-center bg-white p-2 rounded-md'}>
+            <div
+              ref={displayCheckInRef}
+              onClick={toggleCheckinCalendar}
+              className={'flex items-center bg-white p-2 rounded-md'}
+            >
               <CheckinNew />
               <h3 className={'pl-3'}>{rangeDate[0].startDate.toLocaleDateString()}</h3>
             </div>
@@ -89,15 +100,24 @@ const BookingSearchBox = () => {
           <div className={'pt-5 relative'}>
             <h4 className="text-white pb-2 text-md">{t('SEARCH.BOX_SEARCH.CHECKOUT_DATE')}</h4>
 
-            <div onClick={toggleCheckinCalendar} className={'flex items-center bg-white p-2 rounded-md'}>
+            <div
+              ref={displayCheckOutRef}
+              onClick={toggleCheckinCalendar}
+              className={'flex items-center bg-white p-2 rounded-md'}
+            >
               <CheckoutNew />
               <h3 className={'pl-3'}>{rangeDate[0].endDate.toLocaleDateString()}</h3>
             </div>
           </div>
-          <h4 className="text-md py-5 text-white">{t('SEARCH.BOX_SEARCH.NIGHTS_STAY',{value:quantityNight})}</h4>
-          <button onClick={handleLoadRoomAvailable}className={`px-6 bg-blue-600 py-2 text-md rounded-md text-white uppercase bg-[#0A7CFF]`}>
-          {t('SEARCH.BOX_SEARCH.SEARCH_BUTTON')}
-          </button>
+          <h4 className="text-md py-5 text-white">{t('SEARCH.BOX_SEARCH.NIGHTS_STAY', { value: quantityNight })}</h4>
+          <SecondLoading isLoading={loading}>
+            <button
+              onClick={handleLoadRoomAvailable}
+              className={`w-full h-full px-6 bg-blue-600 py-2 text-md rounded-md text-white uppercase bg-[#0A7CFF]`}
+            >
+              {t('SEARCH.BOX_SEARCH.SEARCH_BUTTON')}
+            </button>
+          </SecondLoading>
         </div>
       )}
     </div>

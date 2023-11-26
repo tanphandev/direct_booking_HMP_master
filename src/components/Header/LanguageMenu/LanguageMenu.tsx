@@ -58,7 +58,7 @@ function LanguageMenu() {
       </div>
       <ul
         ref={languageMenuRef}
-        className="hidden absolute top-8 right-0 lg:left-0 w-[112px] bg-white rounded-md shadow-custom_1 py-2"
+        className="hidden absolute top-8 right-0 lg:left-0 w-[112px] bg-white rounded-md shadow-custom_1 py-2 z-10"
       >
         {languages?.map((item: languageProps, index: number) => (
           <li

@@ -1,10 +1,9 @@
 'use client';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'react-i18next';
 import { useRoomContext } from '@/contexts/RoomProvider';
 import { isEmpty } from 'lodash';
-
 import QuantityRoomOption from '@/components/RoomCardResult/QuantityRoomOption/QuantityRoomOption';
 import PackageDetail from './QuantityRoomOption/PackageDetail';
 import i18n from '@/i18n/i18n';
@@ -12,8 +11,7 @@ interface RoomCardResultProps {
   room: RoomAvailable;
   index: number;
 }
-
-const RoomCardResult: React.FC<RoomCardResultProps> = ({ room, index }) => {
+const RoomCardResult: React.FC<RoomCardResultProps> = ({ room }) => {
   const { t } = useTranslation();
   const [showSlider, setShowSlider] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);

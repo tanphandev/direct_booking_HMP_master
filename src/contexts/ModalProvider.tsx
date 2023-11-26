@@ -7,6 +7,9 @@ import { MODAL_NAME } from '@/types/modal';
 import { sleep } from '@/utils/helper';
 import AskQuestionModal from '@/components/Modal/AskQuestionModal';
 import HMPMap from '@/components/Modal/HMPMapModal';
+import AskQuestionThankYouModal from '@/components/Modal/AskQuestionThankYouModal';
+import AmenitiesSelectModal from '@/components/Modal/AmenitiesSelectModal';
+import DescriptionPackageOfferModal from '@/components/Modal/DescriptionPackageOfferModal';
 
 type ModalContextType = {
   modal: MODAL_NAME;
@@ -27,6 +30,12 @@ const Modal: any = {
   [MODAL_NAME.TRAVELX]: <TravelXModal />,
   [MODAL_NAME.ASK_QUESTION]: <AskQuestionModal />,
   [MODAL_NAME.HMP_MAP]: <HMPMap />,
+  [MODAL_NAME.ASK_A_QUESTION_THANK_YOU]: <AskQuestionThankYouModal />,
+  [MODAL_NAME.AMENITIES_SELECT_MODAL]: <AmenitiesSelectModal />,
+  [MODAL_NAME.DECRIPTION_PACKAGE_OFFER_MODAL]: <DescriptionPackageOfferModal />,
+
+  
+  
 };
 
 // ============================= Use modal context ============================ //

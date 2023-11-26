@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useAppSelector } from '.';
 
 export const useLoading = (sections: string[]) => {
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
   const { loading: loadingItems } = useAppSelector((state) => state.common);
   useEffect(() => {
     if (!loadingItems.length) setLoading(false);

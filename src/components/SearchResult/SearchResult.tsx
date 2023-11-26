@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import { useAppSelector } from '@/hooks';
-import RoomCardResult from '../RoomCardResult/RoomCardResult';
+import RoomCardResult from '@/components/RoomCardResult/RoomCardResult';
 
 const SearchResult = () => {
   const ListRoomAvailable: RoomAvailable[] = useAppSelector((state) => state.room.public_room_available);
