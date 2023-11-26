@@ -55,7 +55,7 @@ function VerifyRoomDetail() {
     !isEmpty(arrivalTime.arrivalAt) && (bodyData.res_arrival_at = arrivalTime.arrivalAt);
     !isEmpty(arrivalTime.departingFrom) && (bodyData.res_departing_from = arrivalTime.departingFrom);
     !isEmpty(arrivalTime.via) && (bodyData.res_departing_via = arrivalTime.via);
-    console.log('bodyData', bodyData);
+
     /* call api */
     dispatch(roomCreate({ bodyData }));
     /* next step */
@@ -75,10 +75,10 @@ function VerifyRoomDetail() {
           country={orderData?.country}
         />
       </div>
-      {/* guest of info */}
+      {/* guest of room */}
       <div>
         {roomTypes?.map((room: any, index: number) => (
-          <RoomTypeInfo key={index} room={room} />
+          <RoomTypeInfo key={index} room={room} index={index} />
         ))}
       </div>
       {/* Arrival Plan */}

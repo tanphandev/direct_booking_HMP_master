@@ -5,7 +5,6 @@ import RoomDetail from './RoomDetail';
 function RoomSelected() {
   const { t } = useTranslation();
   const { roomChoseValue } = useRoomContext();
-  console.log('roomChoseValue', roomChoseValue);
   return (
     <div className="border-[1px] border-grey-d9 mb-6">
       <div className="font-bold bg-grey-f5 px-4 py-2">{t('BOOKING_FORM.SIDEBAR.YOU_SELECTED')}</div>

@@ -44,6 +44,9 @@ const bookingSlice = createSlice({
     getReservationFailed: (state, action) => {
       state.error = action.payload;
     },
+    resetError: (state) => {
+      state.error = null;
+    },
   },
 });
 
@@ -58,5 +61,6 @@ export const {
   getBookingRoomPriceFailed,
   getReservationSuccess,
   getReservationFailed,
+  resetError,
 } = bookingSlice.actions;
 export default bookingSlice.reducer;
