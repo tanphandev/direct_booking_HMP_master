@@ -5,7 +5,7 @@ import { useAppSelector } from '@/hooks';
 import i18n from '@/i18n/i18n';
 
 import ArrowDown from '@/assets/icons/ArrowDown';
-import { languageProps } from '@/types/language';
+import { languageProps } from '@/types/Language';
 
 function LanguageMenu() {
   const { db_languages: defaultLanguage, db_enable_languages: languages } = useAppSelector(
