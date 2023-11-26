@@ -7,6 +7,7 @@ import { MODAL_NAME } from '@/types/modal';
 import { HANDLE_STATUS } from '@/types/handle';
 import { useTranslation } from 'next-i18next';
 import { formatCurrency } from '@/utils/helper';
+import classNames from 'classnames';
 
 type PackageItemDetail = {
   width?: string;
@@ -81,7 +82,15 @@ function PackageItemDetail({
         <p className="line-clamp-2">{packageDetail.packages_note}</p>
       </div>
       <div className="w-full text-end">
-        <button onClick={showPackageDetail} className=" hover:text-grey-21 underline">
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            showPackageDetail();
+          }}
+          className={classNames('text-blue-09 hover:!text-grey-21 underline', {
+            '!text-white': isActive,
+          })}
+        >
           {t('HOMEPAGE.MORE_DETAILS')}
         </button>
       </div>
