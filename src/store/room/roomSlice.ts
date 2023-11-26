@@ -10,7 +10,7 @@ const roomSlice = createSlice({
   name: 'room',
   initialState: initialState,
   reducers: {
-      getPublicRoomAvailableSuccess: (state, action) => {
+    getPublicRoomAvailableSuccess: (state, action) => {
       state.public_room_available = action.payload;
     },
     getPublicRoomAvailableFailed: (state, action) => {

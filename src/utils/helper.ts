@@ -15,6 +15,7 @@ export const getDateFormatTimestamp = (date: string) => {
   return Math.floor(new Date(date).getTime() / 1000); // Convert to seconds
 };
 
+
 export const formatCurrency = (currency: CurrencyType) => {
   return new Intl.NumberFormat(currencyCountry[currency]?.locate, {
     style: 'currency',

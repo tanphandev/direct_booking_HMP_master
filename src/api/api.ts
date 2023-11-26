@@ -8,6 +8,7 @@ const API = {
   room_create: 'public/public_book_reservations/direct_booking_create',
   public_room_available: 'public/public_room_available',
   get_common_pages_by_slug: 'common_pages/get_common_pages_by_slug',
+  send_questions:'public/public_book_reservations/send_questions'
 };
 
 export default API;
