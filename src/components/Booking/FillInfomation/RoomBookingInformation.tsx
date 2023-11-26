@@ -10,8 +10,8 @@ import InformationForm from './InfomationForm';
 import { SpecialRequireRefType } from './SpecialRequire';
 import StayManagementCheckbox from './StayManagementCheckbox';
 import { scrollOnTop, trimObjectValues } from '@/utils/helper';
-import { toast } from 'react-toastify';
 import GuestOfRoom from './GuestOfRoom';
+import { toast } from 'react-toastify';
 
 function RoomBookingInformation() {
   const { t } = useTranslation();
@@ -32,7 +32,6 @@ function RoomBookingInformation() {
     setForOther,
     setBookFor,
     setViaTravelX,
-    setSpecialRequire,
     setArrivalTime,
     setRoomTypes,
   } = useStepContext();
@@ -108,7 +107,6 @@ function RoomBookingInformation() {
 
   /* handle use order data */
   const handleUseOrderData = (guestFormIndex: number) => {
-    console.log('guestFormIndex', guestFormIndex);
     const isOrderFormValid = orderFormRef.current?.formik?.dirty && orderFormRef.current?.formik?.isValid;
     /* validate order form if it is invalid */
     if (!isOrderFormValid) {

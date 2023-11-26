@@ -1,14 +1,24 @@
-import { isEmpty } from 'lodash';
+import { forwardRef, useImperativeHandle, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
+import { isEmpty } from 'lodash';
 import PriceInclude from '../FillInfomation/PriceInclude';
 import ContactInfo from './ContactInfo';
+import OtherPeopleToReservation from './OtherPeopleToReservation';
 
 type Props = {
   room: any;
+  index: number;
 };
-function RoomTypeInfo({ room }: Props) {
+
+const RoomTypeInfo = forwardRef<{}, Props>(function Component({ room, index }, ref) {
   const { t } = useTranslation();
-  console.log('room?.special_requirements', room?.special_requirements);
+  const otherPeopleFormRef = useRef<any[]>([]);
+
+  useImperativeHandle(ref, () => ({
+    otherPeopleRef: otherPeopleFormRef,
+  }));
+
+  const handleSubmit = () => {};
   return (
     <div className="mt-8">
       <h3 className="font-bold border-b-2 border-grey-21 mb-4 py-2 ">{room?.title}</h3>
@@ -19,6 +29,12 @@ function RoomTypeInfo({ room }: Props) {
         country={room?.guest_stay[0]?.country}
       />
       <PriceInclude />
+      <OtherPeopleToReservation
+        room={room}
+        otherPeopleFormRef={otherPeopleFormRef}
+        index={index}
+        handleSubmit={handleSubmit}
+      />
       {/* Special requirements */}
       {!isEmpty(room?.special_requirements) && (
         <div>
@@ -32,6 +48,6 @@ function RoomTypeInfo({ room }: Props) {
       )}
     </div>
   );
-}
+});
 
 export default RoomTypeInfo;

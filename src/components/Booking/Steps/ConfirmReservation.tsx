@@ -9,14 +9,14 @@ import Path from '@/routes/Path';
 import { PACKAGE_CREATE, ROOM_CREATE } from '@/store/common/constants';
 import SecondLoading from '@/components/Loading/SecondLoading';
 import { useAppSelector } from '@/hooks';
+import { isEmpty } from 'lodash';
 
 export default function ConfirmReservation({ currentStep, step }: ConfirmReservationProps) {
   const { t } = useTranslation();
   const { hotel_slug } = useParams();
   const { loading } = useLoading([PACKAGE_CREATE, ROOM_CREATE]);
   const error = useAppSelector((state) => state.booking.error);
-  console.log('errorr', error);
-  if (error)
+  if (!isEmpty(error))
     return (
       <div
         className={classNames('flex justify-center my-4', {

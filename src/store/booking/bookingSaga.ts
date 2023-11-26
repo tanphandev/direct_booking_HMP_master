@@ -14,6 +14,7 @@ import {
   getReservationSuccess,
   getYourBookingPriceFailed,
   getYourBookingPriceSuccess,
+  resetError,
 } from './bookingSlice';
 import Path from '@/routes/Path';
 import { toast } from 'react-toastify';
@@ -59,6 +60,7 @@ function* packageCalculatePrice({ payload }: any): Generator {
 
 function* packageCreate({ payload }: any): Generator {
   const { bodyData } = payload;
+  yield put(resetError());
   yield put(enableLoading(PACKAGE_CREATE));
   try {
     const data: any = yield call(ApiCaller.post, API.package_create, bodyData);
@@ -88,6 +90,7 @@ function* roomCalculatePrice({ payload }: any): Generator {
 
 function* roomCreate({ payload }: any): Generator {
   const { bodyData } = payload;
+  yield put(resetError());
   yield put(enableLoading(ROOM_CREATE));
   try {
     const data: any = yield call(ApiCaller.post, API.room_create, bodyData);
