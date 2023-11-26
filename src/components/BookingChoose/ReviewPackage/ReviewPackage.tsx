@@ -11,7 +11,8 @@ import PersonQuanity, { PersonQuanityRefProps } from '../PersonQuanity/PersonQua
 import { packageCalculatePrice } from '@/store/booking/bookingAction';
 import SecondLoading from '@/components/Loading/SecondLoading';
 import { PACKAGE_CAL_PRICE } from '@/store/common/constants';
-import { getBookingInfo } from '@/store/booking/bookingSlice';
+import { getBookingInfo, getBookingRoomInfo, getBookingRoomPriceSuccess } from '@/store/booking/bookingSlice';
+import { useRoomContext } from '@/contexts/RoomProvider';
 
 function ReviewPackage({ packageChose, setIsChoosePackage }: PackageProps) {
   const { t } = useTranslation();
@@ -22,6 +23,7 @@ function ReviewPackage({ packageChose, setIsChoosePackage }: PackageProps) {
   const personQuantityRef = useRef<PersonQuanityRefProps>(null);
   const { loading } = useLoading([PACKAGE_CAL_PRICE]);
   const { basic_business_info } = useAppSelector((state) => state.business);
+  const { setRoomChoseValue } = useRoomContext();
   const handleCalculatePrice = () => {
     const isValid = checkInRef.current && checkInRef.current.isValid;
     const bid = basic_business_info.bid;
@@ -30,6 +32,11 @@ function ReviewPackage({ packageChose, setIsChoosePackage }: PackageProps) {
     const check_out = checkInRef.current && checkInRef.current.endDate;
     const adults = personQuantityRef.current?.adults;
     const child = personQuantityRef.current?.child;
+
+    /* reset booking_room_info and booking_room_price */
+    setRoomChoseValue({});
+    dispatch(getBookingRoomInfo(null));
+    dispatch(getBookingRoomPriceSuccess(null));
 
     /* store booking_info */
     dispatch(

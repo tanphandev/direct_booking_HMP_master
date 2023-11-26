@@ -47,9 +47,9 @@ function* checkCouponCode({ payload }: any): Generator {
   try {
     const data: any = yield call(ApiCaller.post, API.direct_booking_check_coupon_code, bodyData);
     if (!data[0]) {
-      toast.error('Mã của bạn không hợp lệ');
+      toast.error('Your code is not valid');
     } else {
-      toast.success('Mã đã được áp dụng');
+      toast.success('Your code has been applied');
     }
   } catch (error: any) {
     yield put(checkCouponFailed(error));
