@@ -91,7 +91,7 @@ function ReviewPriceSummary() {
           <div>
             <div className="flex justify-between">
               <p>{t('BOOKING_FORM.SIDEBAR.AMOUNT_EX_TAX')}</p>
-              <p>{formatCurrency(business_currency).format(booking_room_price?.price_total_room_nom_tax)}</p>
+              <p>{formatCurrency(business_currency).format(booking_room_price?.reservations_amount_sub)}</p>
             </div>
             {booking_room_price?.taxes_breakdown?.map((tax_item: any, index: number) => (
               <div key={index} className="flex justify-between">

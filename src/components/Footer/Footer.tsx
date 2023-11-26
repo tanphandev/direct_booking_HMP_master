@@ -27,7 +27,7 @@ function Footer() {
         <NavFooter />
       </div>
       <div className="flex justify-end items-center bg-grey-2a py-5 px-8">
-        <p className="text-white text-sm mr-2">{t('FOOTER.WE_ACCEPT')}:</p>
+        <p className="text-white text-sm mr-2">{t('FOOTER.WE_ACCEPT')}</p>
         <Image className="mx-1" src={AbaPay} width={40} height={24} alt="aba_pay" />
         <Image className="mx-1" src={Khqr} width={40} height={24} alt="khqr_pay" />
         <Image className="mx-1" src={Visa} width={40} height={24} alt="visa_pay" />

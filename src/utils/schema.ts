@@ -21,3 +21,9 @@ export const GUEST_INFO_SCHEMA = () =>
     full_name: yup.string().required(ERROR.required),
     country: yup.string().required(ERROR.required),
   });
+
+export const OTHER_PEOPLE_INFO_SCHEMA = () =>
+  yup.object().shape({
+    name: yup.string().required(ERROR.required),
+    mail: yup.string().required(ERROR.required).email(ERROR.isEmail),
+  });
