@@ -9,7 +9,6 @@ function NavFooter() {
   const { i18n } = useTranslation();
   const { hotel_slug } = useParams();
   const { footer_navigation }: { footer_navigation: any[] } = useAppSelector((state) => state.business);
-  console.log("footer",footer_navigation)
   return (
     <div className="flex flex-col sm:flex-row items-center mb-4 text-base font-normal text-white">
       {footer_navigation?.map((item, index) => (

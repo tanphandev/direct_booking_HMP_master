@@ -23,10 +23,10 @@ function LanguageMenu() {
     let savedLanguageId = isBrowser && localStorage.getItem('language');
     if (!savedLanguageId) {
       savedLanguageId = defaultLanguage?.id || 'en';
-      localStorage.setItem('language', defaultLanguage.id);
+      localStorage.setItem('language', defaultLanguage?.id);
     }
 
-    const selectedLanguage = languages?.find((item: languageProps) => item.id === savedLanguageId);
+    const selectedLanguage = languages?.find((item: languageProps) => item?.id === savedLanguageId);
     if (selectedLanguage) {
       setLanguageValue(selectedLanguage);
       i18n.changeLanguage(savedLanguageId as string);
@@ -42,8 +42,8 @@ function LanguageMenu() {
   const handleChangeLanguage = (item: languageProps) => {
     setLanguageValue(item);
     toggleMenu();
-    localStorage.setItem('language', item.id);
-    i18n.changeLanguage(item.id);
+    localStorage.setItem('language', item?.id);
+    i18n.changeLanguage(item?.id);
   };
   /* Toggle menu */
   const toggleMenu = () => {

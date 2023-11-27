@@ -19,7 +19,6 @@ function Rooms() {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const { loading } = useLoading([CHECK_COUPON_CODE, PUBLIC_ROOM_AVAILABLE]);
-  console.log('loading', loading);
   const checkInRef = createRef<RangeDate>();
   const personQuantityRef = useRef<PersonQuanityRefProps>(null);
   const { basic_business_info } = useAppSelector((state) => state.business);

@@ -4,18 +4,13 @@ import { pick } from 'lodash';
 import API from '@/api/api';
 import ApiCaller from '@/api/ApiCaller';
 import * as roomAction from './roomAction';
-import {
-  getPublicRoomAvailableSuccess,
-  getPublicRoomAvailableFailed,
-} from './roomSlice';
+import { getPublicRoomAvailableSuccess, getPublicRoomAvailableFailed } from './roomSlice';
 import { disableLoading, enableLoading } from '../common/commonSlice';
 import { PUBLIC_ROOM_AVAILABLE } from '../common/constants';
 import Path from '@/routes/Path';
 
 function* getPublicRoomAvailable({ payload }: any): Generator {
-
   const { bid, check_in, check_out, adults, child, datecreated, hotel_slug, router } = payload;
-  console.log(payload)
   yield put(enableLoading(PUBLIC_ROOM_AVAILABLE));
   try {
     const data: any = yield call(ApiCaller.get, API.public_room_available, {
@@ -24,7 +19,7 @@ function* getPublicRoomAvailable({ payload }: any): Generator {
         check_in: check_in,
         check_out: check_out,
         adults: adults,
-        child: child
+        child: child,
       },
       datecreated,
     });
@@ -38,7 +33,5 @@ function* getPublicRoomAvailable({ payload }: any): Generator {
   }
 }
 export default function* RoomSaga() {
-  yield all([
-    takeLatest(roomAction.getPublicRoomAvailable, getPublicRoomAvailable),
-  ]);
+  yield all([takeLatest(roomAction.getPublicRoomAvailable, getPublicRoomAvailable)]);
 }
