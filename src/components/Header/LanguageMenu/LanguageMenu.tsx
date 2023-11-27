@@ -5,7 +5,7 @@ import { useAppSelector } from '@/hooks';
 import i18n from '@/i18n/i18n';
 
 import ArrowDown from '@/assets/icons/ArrowDown';
-import { languageProps } from '@/types/language';
+import { languageProps } from '@/types/Language';
 
 function LanguageMenu() {
   const { db_languages: defaultLanguage, db_enable_languages: languages } = useAppSelector(
@@ -58,7 +58,7 @@ function LanguageMenu() {
       </div>
       <ul
         ref={languageMenuRef}
-        className="hidden absolute top-8 right-0 lg:left-0 w-[112px] bg-white rounded-md shadow-custom_1 py-2"
+        className="hidden absolute top-8 right-0 lg:left-0 w-[112px] bg-white rounded-md shadow-custom_1 py-2 z-10"
       >
         {languages?.map((item: languageProps, index: number) => (
           <li

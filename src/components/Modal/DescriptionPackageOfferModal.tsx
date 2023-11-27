@@ -22,8 +22,8 @@ function DescriptionPackageOfferModal() {
           >
             <XmarkIcon width="20px" height="20px" className="transition-colors text-grey-6c hover:text-grey-21" />
           </div>
-          <div className='max-w-[500px] md:max-h-[550px]  h-[100vh] sm:w-[80vw] bg-white rounded-[4px] text-left justify-center p-10 items-stretch'>
-            <p className="text-grey-21 mb-4">{package_des}</p>
+          <div className="max-w-[500px] md:max-h-[550px]  h-[100vh] sm:w-[80vw] bg-white rounded-[4px] text-left justify-center p-10 items-stretch">
+            <p className="text-grey-21 mb-4" dangerouslySetInnerHTML={{ __html: package_des }} />
           </div>
         </div>
       </div>

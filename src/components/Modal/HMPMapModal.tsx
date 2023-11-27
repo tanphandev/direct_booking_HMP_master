@@ -15,7 +15,7 @@ function HMPMap() {
 
   return (
     <div className="z-20 flex justify-center items-center fixed top-0 left-0 right-0 bottom-0 bg-black-0.3">
-      <div id="modal" ref={modalRef} className="transition-all animate-fadeIn map-modal relative">
+      <div id="modal" ref={modalRef} className="transition-all bg-grey-99 animate-fadeIn map-modal relative">
         <div
           onClick={() => {
             closeModalWithAnimation(150);
