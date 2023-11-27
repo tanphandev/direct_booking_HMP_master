@@ -1,5 +1,5 @@
 'use client';
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { useRoomContext } from '@/contexts/RoomProvider';
 import { useAppDispatch, useAppSelector } from '@/hooks';
 import { useTranslation } from 'react-i18next';
@@ -12,6 +12,7 @@ import { isEmpty, pick } from 'lodash';
 import { ROOM_CAL_PRICE } from '@/store/common/constants';
 import SecondLoading from '../Loading/SecondLoading';
 import { getBookingInfo, getBookingRoomInfo, getYourBookingPriceSuccess } from '@/store/booking/bookingSlice';
+import ArrowDown from '../../../public/assets/icons/ArrowDown';
 
 const packageFieldPicker = [
   'dbp_activities',
@@ -92,43 +93,54 @@ const BookingCart = () => {
     dispatch(getBookingRoomInfo({ ...bodyData, night }));
     dispatch(roomCalculatePrice({ bodyData, router, hotel_slug }));
   };
+  const [isShowRoomChoose, setShowRoomChoose] = useState(false)
+  const handleToggleShowRoomChoose = () => {
+    setShowRoomChoose(!isShowRoomChoose)
+  }
   return (
     <div className=" bg-[#f5f5f5] sticky bottom-0 z-50  inset-x-0 ">
       <div className="px-4 lg:mx-8 md:mx-6">
         <div className="flex overflow-hidden">
           <div className="py-1 w-full flex flex-col sm:flex-row">
-            <div className="px-4 py-2 lg:px-8 lg:py-4 grid grid-cols-3 gap-x-4 sm:gap-0 w-full border-b-2 sm:border-none border-grey-d9">
-              <div className="col-span-1 mb-4 sm:m-0">
-                <span className="text-[#9c9c9c] font-bold">{t('HOMEPAGE.ROOM')}</span>
+           <div className='md:hidden w-full flex justify-center items-center text-[#9c9c9c] pb-2 text-xl'>
+              <div onClick={handleToggleShowRoomChoose}>
+                <ArrowDown width="24px" height="24px" />
               </div>
-              <div className="col-span-2 justify-center">
-                <span className="text-[#9c9c9c] font-bold ml-10 mb-4 sm:m-0">
-                  {t('SEARCH.ROOM_TYPE.SPECIAL_OFFERS')}
-                </span>
-              </div>
-              {Object.values(roomChoseValue)?.map((item: any, index: number) => (
-                <Fragment key={index}>
-                  <ul className="list-disc col-span-1 pl-3">
-                    <li className="text-blue-0a font-bold">
-                      {item?.room?.title}
-                      {item?.quantity > 1 && ` x ${item?.quantity}`}
-                    </li>
-                  </ul>
-                  <div className="col-span-2 justify-center ml-10 sm:ml-0">
-                    {item?.packages?.map((packageItem: any, index: number) => (
-                      <span key={index} className="bg-blue-0a text-white rounded-xl px-2 py-1 mr-1">
-                        {packageItem?.quantity > 1 && `${packageItem?.quantity} x `}{' '}
-                        {
-                          packageItem?.package?.dbp_title.find((valueItem: any) => valueItem?.lang === i18n.language)
-                            ?.value
-                        }
-                      </span>
-                    ))}
+              <span>{Object.values(roomChoseValue).length}  {Object.values(roomChoseValue).length<2?t('SEARCH.BOX_SEARCH.ROOM'):t('SEARCH.BOX_SEARCH.ROOMS')} </span>
+            </div>   
+              <div className={`w-full md:flex flex-col sm:flex-row ${isShowRoomChoose?'':'hidden'}`}>
+                <div className="px-4 py-2 lg:px-8 lg:py-4 grid grid-cols-3 gap-x-4 sm:gap-0 w-full border-b-2 sm:border-none border-grey-d9">
+                  <div className="col-span-1 mb-4 sm:m-0">
+                    <span className="text-[#9c9c9c] font-bold">{t('HOMEPAGE.ROOM')}</span>
                   </div>
-                </Fragment>
-              ))}
-            </div>
-
+                  <div className="col-span-2 justify-center">
+                    <span className="text-[#9c9c9c] font-bold ml-10 mb-4 sm:m-0">
+                      {t('SEARCH.ROOM_TYPE.SPECIAL_OFFERS')}
+                    </span>
+                  </div>
+                  {Object.values(roomChoseValue)?.map((item: any, index: number) => (
+                    <Fragment key={index}>
+                      <ul className="list-disc col-span-1 pl-3">
+                        <li className="text-blue-0a font-bold">
+                          {item?.room?.title}
+                          {item?.quantity > 1 && ` x ${item?.quantity}`}
+                        </li>
+                      </ul>
+                      <div className="col-span-2 justify-center ml-10 sm:ml-0">
+                        {item?.packages?.map((packageItem: any, index: number) => (
+                          <span key={index} className="bg-blue-0a text-white rounded-xl px-2 py-1 mr-1">
+                            {packageItem?.quantity > 1 && `${packageItem?.quantity} x `}{' '}
+                            {
+                              packageItem?.package?.dbp_title.find((valueItem: any) => valueItem?.lang === i18n.language)
+                                ?.value
+                            }
+                          </span>
+                        ))}
+                      </div>
+                    </Fragment>
+                  ))}
+                </div>
+              </div>
             <div className="p-4 flex flex-col w-full sm:w-[180px] items-center">
               <div className="w-full sm:w-auto flex flex-row justify-between sm:flex-col text-end">
                 <span className="text-[#9c9c9c] mb-2 font-bold">{t('SEARCH.ROOM_TYPE.PRICE_SUMMARY')}</span>
@@ -139,9 +151,8 @@ const BookingCart = () => {
               <button
                 disabled={isEmpty(roomChoseValue)}
                 onClick={() => handleCalculatePrice()}
-                className={`w-full uppercase ${
-                  isEmpty(roomChoseValue) ? 'bg-grey-d9 text-grey-6c cursor-not-allowed' : 'bg-blue-0a text-white'
-                } px-4 py-2 border font-bold border-grey-d9 rounded-md`}
+                className={`w-full uppercase ${isEmpty(roomChoseValue) ? 'bg-grey-d9 text-grey-6c cursor-not-allowed' : 'bg-blue-0a text-white'
+                  } px-4 py-2 border font-bold border-grey-d9 rounded-md`}
               >
                 <SecondLoading isLoading={loading}>
                   <span className="w-full text-sm ">{t('SEARCH.ROOM_TYPE.BOOKNOW_PAYLATER')}</span>
