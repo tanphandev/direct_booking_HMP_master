@@ -93,11 +93,11 @@ const RoomCardResult: React.FC<RoomCardResultProps> = ({ room }) => {
       <h2 className="font-bold text-2xl mt-12 mb-4 pb-2 border-b-2">{room.title}</h2>
       <div className="flex flex-col md:flex-row ">
         {photos[0] ? (
-          <div className="md:w-1/3 md:h-[200px] pb-2 h-[180px] relative">
+          <div className="md:w-1/3 md:h-[200px] overflow-hidden h-[180px] relative">
             <Image
               src={photos[0]?.uri_full}
               alt={`Image ${currentImage + 1}`}
-              className=" cursor-pointer"
+              className=" cursor-pointer pb-4"
               onClick={() => handleImageClick(0)}
               quality={100}
               fill
@@ -256,7 +256,7 @@ const RoomCardResult: React.FC<RoomCardResultProps> = ({ room }) => {
 
       {packages[0] && (
         <div className="mt-4">
-          <h2 className="uppercase mb-4 pb-2">{t('SEARCH.ROOM_TYPE.SPECIAL_OFFERS')}</h2>
+          <h2 className="uppercase font-bold mb-4 pb-2">{t('SEARCH.ROOM_TYPE.SPECIAL_OFFERS')}</h2>
           <div className="flex flex-col md:flex-row md:flex-wrap">
             {packages?.map((roomPackage, index) => (
               <PackageDetail

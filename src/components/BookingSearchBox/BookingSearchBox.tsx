@@ -69,10 +69,9 @@ const BookingSearchBox = () => {
     dispatch(getPublicRoomAvailable({ bid, check_in, check_out, adults, child, datecreated, hotel_slug, router }));
   };
   return (
-    <div className={'flex flex-col w-full px-2 py-2 md:px-4 lg:px-6 lg:py-3'}>
+    <div className={'flex flex-col w-full px-2 py-2 md:px-4 lg:px-6 lg:py-3 lg:pt-5'}>
       <div className={'flex items-center justify-between'}>
         <span className={' text-xl lg:text-2xl text-white font-light '}>{t('SEARCH.BOX_SEARCH.SEARCH')}</span>
-
         <button className="" onClick={toggleSearchBox}>
           <ArrowDown width="30px" height="30px" />
         </button>

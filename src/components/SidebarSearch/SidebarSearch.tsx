@@ -40,7 +40,7 @@ const SidebarSearch = () => {
   
   return (
     <>
-      <div className="rounded-t-md bg-[#636363]">
+      <div className="rounded-md bg-[#636363]">
         <BookingSearchBox />
       </div>
       <button

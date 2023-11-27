@@ -96,7 +96,7 @@ const BookingCart = () => {
     <div className=" bg-[#f5f5f5] sticky bottom-0 z-50  inset-x-0 ">
       <div className="px-4 lg:mx-8 md:mx-6">
         <div className="flex overflow-hidden">
-          <div className="py-4 w-full flex flex-col sm:flex-row">
+          <div className="py-1 w-full flex flex-col sm:flex-row">
             <div className="px-4 py-2 lg:px-8 lg:py-4 grid grid-cols-3 gap-x-4 sm:gap-0 w-full border-b-2 sm:border-none border-grey-d9">
               <div className="col-span-1 mb-4 sm:m-0">
                 <span className="text-[#9c9c9c] font-bold">{t('HOMEPAGE.ROOM')}</span>
