@@ -26,7 +26,7 @@ const RoomCardResult: React.FC<RoomCardResultProps> = ({ room }) => {
   const MAX_DISPLAYED_OFFERS = 15;
   const [displayedItems, setDisplayedItems] = useState(MAX_DISPLAYED_ITEMS);
   const [displayedItemOffers, setDisplayedItemOffers] = useState(MAX_DISPLAYED_OFFERS);
-  const handleRoomChoseChange = () => {};
+  const handleRoomChoseChange = () => { };
   const lang = i18n.language;
   useEffect(() => {
     setRoomChose({
@@ -87,6 +87,7 @@ const RoomCardResult: React.FC<RoomCardResultProps> = ({ room }) => {
   };
   const displayedAmenities = room.room_type_amenities?.slice(0, displayedItems);
   const displayedOffers = room.room_type_offers?.slice(0, displayedItemOffers);
+  
 
   return (
     <>
@@ -97,7 +98,7 @@ const RoomCardResult: React.FC<RoomCardResultProps> = ({ room }) => {
             <Image
               src={photos[0]?.uri_full}
               alt={`Image ${currentImage + 1}`}
-              className=" cursor-pointer pb-4"
+              className=" cursor-pointer pb-4 h-full w-full object-cover"
               onClick={() => handleImageClick(0)}
               quality={100}
               fill
@@ -106,12 +107,19 @@ const RoomCardResult: React.FC<RoomCardResultProps> = ({ room }) => {
               <div className="fixed top-0 left-0 w-screen h-screen flex  bg-[black] z-30">
                 <div className="relative   w-full h-full overflow-hidden">
                   <button
-                    className="absolute z-50 top-2 right-6  text-white text-3xl cursor-pointer"
+                    className="absolute z-50 top-2 right-8  text-white text-2xl cursor-pointer uppercase"
                     onClick={handleCloseSlider}
                   >
                     x
                   </button>
-                  <Image src={photos[currentImage]?.uri_full} alt={`Image ${currentImage + 1}`} quality={100} fill />
+                  
+                  <Image
+                    src={photos[currentImage]?.uri_full}
+                    alt={`Image ${currentImage + 1}`}
+                    quality={100}
+                    fill
+                    className=" cursor-pointer pb-4 h-full w-full object-contain"
+                  />
                   <button
                     className="absolute ml-3 top-1/2 -translate-y-1/2 left-4 text-white text-2xl cursor-pointer"
                     onClick={handlePrev}
