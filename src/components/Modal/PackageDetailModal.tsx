@@ -8,12 +8,14 @@ import Schedule from '../BookingChoose/Schedule/Schedule';
 import XmarkIcon from '@/assets/icons/XmarkIcon';
 import { HANDLE_STATUS } from '@/types/handle';
 import { formatCurrency } from '@/utils/helper';
+import { isEmpty } from 'lodash';
 
 function PackageDetailModal() {
   const { t } = useTranslation();
   const modalRef = useRef<HTMLDivElement>(null);
   const { business_currency } = useAppSelector((state) => state.business.basic_business_info);
   const { payload: packageDetail, setStatus, closeModalWithAnimation } = useModalContext();
+  console.log('packageDetail', packageDetail);
   useOnClickOutside(modalRef, () => {
     closeModalWithAnimation(150);
     setStatus(HANDLE_STATUS.NOT_START);
@@ -34,22 +36,22 @@ function PackageDetailModal() {
           <h2 className="font-bold text-center p-4">{packageDetail?.title}</h2>
           <div className="border-[1px] w-[280px] p-4 mb-4 border-grey-d9 rounded-lg">
             <p className="font-bold">
-              {t('HOMEPAGE.DURATION')}: {packageDetail.packages_night_stay + 1}{' '}
-              {packageDetail.packages_night_stay + 1 <= 1
+              {t('HOMEPAGE.DURATION')}: {packageDetail?.packages_night_stay + 1}{' '}
+              {packageDetail?.packages_night_stay + 1 <= 1
                 ? t('BOOKING_FORM.SIDEBAR.DAY')
                 : t('BOOKING_FORM.SIDEBAR.DAYS')}
-              , {packageDetail.packages_night_stay}{' '}
-              {packageDetail.packages_night_stay <= 1
+              , {packageDetail?.packages_night_stay}{' '}
+              {packageDetail?.packages_night_stay <= 1
                 ? t('BOOKING_FORM.SIDEBAR.NIGHT')
                 : t('BOOKING_FORM.SIDEBAR.NIGHTS')}
             </p>
             <div className="py-2 my-2 border-b-2 border-grey-21">
               <p className="font-bold">
                 {' '}
-                {t('HOMEPAGE.MAX_ADULT')}: {packageDetail.db_max_adult}
+                {t('HOMEPAGE.MAX_ADULT')}: {packageDetail?.db_max_adult}
               </p>
               <p className="font-bold">
-                {t('HOMEPAGE.MAX_CHILDREN')}: {packageDetail.db_max_children}
+                {t('HOMEPAGE.MAX_CHILDREN')}: {packageDetail?.db_max_children}
               </p>
             </div>
             <div className="py-2 my-2 border-b-2 border-grey-21">
@@ -67,15 +69,17 @@ function PackageDetailModal() {
               </p>
             </div>
           </div>
-          <p>{packageDetail.packages_note}</p>
-          <div className="my-6">
-            <p className="text-lg font-bold mb-2">{t('HOMEPAGE.ROOM')}</p>
-            {packageDetail.packages_room_type.map((item: any, index: number) => (
-              <p key={index} className="font-bold">
-                {item?.title}
-              </p>
-            ))}
-          </div>
+          <p>{packageDetail?.packages_note}</p>
+          {!isEmpty(packageDetail?.packages_room_type) && (
+            <div className="my-6">
+              <p className="text-lg font-bold mb-2">{t('HOMEPAGE.ROOM')}</p>
+              {packageDetail?.packages_room_type?.map((item: any, index: number) => (
+                <p key={index} className="font-bold">
+                  {item?.title}
+                </p>
+              ))}
+            </div>
+          )}
           {packageDetail?.packages_days.map((package_day: any, index: number) => (
             <Schedule activities={package_day?.activities} key={index} day={`${t('HOMEPAGE.DAY')} ${index + 1}`} />
           ))}
