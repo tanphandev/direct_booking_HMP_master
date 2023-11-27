@@ -37,7 +37,7 @@ function FAQSPage() {
   const lang = i18n.language;
   const cp_body_value = pageData.cp_body?.find((cp) => cp.lang === lang)?.value;
   const cp_title_value = pageData.cp_title?.find((cp) => cp.lang === lang)?.value;
-  const questions: cp_paragraph[] = pageData.cp_paragraphs;
+  const questions: cp_paragraph[] = pageData.cp_paragraphs||[];
 
   return (
     <div className="main-container py-8 px-4">
